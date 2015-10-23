@@ -1,7 +1,11 @@
 #include <iostream>
 #include <cmath>
+#include "lib.h"
 
 using namespace std;
+
+inline int periodic(int i, int limit, int add){return (i+limit+add)%(limit);}
+void metropolis(int,long &,int **,double &,double &,double *);
 
 int main()
 {
@@ -30,7 +34,7 @@ int main()
         M[i] = 0;
         for(int l=0;l<L;l++)
             spin[l] = 1;
-        for(int k=i;k<L;k++){
+        for(int k=0;k<L;k++){
             E[i] += spin[k]*spin[k+1];
             M[i] += spin[k];
         }
@@ -64,5 +68,25 @@ int main()
     // f, estimate critical temperature
 
     return 0;
+}
+
+void Metropolis(int n_spins, long& idum, int **spin_matrix, double& E, double&M, double *w)
+{
+    // loop over all spins
+    for(int y =0; y < n_spins; y++) {
+        for (int x= 0; x < n_spins; x++){
+            // Find random position
+            int ix = (int) (ran1(&idum)*(double)n_spins);
+            int iy = (int) (ran1(&idum)*(double)n_spins);
+            int deltaE = 2*spin_matrix[iy][ix]*(spin_matrix[iy][periodic(ix,n_spins,-1)]+ spin_matrix[periodic(iy,n_spins,-1)][ix] + spin_matrix[iy][periodic(ix,n_spins,1)] + spin_matrix[periodic(iy,n_spins,1)][ix]);
+            // Here we perform the Metropolis test
+            if ( ran1(&idum) <= w[deltaE+8] ) {
+                spin_matrix[iy][ix] *= -1; // flip one spin and accept new spin config
+                // update energy and magnetization
+                M += (double) 2*spin_matrix[iy][ix];
+                E += (double) deltaE;
+            }
+        }
+    }
 }
 
