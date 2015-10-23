@@ -94,10 +94,6 @@ where
 \begin{equation}
 	\sigma_E^2 = \frac{1}{Z} \sum_i E_i^2 e^{- \beta E_i} - \bigg[ \frac{1}{Z} \sum_i E_i e^{- \beta E_i} \bigg]^2
 \end{equation}
-
-
-\section{Methods}
-
 First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the lattice length. In this case, we can find a closed form expression for the partition function in Eq. (\ref{eq:partition_func}) and the corresponding expectation values for $E$, $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions. \textbf{Periodic boundary conditions} means that the neighbor to the right of a given spin $s_N$ in Eq. (\ref{eq:energy}) takes the value of $s_1$. Similarly, the neighbor to the left of $s_1$ takes the value of $s_N$. 
 
 In the case $L = 2$ we can write Eq. (\ref{eq:energy}) as:
@@ -109,25 +105,31 @@ In the case $L = 2$ we can write Eq. (\ref{eq:energy}) as:
 ... EXPRESSIONS! 
 
 
+
+
+
+
+\section{Methods}
+
 We write a code for the Ising model which computes the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of  $T$ using periodic boundary conditions for in the $x$ and $y$ directions. Using the Ising model in two dimensions, the number of configurations is given by $2^N$ with $N = L \times L$ number of spins for a lattice of length $L$. 
 
 We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
 
-\begin{itemize}
+\begin{enumerate}
 	\item Generate a random configuration in the lattice to create an initial state with energy $E_b$.
 	\item Change the initial configuration by flipping for example one spin only. Compute the energy of this state $E_t$.
 	\item Calculate $\Delta E = E_t - E_b$.
 	\item \textit{The Metropolis test:} If $\Delta E \leq 0$ the new configuration is accepted, meaning the energy is lowered and we are moving towards the energy minimum at a given temperature. If $\Delta E > 0$, calculate $w = e^{- \beta \Delta E}$. If $w < r$ where $r$ is a random number, accept the new configuration. If else, keep the old configuration.
-	\item Compute the new energy $E' = E_t 0 \Delta E$. Calculate various expectation values for the 
-\end{itemize}
+	\item Compute the new energy $E' = E_t 0 \Delta E$. Calculate various expectation values using this energy.
+	\item Repeat steps $2-5$ for the chosen number of Monte Carlo cycles, meaning the number of times we should sweep through the lattice and summed over all spins.
+	\item Compute the various expectation values by dividing by the total number of cycles (and possibly the number of spins).
+\end{enumerate}
 
 
 
 
 
 \section{Results}
-
-...
 
 Our numerical results from computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions, can be compared with expressions given in Eq. (\ref{eq:energy2}) - (?) for a temperature $T=1.0$ (in units of $kT/J$). This gives the following results:
 
@@ -143,8 +145,15 @@ Our numerical results from computing the mean energy $E$, mean magnetization $|{
 \end{center}
 The number of Monte Carlo cycles needed to achieve good agreement is XXX.
 
+Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of Monte Carlo cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. 
+
+A rough and study is done by plotting the various expectation values as a function of number of Monte Carlo cycles, for both $T = 1.0$ kT/J and T = $2.4$ kT/J, as shown in Fig. XXX. PLOT + COMMENTS!
+
+We also study the total number of accepted configurations as a function of the total number of Monte Carlo cycles, shown in Fig. XXX. PLOT + COMMENTS! 
 
 ...
+
+By simply counting the number of times a given energy appears in our computation we can compute the probability $w_i$. MORE. 
 
 
 
