@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.15)  23 OCT 2015 10:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.15)  23 OCT 2015 11:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -526,25 +526,38 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
  [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+txr on input line 117.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/omstxr.fd
+File: omstxr.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Font shape `OMS/txr/m/n' in size <10> not available
+(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 117.
+ [2]
 (./FYS4150-Report-Project4.aux) ) 
 Here is how much of TeX's memory you used:
- 6389 strings out of 493117
- 91411 string characters out of 6135433
- 270382 words of memory out of 5000000
- 9750 multiletter control sequences out of 15000+600000
- 26765 words of font info for 64 fonts, out of 8000000 for 9000
+ 6453 strings out of 493117
+ 92277 string characters out of 6135433
+ 283414 words of memory out of 5000000
+ 9800 multiletter control sequences out of 15000+600000
+ 43744 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,6n,40p,284b,270s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,8n,40p,671b,277s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/
 dvips/base/8r.enc}</usr/local/texlive/2014/texmf-dist/fonts/type1/public/txfont
-s/rtxi.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.
-pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texl
-ive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on FYS4150-Report-Project4.pdf (1 page, 45935 bytes).
+s/rtxi.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/txfonts/rtxmi
+.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/local/texl
+ive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-di
+st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/t
+ype1/urw/times/utmri8a.pfb>
+Output written on FYS4150-Report-Project4.pdf (2 pages, 68222 bytes).
 PDF statistics:
- 29 PDF objects out of 1000 (max. 8388607)
- 20 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
