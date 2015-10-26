@@ -1,55 +1,61 @@
 #include <iostream>
 #include <cmath>
-#include "lib.h"
+//#include "lib.h"
+#include <random>
 
 using namespace std;
 
 inline int periodic(int i, int limit, int add){return (i+limit+add)%(limit);}
-void metropolis(int,long &,int **,double &,double &,double *);
+void Metropolis(int,int **,double &,double &,double *);
+void initialize(int,double,int**,double&,double&);
+void output(int,int,double,double*);
 
 int main()
 {
     double k = 1; // Boltzmann's constant
     int L,N;
     double T=1; // units kT/J
-    double beta = 1/(k*T);
     double Cv,chi,Z;
     double E_exp,M_exp,E_exp2,M_exp2,sigmaE,sigmaM; // Expectation values
+
+    // Periodic boundary conditions and the Metropolis algorithm
+
+    // Analytical solution
+    L = 2;
+    N = 2*2;
+    int jm;
     Z = 0;
     E_exp = 0;
     M_exp = 0;
     E_exp2 = 0;
     M_exp2 = 0;
-
-    // Periodic boundary conditions and the Metropolis algorithm
-
-    // a
-    L = 2;
-    N = 2*2;
-    double *spin = new double[L];
-    double *E = new double[N];
-    double *M = new double[N];
+    int *spin = new int[L];
+    double *En = new double[N];
+    double *Ma = new double[N];
     for(int i=0;i<N;i++){
-        E[i] = 0;
-        M[i] = 0;
-        for(int l=0;l<L;l++)
+        En[i] = 0;
+        Ma[i] = 0;
+        for(int l=0;l<N;l++){
             spin[l] = 1;
-        for(int k=0;k<L;k++){
-            E[i] += spin[k]*spin[k+1];
-            M[i] += spin[k];
         }
-        Z += exp(-beta*E[i]);
-        E_exp +=  E[i]*exp(-beta*E[i]);
-        E_exp2 += E[i]*E[i]*exp(-beta*E[i]);
-        M_exp +=  M[i]*exp(-beta*E[i]);
-        M_exp2 += M[i]*M[i]*exp(-beta*E[i]);
+        for(int k=0;k<N;k++){
+            if(k==N-1){jm=0;}
+            else{jm=k+1;}
+            En[i] -= spin[k]*spin[jm];
+            Ma[i] += spin[k];
+        }
+        Z += exp(-En[i]/T);
+        E_exp +=  En[i]*exp(-En[i]/T);
+        E_exp2 += En[i]*En[i]*exp(-En[i]/T);
+        M_exp +=  Ma[i]*exp(-En[i]/T);
+        M_exp2 += Ma[i]*Ma[i]*exp(-En[i]/T);
     }
     E_exp = E_exp/Z;
     M_exp = M_exp/Z;
     sigmaE = E_exp2/Z - E_exp*E_exp;
     sigmaM = M_exp2/Z - M_exp*M_exp;
-    Cv = sigmaE*beta/T;
-    chi = sigmaM*beta;
+    Cv = sigmaE/(T*T);
+    chi = sigmaM/T;
     cout << "L = " << L << endl;
     cout << "Partition function Z = " << Z << endl;
     cout << "<E> = " << E_exp << endl;
@@ -58,10 +64,55 @@ int main()
     cout << "chi = " << chi << endl;
 
     delete[] spin;
-    delete[] E;
-    delete[] M;
+    delete[] En;
+    delete[] Ma;
 
     // b, Ising model; <E>, <|M|>, Cv, chi as functions of T
+    int **spin_matrix,n_spins,MCs;
+    double w[17],average[5],initial_temp,final_temp,temp_step;
+    temp_step = 0.5;
+    initial_temp = 1.0;
+    final_temp = 3.0;
+    MCs = 5;
+    n_spins = 2;
+    spin_matrix = new int*[n_spins];
+    for(int i=0;i<n_spins;i++)
+        spin_matrix[i] = new int[n_spins];
+    //spin_matrix = (int**)matrix(n_spins,n_spins,sizeof(int));
+    for(int i=0;i<n_spins;i++){
+        for(int j=0;j<n_spins;j++){
+            spin_matrix[i][j] = 1;
+            cout << spin_matrix[i][j] << endl;
+        }
+    }
+
+    for(double temp = initial_temp; temp <= final_temp; temp+=temp_step){
+        double E = 0;
+        double M = 0;
+
+        // Set up array for possible energy changes
+        for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
+        for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/temp);
+
+        // Initialize array for expectation values
+        for(int i=0;i<5;i++) average[i] = 0;
+        initialize(n_spins,temp,spin_matrix,E,M);
+
+        // Start Monte Carlo computation
+        for(int cycles=1;cycles <= MCs;cycles++){
+            Metropolis(n_spins,spin_matrix,E,M,w);
+
+            // Update expectation values
+            average[0] += E; average[1] += E*E;
+            average[2] += M; average[3] += M*M; average[4] += fabs(M);
+        }
+        // Print results
+        //output(n_spins,MCs,temp,average);
+
+
+    }
+
+
     // c, <E>, <M> as functions of MC cycles
     // d, probability as a function of E, compare with sigmaE
     // e, plotting and paralization
@@ -70,17 +121,31 @@ int main()
     return 0;
 }
 
-void Metropolis(int n_spins, long& idum, int **spin_matrix, double& E, double&M, double *w)
+void initialize(int n_spins,double temp,int** spin_matrix,double& E,double&M){
+    for(int y=0;y<n_spins;y++){
+        for(int x=0;x<n_spins;x++){
+            if (temp<1.5) spin_matrix[y][x] = 1;
+            M += (double) spin_matrix[y][x];
+            E -= (double) spin_matrix[y][x]*(spin_matrix[periodic(y,n_spins,-1)][x] + spin_matrix[y][periodic(x,n_spins,-1)]);
+        }
+    }
+
+}
+
+
+void Metropolis(int n_spins, int **spin_matrix, double& E, double&M, double *w)
 {
+    default_random_engine generator;                   // start random number generator
+    uniform_real_distribution<double> distribution(0.0,1.0);   // pick type of random distribution
     // loop over all spins
     for(int y =0; y < n_spins; y++) {
         for (int x= 0; x < n_spins; x++){
             // Find random position
-            int ix = (int) (ran1(&idum)*(double)n_spins);
-            int iy = (int) (ran1(&idum)*(double)n_spins);
+            int ix = (int) (distribution(generator)*(double)n_spins);
+            int iy = (int) (distribution(generator)*(double)n_spins);
             int deltaE = 2*spin_matrix[iy][ix]*(spin_matrix[iy][periodic(ix,n_spins,-1)]+ spin_matrix[periodic(iy,n_spins,-1)][ix] + spin_matrix[iy][periodic(ix,n_spins,1)] + spin_matrix[periodic(iy,n_spins,1)][ix]);
             // Here we perform the Metropolis test
-            if ( ran1(&idum) <= w[deltaE+8] ) {
+            if ( distribution(generator) <= w[deltaE+8] ) {
                 spin_matrix[iy][ix] *= -1; // flip one spin and accept new spin config
                 // update energy and magnetization
                 M += (double) 2*spin_matrix[iy][ix];
@@ -90,3 +155,25 @@ void Metropolis(int n_spins, long& idum, int **spin_matrix, double& E, double&M,
     }
 }
 
+void output(int n_spins,int MCs,double temp,double *average){
+    double norm = 1./((double) (MCs));
+    double Eaverage = average[0]*norm;
+    double E2average = average[1]*norm;
+    double Maverage = average[2]*norm;
+    double M2average = average[3]*norm;
+    double Mabsaverage = average[4]*norm;
+
+    // Expectation values per spin
+    double Evariance = (E2average - Eaverage*Eaverage)/n_spins/n_spins;
+    double Mvariance = (M2average - Maverage*Maverage)/n_spins/n_spins;
+    double M2variance = (M2average - Mabsaverage*Mabsaverage)/n_spins/n_spins;
+
+    // Print
+    cout << "T = "             << "\t" << temp << endl;
+    cout << "<E> = "              << "\t" << Eaverage << endl;
+    cout << "<E>/spin = "      << "\t" << Eaverage/n_spins/n_spins << endl;
+    cout << "Cv = "            << "\t" << Evariance/temp/temp << endl;
+    cout << "X = "             << "\t" << M2variance/temp << endl;
+    cout << "<M> = "              << "\t" << Maverage << endl;
+    cout << "<M>/spin = "       << "\t" << Mabsaverage/n_spins/n_spins << endl;
+}
