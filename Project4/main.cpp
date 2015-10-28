@@ -2,6 +2,7 @@
 #include <cmath>
 //#include "lib.h"
 #include <random>
+#include <fstream>
 
 using namespace std;
 
@@ -21,7 +22,7 @@ int main()
     // Periodic boundary conditions and the Metropolis algorithm
 
     // Analytical solution
-    L = 2;
+   /* L = 2;
     N = 2*2;
     int jm;
     Z = 0;
@@ -65,7 +66,7 @@ int main()
 
     delete[] spin;
     delete[] En;
-    delete[] Ma;
+    delete[] Ma;*/
 
     // b, Ising model; <E>, <|M|>, Cv, chi as functions of T
     int **spin_matrix,n_spins,MCs;
@@ -107,17 +108,46 @@ int main()
             average[2] += M; average[3] += M*M; average[4] += fabs(M);
         }
         // Print results
-        //output(n_spins,MCs,temp,average);
+        output(n_spins,MCs,temp,average);
 
 
     }
 
+/*
+    // Expectation Values as functions of MC cycles
+    L = 20;
+    T= 1;
+    ofstream fileT1("ExpectationValues_MCsT" + to_string(T) + ".txt"); // File for expectation values
+    fileT1 << MCs << "\t" << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    fileT1.close();
 
-    // c, <E>, <M> as functions of MC cycles
-    // d, probability as a function of E, compare with sigmaE
-    // e, plotting and paralization
-    // f, estimate critical temperature
+    T = 2.4;
+    ofstream fileT24("ExpectationValues_MCsT" + to_string(T) + ".txt"); // File for expectation values
+    fileT24 << MCs << "\t" << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    fileT24.close();
 
+    // Accepted conficurations
+    ofstream fileACMC("AcceptedConfigurationsMC.txt"); // File for expectation values
+    fileACMC << MCs << "\t" << AC << endl; // Write solution to file
+    fileACMC.close();
+    ofstream fileACT("AcceptedConfigurationsT.txt"); // File for expectation values
+    fileACT << T << "\t" << AC << endl; // Write solution to file
+    fileACT.close();
+
+
+    // Probability
+    ofstream fileP("ProbabilityL" + to_string(L) + ".txt"); // File for expectation values
+    fileP << L << Probability << "\t" << sigmaE << endl; // Write solution to file
+    fileP.close();
+
+
+    // Ecpectation values for different L and T. Parallelization!
+    ofstream fileL("ExpectationValuesL" + to_string(L) + ".txt"); // File for expectation values
+    fileL << T << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl;
+    fileL.close();
+    */
+
+    // Estimate critical temperature
     return 0;
 }
 
