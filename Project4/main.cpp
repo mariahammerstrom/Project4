@@ -113,39 +113,47 @@ int main()
 
     }
 
-/*
+
     // Expectation Values as functions of MC cycles
+    ofstream fileT1("ExpectationValues_MCsT1.txt"); // Expectation values, T = 1
+    ofstream fileT24("ExpectationValues_MCsT24.txt"); // Expectation values, T = 2.4
     L = 20;
     T= 1;
-    ofstream fileT1("ExpectationValues_MCsT" + to_string(T) + ".txt"); // File for expectation values
-    fileT1 << MCs << "\t" << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl; // Write solution to file
-    fileT1.close();
+    int MCs[10];
+    for(int i=0;i<10;i++) MCs[i] = i;
+    for(int cycles=1;cycles <= MCs;cycles++){
+        Metropolis(n_spins,spin_matrix,E,M,w);
+
+        // Update expectation values
+        average[0] += E; average[1] += E*E;
+        average[2] += M; average[3] += M*M; average[4] += fabs(M);
+    }
+    //fileT1 << MCs << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
 
     T = 2.4;
-    ofstream fileT24("ExpectationValues_MCsT" + to_string(T) + ".txt"); // File for expectation values
-    fileT24 << MCs << "\t" << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    //fileT24 << MCs << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+
     fileT24.close();
+    fileT1.close();
 
     // Accepted conficurations
-    ofstream fileACMC("AcceptedConfigurationsMC.txt"); // File for expectation values
-    fileACMC << MCs << "\t" << AC << endl; // Write solution to file
-    fileACMC.close();
-    ofstream fileACT("AcceptedConfigurationsT.txt"); // File for expectation values
-    fileACT << T << "\t" << AC << endl; // Write solution to file
-    fileACT.close();
+    //ofstream fileACMC("AcceptedConfigurationsMC.txt"); // File for expectation values
+    //fileACMC << MCs << "\t" << AC << endl; // Write solution to file
+    //ofstream fileACT("AcceptedConfigurationsT.txt"); // File for expectation values
+    //fileACT << T << "\t" << AC << endl; // Write solution to file
+    //fileACMC.close();
+    //fileACT.close();
 
 
     // Probability
-    ofstream fileP("ProbabilityL" + to_string(L) + ".txt"); // File for expectation values
-    fileP << L << Probability << "\t" << sigmaE << endl; // Write solution to file
-    fileP.close();
-
+    //ofstream fileP("ProbabilityL" + to_string(L) + ".txt"); // File for expectation values
+    //fileP << L << Probability << "\t" << sigmaE << endl; // Write solution to file
+    //fileP.close();
 
     // Ecpectation values for different L and T. Parallelization!
-    ofstream fileL("ExpectationValuesL" + to_string(L) + ".txt"); // File for expectation values
-    fileL << T << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl;
-    fileL.close();
-    */
+    //ofstream fileL("ExpectationValuesL" + to_string(n_spins) + ".txt"); // File for expectation values
+    //fileL << T << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl;
+    //fileL.close();
 
     // Estimate critical temperature
     return 0;
