@@ -1,4 +1,11 @@
-# PROJECT 4: THE 2-DIMENSIONAL ISING MODEL
+"""THE 2-DIMENSIONAL ISING MODEL
+
+A program that plots:
+1) the total number of accepted configurations as a function of the 
+total number of Monte Carlo cycles,
+2) the total number of accepted configurations as a function of temperature
+for a 2-dimensional Ising model using the Metropolis algorithm."""
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -33,7 +40,7 @@ def exp_values(filename):
     plt.plot(MC_cycles,C_v,label=r'$C_v$')
     plt.plot(MC_cycles,X,label=r'$\chi$')
     plt.title('Ising model, L = %d, T = %d kT/J' % (L,T))
-    plt.xlabel('# MC cycles')
+    plt.xlabel('# of MC cycles')
     plt.ylabel('Expectation values')
     plt.legend()
     plt.show()
@@ -56,20 +63,20 @@ def accepted_config(filename):
     
     plt.figure()
     plt.plot(MC_cycles,accepted_tot)
-    plt.xlabel('# MC cycles')
-    plt.ylabel('# accepted configurations')
+    plt.xlabel('# of MC cycles')
+    plt.ylabel('# of accepted configurations')
+    plt.title('T = %d' % T)
     
     plt.figure()
     plt.plot(T,accepted_tot)
     plt.xlabel('Temperature [kT/J]')
-    plt.ylabel('# accepted configurations')
+    plt.ylabel('# of accepted configurations')
     
     plt.show()
     
     return
 
 
-# Call to functions
 filename = ''
 exp_values(filename)
 accepted_config(filename)
