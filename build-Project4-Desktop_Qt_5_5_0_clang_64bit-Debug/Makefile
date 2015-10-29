@@ -48,10 +48,8 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Project4/main.cpp \
-		../Project4/lib.cpp 
-OBJECTS       = main.o \
-		lib.o
+SOURCES       = ../Project4/main.cpp 
+OBJECTS       = main.o
 DIST          = /Applications/QT/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/qdevice.pri \
 		/Applications/QT/5.5/clang_64/mkspecs/features/device_config.prf \
@@ -169,6 +167,7 @@ DIST          = /Applications/QT/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/qt_config.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/spec_post.prf \
+		../Project4/.qmake.stash \
 		/Applications/QT/5.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/default_pre.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -184,8 +183,7 @@ DIST          = /Applications/QT/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/exceptions.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/yacc.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/lex.prf \
-		../Project4/Project4.pro lib.h ../Project4/main.cpp \
-		../Project4/lib.cpp
+		../Project4/Project4.pro  ../Project4/main.cpp
 QMAKE_TARGET  = Project4
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Project4
@@ -345,6 +343,7 @@ Makefile: ../Project4/Project4.pro /Applications/QT/5.5/clang_64/mkspecs/macx-cl
 		/Applications/QT/5.5/clang_64/mkspecs/features/qt_config.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Applications/QT/5.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/default_pre.prf \
 		/Applications/QT/5.5/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -479,6 +478,7 @@ Makefile: ../Project4/Project4.pro /Applications/QT/5.5/clang_64/mkspecs/macx-cl
 /Applications/QT/5.5/clang_64/mkspecs/features/qt_config.prf:
 /Applications/QT/5.5/clang_64/mkspecs/macx-clang/qmake.conf:
 /Applications/QT/5.5/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Applications/QT/5.5/clang_64/mkspecs/features/exclusive_builds.prf:
 /Applications/QT/5.5/clang_64/mkspecs/features/default_pre.prf:
 /Applications/QT/5.5/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -540,11 +540,8 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../Project4/main.cpp ../Project4/lib.h
+main.o: ../Project4/main.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Project4/main.cpp
-
-lib.o: ../Project4/lib.cpp ../Project4/lib.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lib.o ../Project4/lib.cpp
 
 ####### Install
 
