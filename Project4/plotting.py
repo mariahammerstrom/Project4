@@ -17,7 +17,7 @@ def exp_values(filename):
     """
     Function that plots various expectation values as a function of 
     Monte Carlo cycles.
-    File structure: [MC_cycles,E_avg,M_absavg,C_v,X]
+    File structure: [MC_cycles,E_avg,M_absavg,C_v,X, number of accepted]
     """
     
     data = np.loadtxt(filename,unpack=True)     # Read data
@@ -31,7 +31,8 @@ def exp_values(filename):
     E_avg = data[1]                      # Mean energy
     M_absavg = data[2]                   # Mean magnetization (absolute value) 
     C_v = data[3]                        # Specific heat
-    X = data[4]                          # Susceptibility
+    X = data[4] 					     # Susceptibility
+    AC = data[5]
     
     # Plotting
     plt.figure()
@@ -39,6 +40,7 @@ def exp_values(filename):
     plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
     #plt.plot(MC_cycles,C_v,label=r'$C_v$')
     #plt.plot(MC_cycles,X,label=r'$\chi$')
+    #plt.plot(MC_cycles,AC,label=r'AC')
     #plt.title('Ising model, L = %d, T = %d kT/J' % (L,T))
     plt.xlabel('# of MC cycles',size=14)
     plt.ylabel('Expectation values',size=14)
@@ -78,7 +80,7 @@ def accepted_config(filename):
 
 	
 def main(argv):
-    filename = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT1.txt'
+    filename = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT24.txt'
     exp_values(filename)
     # accepted_config(filename)
 

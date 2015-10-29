@@ -7,49 +7,62 @@
 using namespace std;
 
 inline int periodic(int i, int limit, int add){return (i+limit+add)%(limit);}
-void Metropolis(int,int **,double &,double &,double *);
+void Metropolis(int,int **,double &,double &,double *,int&);
 void initialize(int,double,int**,double&,double&);
 void output(int,int,double,double*);
 
 int main()
 {
-    double k = 1; // Boltzmann's constant
+    //double k = 1; // Boltzmann's constant
     int L,N;
     double T = 1; // units kT/J
     double Cv,chi,Z;
-    double E_exp,M_exp,E_exp2,M_exp2,sigmaE,sigmaM; // Expectation values
+    double E_exp,M_exp,E_exp2,M_exp2,sigmaE,sigmaM,M_abs; // Expectation values
 
     // Periodic boundary conditions and the Metropolis algorithm
 
     // Analytical solution
-   /* L = 2;
+    L = 2;
     N = 2*2;
-    int jm;
+    int jm,km;
     Z = 0;
     E_exp = 0;
     M_exp = 0;
     E_exp2 = 0;
     M_exp2 = 0;
-    int *spin = new int[L];
-    double *En = new double[N];
-    double *Ma = new double[N];
-    for(int i=0;i<N;i++){
+    //int *spin = new int[L];
+    int **spin;
+    spin = new int*[L];
+    for(int i=0;i<L;i++)
+        spin[i] = new int[L];
+    for(int i=0;i<L;i++){
+        for(int j=0;j<L;j++){
+            spin[i][j] = 1;
+        }
+    }
+    //double *En = new double[N];
+    double En[N];
+    //double *Ma = new double[N];
+    double Ma[N];
+    for(int i=0;i<L;i++){
         En[i] = 0;
         Ma[i] = 0;
-        for(int l=0;l<N;l++){
-            spin[l] = 1;
-        }
-        for(int k=0;k<N;k++){
-            if(k==N-1){jm=0;}
-            else{jm=k+1;}
-            En[i] -= spin[k]*spin[jm];
-            Ma[i] += spin[k];
+        for(int k=0;k<L;k++){
+            if(k==L-1){km=0;}
+            else{km=k+1;}
+            for(int j=0;j<L;j++){
+                if(j==L-1){jm=0;}
+                else{jm=j+1;}
+                En[i] -= 2*spin[k][jm]*spin[km][j];//+spin[km][j]*spin[k][jm];
+                Ma[i] += spin[k][j];
+            }
         }
         Z += exp(-En[i]/T);
         E_exp +=  En[i]*exp(-En[i]/T);
         E_exp2 += En[i]*En[i]*exp(-En[i]/T);
         M_exp +=  Ma[i]*exp(-En[i]/T);
         M_exp2 += Ma[i]*Ma[i]*exp(-En[i]/T);
+        M_abs += fabs(Ma[i])*exp(-En[i]/T);
     }
     E_exp = E_exp/Z;
     M_exp = M_exp/Z;
@@ -64,17 +77,18 @@ int main()
     cout << "Cv = " << Cv << endl;
     cout << "chi = " << chi << endl;
 
-    delete[] spin;
-    delete[] En;
-    delete[] Ma;*/
-/*
+    //delete[] spin;
+    //delete[] En;
+    //delete[] Ma;
+
     // b, Ising model; <E>, <|M|>, Cv, chi as functions of T
-    int **spin_matrix,n_spins,MCs;
+    int **spin_matrix,n_spins,MCs,AC;
     double w[17],average[5],initial_temp,final_temp,temp_step;
     temp_step = 0.5;
     initial_temp = 1.0;
     final_temp = 3.0;
     MCs = 5;
+    AC = 0;
     n_spins = 2;
     spin_matrix = new int*[n_spins];
     for(int i=0;i<n_spins;i++)
@@ -83,7 +97,6 @@ int main()
     for(int i=0;i<n_spins;i++){
         for(int j=0;j<n_spins;j++){
             spin_matrix[i][j] = 1;
-            cout << spin_matrix[i][j] << endl;
         }
     }
 
@@ -101,19 +114,19 @@ int main()
 
         // Start Monte Carlo computation
         for(int cycles=1;cycles <= MCs;cycles++){
-            Metropolis(n_spins,spin_matrix,E,M,w);
+            Metropolis(n_spins,spin_matrix,E,M,w,AC);
 
             // Update expectation values
             average[0] += E; average[1] += E*E;
             average[2] += M; average[3] += M*M; average[4] += fabs(M);
         }
         // Print results
-        output(n_spins,MCs,temp,average);
+         // output(n_spins,MCs,temp,average);
 
 
-    }*/
+    }
 
-
+/*
     // Expectation Values as functions of MC cycles
     ofstream fileT1("ExpectationValues_MCsT1.txt"); // Expectation values, T = 1
     ofstream fileT24("ExpectationValues_MCsT24.txt"); // Expectation values, T = 2.4
@@ -131,19 +144,22 @@ int main()
     }
     double w[17],average[5];
     T= 1;
-    int MCsa[200];
-    double E = 0;
-    double M = 0;
+    int MCsa[20];
+    double E,M;
+    int AC;
     // Set up array for possible energy changes
     for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
     for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
     // Initialize array for expectation values
     for(int i=0;i<5;i++) average[i] = 0;
     initialize(n_spins,T,spin_matrix,E,M);
-    for(int i=1;i<=200;i++){
+    for(int i=1;i<=20;i++){
+        E = 0;
+        M = 0;
+        AC = 0;
         MCsa[i-1] = i;
         for(int cycles=1;cycles <= MCsa[i-1];cycles++){
-            Metropolis(n_spins,spin_matrix,E,M,w);
+            Metropolis(n_spins,spin_matrix,E,M,w,AC);
 
             // Update expectation values
             average[0] += E; average[1] += E*E;
@@ -156,22 +172,23 @@ int main()
         double M_abs = average[4]/n_spins/n_spins;
         Cv = (E_exp2-E_exp*E_exp)/T/T;
         chi = (M_exp2-M_abs*M_abs)/T;
-        fileT1 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+        fileT1 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << "\t" << AC << endl; // Write solution to file
     }
 
     T = 2.4;
-    E = 0;
-    M = 0;
     // Set up array for possible energy changes
     for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
     for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
     // Initialize array for expectation values
     for(int i=0;i<5;i++) average[i] = 0;
     initialize(n_spins,T,spin_matrix,E,M);
-    for(int i=1;i<=200;i++){
+    for(int i=1;i<=20;i++){
+        E = 0;
+        M = 0;
+        AC = 0;
         MCsa[i-1] = i;
         for(int cycles=1;cycles <= MCsa[i-1];cycles++){
-            Metropolis(n_spins,spin_matrix,E,M,w);
+            Metropolis(n_spins,spin_matrix,E,M,w,AC);
 
             // Update expectation values
             average[0] += E; average[1] += E*E;
@@ -184,23 +201,14 @@ int main()
         double M_abs = average[4]/n_spins/n_spins;
         Cv = (E_exp2-E_exp*E_exp)/T/T;
         chi = (M_exp2-M_abs*M_abs)/T;
-        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << "\t" << AC << endl; // Write solution to file
     }
     fileT24.close();
-    fileT1.close();
+    fileT1.close();*/
 
     // Accepted conficurations
-    /*
-     * int AC = 0;
-     * temp = E;
-     * //some coding
-     * if(E<temp) AC += 1;
-    */
-    //ofstream fileACMC("AcceptedConfigurationsMC.txt"); // File for expectation values
-    //fileACMC << MCs << "\t" << AC << endl; // Write solution to file
     //ofstream fileACT("AcceptedConfigurationsT.txt"); // File for expectation values
     //fileACT << T << "\t" << AC << endl; // Write solution to file
-    //fileACMC.close();
     //fileACT.close();
 
 
@@ -230,7 +238,7 @@ void initialize(int n_spins,double temp,int** spin_matrix,double& E,double&M){
 }
 
 
-void Metropolis(int n_spins, int **spin_matrix, double& E, double&M, double *w)
+void Metropolis(int n_spins, int **spin_matrix, double& E, double&M, double *w, int& AC)
 {
     default_random_engine generator;                   // start random number generator
     uniform_real_distribution<double> distribution(0.0,1.0);   // pick type of random distribution
@@ -241,12 +249,14 @@ void Metropolis(int n_spins, int **spin_matrix, double& E, double&M, double *w)
             int ix = (int) (distribution(generator)*(double)n_spins);
             int iy = (int) (distribution(generator)*(double)n_spins);
             int deltaE = 2*spin_matrix[iy][ix]*(spin_matrix[iy][periodic(ix,n_spins,-1)]+ spin_matrix[periodic(iy,n_spins,-1)][ix] + spin_matrix[iy][periodic(ix,n_spins,1)] + spin_matrix[periodic(iy,n_spins,1)][ix]);
+            //cout << deltaE << endl;
             // Here we perform the Metropolis test
-            if ( distribution(generator) <= w[deltaE+8] ) {
+            if (distribution(generator) <= w[deltaE+8]) {
                 spin_matrix[iy][ix] *= -1; // flip one spin and accept new spin config
                 // update energy and magnetization
                 M += (double) 2*spin_matrix[iy][ix];
                 E += (double) deltaE;
+                AC += 1;
             }
         }
     }
