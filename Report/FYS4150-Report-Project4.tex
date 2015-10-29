@@ -49,7 +49,7 @@
 
 This project deals with the Ising model in two dimensions without an external magnetic field. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}.
 
-\subsection{Mathematical foundation}
+\subsection{Theory}
 In the two-dimensional Ising model, the simplest form of the \textbf{energy} for a specific microstate $i$ is expressed as
 
 \begin{equation}\label{eq:energy}
@@ -100,6 +100,20 @@ and the \textbf{susceptibility}, which describes whether a material is attracted
 \begin{equation}
 	\chi = \frac{\sigma_M^2}{kT} = \frac{\langle M^2\rangle - \langle M\rangle^2}{kT}.
 \end{equation}
+The model we are considering here undergoes a \textbf{phase transition}. Below a critical temperature $T_C$ there is spontaneous magnetization $\langle M\rangle \neq 0$ (magnetic phase), while above this temperature the average magnetization is zero (paramagnetic phase). Near $T_C$ we can characterize the behavior of many physical quantities by a power law behavior.
+
+An important quantity is the \textbf{correlation length}, which is expected to be of the order of the lattice spacing for $T \gg T_C$. Because the spins become more and more correlated as $T$ approaches $T_C$, the correlation length increases as we get closer to the critical temperature. The divergent behavior of $\xi$ near $T_C$ is
+
+\begin{equation}\label{eq:xi}
+	\xi(T) \sim \left|T_C-T\right|^{-\nu}.
+\end{equation}
+A second-order phase transition is characterized by a correlation length which spans the whole system. Since we are always limited to a finite lattice, $\xi$ will be proportional with the size of the lattice. Through so-called finite size scaling relations it is possible to relate the behavior at finite lattices with the results for an infinitely large lattice. The critical temperature then scales as
+
+\begin{equation}\label{eq:T_C}
+	T_C(L)-T_C(L=\infty) = aL^{-1/\nu},
+\end{equation}
+with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}).
+
 
 
 
@@ -186,7 +200,7 @@ and
 \begin{equation}
 \begin{aligned}
 	\langle M\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0 \\
-	\langle M\rangle^2 	&= 0 \\
+	%\langle M\rangle^2 	&= 0 \\
 	\langle M^2\rangle 	&= \frac{1}{Z^2} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
 			&= \frac{32}{Z^2} \bigg( e^{8J\beta} + 1  \bigg)
 \end{aligned}
@@ -224,25 +238,25 @@ We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
 
 
 \subsection{Parallelization}
-...
+We have parallelized our code using ...
 
 
 
 \section{Results}
 
-Our numerical results from computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions, can be compared with expressions given in Eq. (\ref{eq:Z_analytic}) - (\ref{eq:chi_analytic}) for a temperature $T=1.0$ (in units of $kT/J$). This gives the following results:
+Our numerical results from computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions, can be compared with expressions given in Eq. (\ref{eq:Z_analytic}) -- (\ref{eq:chi_analytic}) for a temperature $T=1.0$ (in units of $kT/J$). This gives the following results:
 
 \begin{center}
 \begin{tabular}{ l l l }\hline
 	Quantity 								& Closed form	 				& Numerical		\\ \hline
-	Mean energy $E$ 						& - 							& -		 \\
-	Mean magnetization $|{\cal M}|$ 			& -							& -		 \\
-	Specific heat $C_V$						& -							& - 		\\
-	Susceptibility $\chi$						& -							& -		\\
+	Mean energy $E$ 						& -8 							& -		 \\
+	Mean magnetization $|{\cal M}|$ 			& 4							& -		 \\
+	Specific heat $C_V$						& $\sim 0$					& - 		\\
+	Susceptibility $\chi$						& $\sim 0$					& -		\\
 	\hline
 \end{tabular}
 \end{center}
-The number of Monte Carlo cycles needed to achieve good agreement is XXX.
+COMMENT. The number of Monte Carlo cycles needed to achieve good agreement is XXX. COMMENT.
 
 Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of Monte Carlo cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. 
 
@@ -252,7 +266,9 @@ We also study the total number of accepted configurations as a function of the t
 
 ...
 
-By simply counting the number of times a given energy appears in our computation we can compute the probability $w_i$. MORE. 
+By simply counting the number of times a given energy appears in our computation we can compute the probability $P_i$. We start the counting after the steady state situation has been reached. This result is compared with the compute variance in energy $\sigma_E^2$. DISCUSS. 
+
+In our study of the behavior of our model close to the critical temperature ... MORE.
 
 
 
