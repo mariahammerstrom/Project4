@@ -25,9 +25,9 @@
 \titleformat{\subsubsection}{\fontfamily{phv}\fontsize{9}{15}\bfseries}{\thesubsubsection}{1em}{}
 
 
-\title{\textbf{FYS4150 Project 4: \\The Ising model in 2 dimensions}}
+\title{\textbf{FYS4150 Project 4: \\The Ising model in two dimensions}}
 \author{Marie Foss (\# 56), Maria Hammerstr{{\o}}m (\# 59)}
-\date{} % removes date from title
+\date{}
 
 \begin{document}
 
@@ -47,38 +47,38 @@
 
 \section{Introduction}
 
-This project deals with the Ising model in two dimensions, without an external magnetic field. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. In its simplest form the \textbf{energy} for a specific microstate $i$ is expressed as
+This project deals with the Ising model in two dimensions without an external magnetic field. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}.
+
+\subsection{Mathematical foundation}
+In the two-dimensional Ising model, the simplest form of the \textbf{energy} for a specific microstate $i$ is expressed as
 
 \begin{equation}\label{eq:energy}
 	E_i = -J \sum_{<kl>}^{N}s_k s_l,
 \end{equation}
-with  $s_k=\pm 1$, $N$ is the total number of spins and $J$ is a coupling constant expressing the strength of the interaction between neighboring spins. The symbol $<kl>$ indicates that we sum over nearest neighbors only. We will assume that we have a ferromagnetic ordering, meaning $J> 0$. We will use periodic boundary conditions and the Metropolis algorithm only. 
-
-...
+with  $s_k=\pm 1$ where $+ 1$ denotes spin up and $ - 1$ denotes spin down, $N$ is the total number of spins and $J$ is a coupling constant expressing the strength of the interaction between neighboring spins. The symbol $<kl>$ indicates that we sum over nearest neighbors only. We will assume that we have a ferromagnetic ordering, meaning $J> 0$. We will use periodic boundary conditions and the Metropolis algorithm only. 
 
 We will be using the \textbf{Boltzmann probability distribution} (PDF) defined as
 
-\begin{equation}\label{eq:distribution}
-	w_i = \frac{1}{Z} e^{- \beta E_i},
+\begin{equation}
+	P_i (\beta) = \frac{e^{-\beta E_i}}{Z},
 \end{equation}
-where $\beta = 1/kT$ with $k$ the Boltzmann constant and $T$ the temperature, and with $Z$ as the \textbf{partition function} for the canonical ensemble defined as
+where $P_i$ expresses the probability of finding the system in a given microstate $i$, $\beta = 1/kT$ with $k$ the Boltzmann constant and $T$ the temperature, and with $Z$ as the \textbf{partition function} for the canonical ensemble defined as
 
 \begin{equation}\label{eq:partition_func}
-	Z = \sum_{i = 1}^{\infty} e^{-\beta E_i}.
+	Z = \sum_{i = 1}^{\infty} e^{-\beta E_i},
 \end{equation}
-summing over all micro states $i$. $w_i$ expresses the probability of finding the system in a given microstate $i$.
+summing over all micro states $i$. 
 
 The \textbf{magnetic moment} of a given microstate is
 
 \begin{equation}\label{eq:magnetization}
 	M_i = \sum_j s_j.
 \end{equation} 
-
 Some quantities we are interested in calculating, are the \textbf{expection values} for the energy $<E>$ and magnetic moment $<M>$:
 
 \begin{equation}
 \begin{aligned}
-	<E> &= \frac{1}{Z} \sum_i E_i e^{- \beta E_i} = kT^2 \frac{\partial \textrm{ ln } Z}{\partial T} = - \frac{\partial \textrm{ ln } Z}{\partial \beta} \\
+	<E> &= \frac{1}{Z} \sum_i E_i e^{- \beta E_i} = kT^2 \frac{\partial \textrm{ ln } Z}{\partial T} = - \frac{\partial \textrm{ ln } Z}{\partial \beta}, \\
 	<M> &= \frac{1}{Z} \sum_i M_i e^{- \beta E_i},
 \end{aligned}
 \end{equation}
@@ -86,30 +86,24 @@ as well as the variances for the energy $\sigma_E^2$ and for the magnetic moment
 
 \begin{equation}\label{eq:expect_values}
 \begin{aligned}
-	\sigma_E^2 &= <E^2> - <E>^2 \\
-	\sigma_M^2 &= <M^2> - <M>^2,
+	\sigma_E^2 &= <E^2> - <E>^2, \\
+	\sigma_M^2 &= <M^2> - <M>^2.
 \end{aligned}
 \end{equation}
-where
-
-\begin{equation}
-	\sigma_E^2 = \frac{1}{Z} \sum_i E_i^2 e^{- \beta E_i} - \bigg[ \frac{1}{Z} \sum_i E_i e^{- \beta E_i} \bigg]^2
-\end{equation}
-These values can be used to calculate the \textbf{heat capacity} of a fixed volume given by:
+These values can be used to calculate the \textbf{heat capacity} of a fixed volume given by
 
 \begin{equation}
 	C_V = \frac{\sigma_E^2}{kT^2} = \frac{\partial <E>}{\partial T},
 \end{equation}
-and the \textbf{susceptibility}
+and the \textbf{susceptibility}, which describes whether a material is attracted into or repelled out of a magnetic field, given by
 
 \begin{equation}
 	\chi = \frac{\sigma_M^2}{kT} = \frac{<M^2> - <M>^2}{kT}.
 \end{equation}
-Finally we have the \textbf{probability distribution}
 
-\begin{equation}
-	P_i (\beta) = \frac{e^{-\beta E_i}}{Z}.
-\end{equation}
+
+
+\subsection{Analytical solution}
 First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the lattice length. The situation looks like this:
 
 \begin{equation*}
@@ -118,27 +112,27 @@ First we will assume that we only have two spins in each dimension, that is $L =
 	\uparrow_{(3)} \quad \uparrow_{(4)}   
 \end{aligned}
 \end{equation*}
-where an upward arrow denotes spin up. We will make use of \textbf{periodic boundary conditions}, which means that the neighbor to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbor to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this mean we will treat our system as though it looked like this (where the original system is highlighted in cyan):
-
-\begin{equation}
-\begin{aligned}
-	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \quad \textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
-	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{cyan}{\uparrow_{(1)}} \quad \textcolor{cyan}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \\
-	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{cyan}{\uparrow_{(3)}} \quad \textcolor{cyan}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
-	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \quad \textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}}
-\end{aligned}
-\end{equation}
-Closed form expression can be found for the partition function in Eq. (\ref{eq:partition_func}) and the corresponding expectation values for $E$, $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions. In the case $L = 2$ we can write Eq. (\ref{eq:energy}) for the different components as, making use of the periodic boundary conditions:
+where an upward arrow denotes spin up. We will make use of \textbf{periodic boundary conditions}, which means that the neighbor to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbor to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this mean we will treat our system as though it looked like this (where the original system is highlighted in magenta):
 
 \begin{equation*}
 \begin{aligned}
-	E_1 &= - J (s_1 s_2 + s_1 s_3) = - 2J \\
-	E_2 &= - J (s_1 s_2 + s_2 s_4) = - 2J \\
-	E_3 &= - J (s_1 s_3 + s_3 s_4) = - 2J \\
-	E_4 &= - J (s_3 s_4 + s_2 s_4) = - 2J 
+	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \quad \textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
+	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{magenta}{\uparrow_{(1)}} \quad \textcolor{magenta}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \\
+	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{magenta}{\uparrow_{(3)}} \quad \textcolor{magenta}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
+	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \quad \textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}}
 \end{aligned}
 \end{equation*}
-Thus the total energy for the system is:
+Closed form expression can be found for the partition function in Eq. (\ref{eq:partition_func}) and the corresponding expectation values for $E$, $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions. In the case $L = 2$ we can write Eq. (\ref{eq:energy}) for the different components as, making use of the periodic boundary conditions, giving
+
+\begin{equation*}
+\begin{aligned}
+	E_1 &= - J (s_1 s_2 + s_1 s_3) = - 2J, \\
+	E_2 &= - J (s_1 s_2 + s_2 s_4) = - 2J, \\
+	E_3 &= - J (s_1 s_3 + s_3 s_4) = - 2J, \\
+	E_4 &= - J (s_3 s_4 + s_2 s_4) = - 2J. 
+\end{aligned}
+\end{equation*}
+Thus the total energy for the system is
 
 \begin{equation*}
 	E = E_1 + E_2 + E_3 + E_4 = - 8J.
@@ -161,29 +155,29 @@ If going through this exercise for different configurations of spin up and spin 
 \end{center}
 \end{table*}
 
-These calculations can be used to find the closed-form expressions, starting with the partition function:
+These calculations can be used to find the closed-form expressions, starting with the partition function, which can be expressed as
 
-\begin{equation}
+\begin{equation}\label{eq:Z_analytic}
 \begin{aligned}
 	Z(\beta) 	&= \sum_E \Omega(E) e^{- \beta E} = 2 e^{8J\beta} + 2 e^{- 8J \beta} + 12 \\
-			&= 4 \textrm{ cosh}(8J \beta) + 12
+			&= 4 \textrm{ cosh}(8J \beta) + 12.
 \end{aligned}
 \end{equation}
-Then the expectation value can be written, using the expression in Eq. (\ref{eq:expect_values}):
+Then the expectation value can be written, using the expression in Eq. (\ref{eq:expect_values}), as
 
-\begin{equation}
-	<E> = - \frac{8J \textrm{ sinh}(8J \beta)}{\textrm{cosh}(8J\beta) + 3} \approx - 8J \textrm{ tanh} (8J\beta)
+\begin{equation}\label{eq:E_avg_analytic}
+	<E> = - \frac{8J \textrm{ sinh}(8J \beta)}{\textrm{cosh}(8J\beta) + 3} \approx - 8J \textrm{ tanh} (8J\beta),
 \end{equation}
-where we have used that cosh$(8J\beta) \gg 3$ in the approximation. Using this approximation we find:
+where we have used that cosh$(8J\beta) \gg 3$ in the approximation. Using this approximation gives
 
-\begin{equation}
-	C_V(\beta) = k \textrm{ } \bigg( \frac{8J\beta}{\textrm{cosh }(8J\beta)} \bigg)^2
+\begin{equation}\label{eq:C_V_analytic}
+	C_V(\beta) = k \textrm{ } \bigg( \frac{8J\beta}{\textrm{cosh }(8J\beta)} \bigg)^2.
 \end{equation}
-Similarly, using the values for magnetization in Table~\ref{table:quantities} and Eq. (\ref{eq:magnetization}):
+Similarly, using the values for magnetization in Table~\ref{table:quantities} and Eq. (\ref{eq:magnetization}), gives
 
-\begin{equation}
+\begin{equation}\label{eq:M_avg_analytic}
 \begin{aligned}
-	<|M|> 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 + 4\cdot|-2| + |-4|e^{8J\beta} \bigg) \\
+	<|M|> 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 + 4\cdot|-2| + |-4|e^{8J\beta} \bigg), \\
 			&= \frac{8}{Z}(e^{8J\beta} + 2) \\
 \end{aligned}
 \end{equation}
@@ -191,23 +185,17 @@ and
 
 \begin{equation}
 \begin{aligned}
-	<M> 		&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0 \\
-	<M>^2 	&= 0 \\
+	<M> 		&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0, \\
+	%<M>^2 	&= 0 \\
 	<M^2> 	&= \frac{1}{Z^2} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
-			&= \frac{32}{Z^2} \bigg( e^{8J\beta} + 1  \bigg)
+			&= \frac{32}{Z^2} \bigg( e^{8J\beta} + 1  \bigg).
 \end{aligned}
 \end{equation}
 Thus
 
-\begin{equation}
-	\chi(\beta) = \frac{<M^2> - <M>^2}{kT} = \frac{32 \beta}{Z^2} \bigg(e^{8J\beta} + 1  \bigg)
+\begin{equation}\label{eq:chi_analytic}
+	\chi(\beta) = \frac{<M^2> - <M>^2}{kT} = \frac{32 \beta}{Z^2} \bigg(e^{8J\beta} + 1  \bigg).
 \end{equation}
-
-
-
-
-... 
-
 
 
 
@@ -219,8 +207,9 @@ Thus
 
 \section{Methods}
 
-We write a code for the Ising model which computes the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of  $T$ using periodic boundary conditions for in the $x$ and $y$ directions. Using the Ising model in two dimensions, the number of configurations is given by $2^N$ with $N = L \times L$ number of spins for a lattice of length $L$. 
+We wrote a code for the Ising model which computes the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of  $T$ using periodic boundary conditions for in the $x$ and $y$ directions. Using the Ising model in two dimensions, the number of configurations is given by $2^N$ with $N = L \times L$ number of spins for a lattice of length $L$. 
 
+\subsection{Algorithm}
 We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
 
 \begin{enumerate}
@@ -234,12 +223,14 @@ We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
 \end{enumerate}
 
 
+\subsection{Parallelization}
+...
 
 
 
 \section{Results}
 
-Our numerical results from computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions, can be compared with expressions given in Eq. (\ref{eq:energy2}) - (?) for a temperature $T=1.0$ (in units of $kT/J$). This gives the following results:
+Our numerical results from computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions, can be compared with expressions given in Eq. (\ref{eq:Z_analytic}) - (\ref{eq:chi_analytic}) for a temperature $T=1.0$ (in units of $kT/J$). This gives the following results:
 
 \begin{center}
 \begin{tabular}{ l l l }\hline
