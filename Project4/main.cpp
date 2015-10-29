@@ -178,12 +178,18 @@ int main()
         double M_abs = average[4]/n_spins/n_spins;
         Cv = (E_exp2-E_exp*E_exp)/T/T;
         chi = (M_exp2-M_abs*M_abs)/T;
-        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_abs/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
     }*/
     fileT24.close();
     fileT1.close();
 
     // Accepted conficurations
+    /*
+     * int AC = 0;
+     * temp = E;
+     * //some coding
+     * if(E<temp) AC += 1;
+    */
     //ofstream fileACMC("AcceptedConfigurationsMC.txt"); // File for expectation values
     //fileACMC << MCs << "\t" << AC << endl; // Write solution to file
     //ofstream fileACT("AcceptedConfigurationsT.txt"); // File for expectation values
