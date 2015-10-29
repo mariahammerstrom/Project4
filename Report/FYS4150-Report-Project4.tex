@@ -17,6 +17,7 @@
 
 \usepackage[font=small,labelfont={sf,bf}]{caption}
 
+\usepackage{color}
 
 \usepackage{titlesec}
 \titleformat{\section}{\fontfamily{phv}\fontsize{12}{15}\bfseries}{\thesection}{1em}{}
@@ -46,7 +47,7 @@
 
 \section{Introduction}
 
-The project deals with the Ising model in two dimensions, without an external magnetic field. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. In its simplest form the \textbf{energy} for a specific microstate $i$ is expressed as
+This project deals with the Ising model in two dimensions, without an external magnetic field. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. In its simplest form the \textbf{energy} for a specific microstate $i$ is expressed as
 
 \begin{equation}\label{eq:energy}
 	E_i = -J \sum_{<kl>}^{N}s_k s_l,
@@ -69,7 +70,7 @@ summing over all micro states $i$. $w_i$ expresses the probability of finding th
 
 The \textbf{magnetic moment} of a given microstate is
 
-\begin{equation}
+\begin{equation}\label{eq:magnetization}
 	M_i = \sum_j s_j.
 \end{equation} 
 
@@ -77,13 +78,13 @@ Some quantities we are interested in calculating, are the \textbf{expection valu
 
 \begin{equation}
 \begin{aligned}
-	<E> &= \frac{1}{Z} \sum_i E_i e^{- \beta E_i} \\
+	<E> &= \frac{1}{Z} \sum_i E_i e^{- \beta E_i} = kT^2 \frac{\partial \textrm{ ln } Z}{\partial T} = - \frac{\partial \textrm{ ln } Z}{\partial \beta} \\
 	<M> &= \frac{1}{Z} \sum_i M_i e^{- \beta E_i},
 \end{aligned}
 \end{equation}
 as well as the variances for the energy $\sigma_E^2$ and for the magnetic moment $\sigma_M^2$:
 
-\begin{equation}
+\begin{equation}\label{eq:expect_values}
 \begin{aligned}
 	\sigma_E^2 &= <E^2> - <E>^2 \\
 	\sigma_M^2 &= <M^2> - <M>^2,
@@ -94,15 +95,122 @@ where
 \begin{equation}
 	\sigma_E^2 = \frac{1}{Z} \sum_i E_i^2 e^{- \beta E_i} - \bigg[ \frac{1}{Z} \sum_i E_i e^{- \beta E_i} \bigg]^2
 \end{equation}
-First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the lattice length. In this case, we can find a closed form expression for the partition function in Eq. (\ref{eq:partition_func}) and the corresponding expectation values for $E$, $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions. \textbf{Periodic boundary conditions} means that the neighbor to the right of a given spin $s_N$ in Eq. (\ref{eq:energy}) takes the value of $s_1$. Similarly, the neighbor to the left of $s_1$ takes the value of $s_N$. 
+These values can be used to calculate the \textbf{heat capacity} of a fixed volume given by:
 
-In the case $L = 2$ we can write Eq. (\ref{eq:energy}) as:
+\begin{equation}
+	C_V = \frac{\sigma_E^2}{kT^2} = \frac{\partial <E>}{\partial T},
+\end{equation}
+and the \textbf{susceptibility}
 
-\begin{equation}\label{eq:energy2}
-	E_i = -J \sum_{<kl>}^{N}s_k s_l = -J \sum_{k = 1}^{2} \sum_{l = 1}^{2} s_k s_l = - J (s_1 s_1 + s_1 s_2 + s_2 s_1 + s_2 s_2)
+\begin{equation}
+	\chi = \frac{\sigma_M^2}{kT} = \frac{<M^2> - <M>^2}{kT}.
+\end{equation}
+Finally we have the \textbf{probability distribution}
+
+\begin{equation}
+	P_i (\beta) = \frac{e^{-\beta E_i}}{Z}.
+\end{equation}
+First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the lattice length. The situation looks like this:
+
+\begin{equation*}
+\begin{aligned}
+	\uparrow_{(1)} \quad \uparrow_{(2)}   \\
+	\uparrow_{(3)} \quad \uparrow_{(4)}   
+\end{aligned}
+\end{equation*}
+where an upward arrow denotes spin up. We will make use of \textbf{periodic boundary conditions}, which means that the neighbor to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbor to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this mean we will treat our system as though it looked like this (where the original system is highlighted in cyan):
+
+\begin{equation}
+\begin{aligned}
+	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \quad \textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
+	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{cyan}{\uparrow_{(1)}} \quad \textcolor{cyan}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \\
+	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{cyan}{\uparrow_{(3)}} \quad \textcolor{cyan}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
+	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \quad \textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}}
+\end{aligned}
+\end{equation}
+Closed form expression can be found for the partition function in Eq. (\ref{eq:partition_func}) and the corresponding expectation values for $E$, $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions. In the case $L = 2$ we can write Eq. (\ref{eq:energy}) for the different components as, making use of the periodic boundary conditions:
+
+\begin{equation*}
+\begin{aligned}
+	E_1 &= - J (s_1 s_2 + s_1 s_3) = - 2J \\
+	E_2 &= - J (s_1 s_2 + s_2 s_4) = - 2J \\
+	E_3 &= - J (s_1 s_3 + s_3 s_4) = - 2J \\
+	E_4 &= - J (s_3 s_4 + s_2 s_4) = - 2J 
+\end{aligned}
+\end{equation*}
+Thus the total energy for the system is:
+
+\begin{equation*}
+	E = E_1 + E_2 + E_3 + E_4 = - 8J.
+\end{equation*}
+If going through this exercise for different configurations of spin up and spin down, we find values for energies, degeneracies and magnetization for different configurations as shown in Table~\ref{table:quantities}, where magnetization is calculated from Eq. (\ref{eq:magnetization}).
+
+\begin{table*}
+\begin{center}
+\begin{tabular}{ l r r r }\hline
+	Number of spins up 			& Energy $E$	 			& Degeneracy $\Omega$		& Magnetization $M$		\\ \hline
+	4 						& $- 8J$ 					& 1						& 4		 \\
+	3 						& 0						& 4						& 2		 \\
+	2						& 0						& 4						& 0		\\
+	2						& $8J$					& 2						& 0		\\
+	1						& 0						& 4						& -2		\\
+	0						& $-8J$					& 1						& -4		\\
+	\hline
+\end{tabular}
+\caption{Energy and magnetization for the two-dimensional Ising model with $N = 2 \times 2$ spins with periodic boundary conditions.}\label{table:quantities}
+\end{center}
+\end{table*}
+
+These calculations can be used to find the closed-form expressions, starting with the partition function:
+
+\begin{equation}
+\begin{aligned}
+	Z(\beta) 	&= \sum_E \Omega(E) e^{- \beta E} = 2 e^{8J\beta} + 2 e^{- 8J \beta} + 12 \\
+			&= 4 \textrm{ cosh}(8J \beta) + 12
+\end{aligned}
+\end{equation}
+Then the expectation value can be written, using the expression in Eq. (\ref{eq:expect_values}):
+
+\begin{equation}
+	<E> = - \frac{8J \textrm{ sinh}(8J \beta)}{\textrm{cosh}(8J\beta) + 3} \approx - 8J \textrm{ tanh} (8J\beta)
+\end{equation}
+where we have used that cosh$(8J\beta) \gg 3$ in the approximation. Using this approximation we find:
+
+\begin{equation}
+	C_V(\beta) = k \textrm{ } \bigg( \frac{8J\beta}{\textrm{cosh }(8J\beta)} \bigg)^2
+\end{equation}
+Similarly, using the values for magnetization in Table~\ref{table:quantities} and Eq. (\ref{eq:magnetization}):
+
+\begin{equation}
+\begin{aligned}
+	<|M|> 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 + 4\cdot|-2| + |-4|e^{8J\beta} \bigg) \\
+			&= \frac{8}{Z}(e^{8J\beta} + 2) \\
+\end{aligned}
+\end{equation}
+and
+
+\begin{equation}
+\begin{aligned}
+	<M> 		&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0 \\
+	<M>^2 	&= 0 \\
+	<M^2> 	&= \frac{1}{Z^2} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
+			&= \frac{32}{Z^2} \bigg( e^{8J\beta} + 1  \bigg)
+\end{aligned}
+\end{equation}
+Thus
+
+\begin{equation}
+	\chi(\beta) = \frac{<M^2> - <M>^2}{kT} = \frac{32 \beta}{Z^2} \bigg(e^{8J\beta} + 1  \bigg)
 \end{equation}
 
-... EXPRESSIONS! 
+
+
+
+... 
+
+
+
+
 
 
 
