@@ -131,7 +131,7 @@ int main()
     }
     double w[17],average[5];
     T= 1;
-    int MCsa[2000];
+    int MCsa[200];
     double E = 0;
     double M = 0;
     // Set up array for possible energy changes
@@ -140,7 +140,7 @@ int main()
     // Initialize array for expectation values
     for(int i=0;i<5;i++) average[i] = 0;
     initialize(n_spins,T,spin_matrix,E,M);
-    for(int i=1;i<=2000;i++){
+    for(int i=1;i<=200;i++){
         MCsa[i-1] = i;
         for(int cycles=1;cycles <= MCsa[i-1];cycles++){
             Metropolis(n_spins,spin_matrix,E,M,w);
@@ -194,12 +194,12 @@ int main()
 
     // Probability
     //ofstream fileP("ProbabilityL" + to_string(L) + ".txt"); // File for expectation values
-    //fileP << L << Probability << "\t" << sigmaE << endl; // Write solution to file
+    //fileP << L << "\t" << Probability << "\t" << sigmaE << endl; // Write solution to file
     //fileP.close();
 
     // Ecpectation values for different L and T. Parallelization!
     //ofstream fileL("ExpectationValuesL" + to_string(n_spins) + ".txt"); // File for expectation values
-    //fileL << T << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl;
+    //fileL << T << "\t" << E_exp << "\t" << M_exp << "\t" << Cv << "\t" << chi << endl;
     //fileL.close();
 
     // Estimate critical temperature
