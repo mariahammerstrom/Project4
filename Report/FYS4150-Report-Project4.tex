@@ -19,6 +19,8 @@
 
 \usepackage{color}
 
+\usepackage[export]{adjustbox}
+
 \usepackage{titlesec}
 \titleformat{\section}{\fontfamily{phv}\fontsize{12}{15}\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\fontfamily{phv}\fontsize{10}{15}\itshape}{\thesubsection}{1em}{}
@@ -47,7 +49,7 @@
 
 \section{Introduction}
 
-This project deals with the Ising model in two dimensions without an external magnetic field. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}.
+The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}. This project deals with the Ising model in two dimensions without an external magnetic field. 
 
 \subsection{Theory}
 In the two-dimensional Ising model, the simplest form of the \textbf{energy} for a specific microstate $i$ is expressed as
@@ -55,14 +57,14 @@ In the two-dimensional Ising model, the simplest form of the \textbf{energy} for
 \begin{equation}\label{eq:energy}
 	E_i = -J \sum_{\langle kl\rangle}^{N}s_k s_l,
 \end{equation}
-with  $s_k=\pm 1$ where $+ 1$ denotes spin up and $ - 1$ denotes spin down, $N$ is the total number of spins and $J$ is a coupling constant expressing the strength of the interaction between neighboring spins. The symbol $\langle kl\rangle$ indicates that we sum over nearest neighbors only. We will assume that we have a ferromagnetic ordering, meaning $J> 0$. We will use periodic boundary conditions and the Metropolis algorithm only. 
+with  $s_k=\pm 1$ where $+ 1$ denotes spin up and $ - 1$ denotes spin down, $N$ is the total number of spins and $J$ is a coupling constant expressing the strength of the interaction between neighboring spins. The symbol $\langle kl\rangle$ indicates that the sum is over nearest neighbors only. We assume ferromagnetic ordering, meaning $J> 0$ and will make use of periodic boundary conditions.
 
-We will be using the \textbf{Boltzmann probability distribution} (PDF) defined as
+The probability of finding the system in a given microstate $i$ is expressed by the \textbf{Boltzmann probability distribution}
 
 \begin{equation}
 	P_i (\beta) = \frac{e^{-\beta E_i}}{Z},
 \end{equation}
-where $P_i$ expresses the probability of finding the system in a given microstate $i$, $\beta = 1/kT$ with $k$ the Boltzmann constant and $T$ the temperature, and with $Z$ as the \textbf{partition function} for the canonical ensemble defined as
+where $\beta = 1/kT$ with $k$ the Boltzmann constant and $T$ the temperature, and with $Z$ as the \textbf{partition function} for the canonical ensemble defined as
 
 \begin{equation}\label{eq:partition_func}
 	Z = \sum_{i = 1}^{\infty} e^{-\beta E_i},
@@ -74,7 +76,7 @@ The \textbf{magnetic moment} of a given microstate is
 \begin{equation}\label{eq:magnetization}
 	M_i = \sum_j s_j.
 \end{equation} 
-Some quantities we are interested in calculating, are the \textbf{expection values} for the energy $\langle E\rangle$ and magnetic moment $\langle M\rangle$:
+Some quantities of interest are the \textbf{expection values} for the energy $\langle E\rangle$ and magnetic moment $\langle M\rangle$:
 
 \begin{equation}
 \begin{aligned}
@@ -272,6 +274,20 @@ In our study of the behavior of our model close to the critical temperature we l
 
 .... MORE.
 
+\begin{figure*}[t]
+\begin{center}
+\begin{tabular}{ccc}
+  	\includegraphics[width=56mm,frame]{images/visualization_L80_T2_0_square.png}
+	& \includegraphics[width=56mm,frame]{images/visualization_L80_T2_2_square.png}
+	& \includegraphics[width=56mm,frame]{images/visualization_L80_T2_4_square.png} \\
+	
+	(a) $T = 2.0$					
+	& (b) $T = 2.2$
+	& (c) $T = 2.4$  \\[6pt]
+\end{tabular}
+\caption{Visualization of the spin matrix for a $80 \times 80$ lattice for different temperatures $T$. White = spin up, black = spin down.}\label{fig:visualization}
+\end{center}
+\end{figure*}
 
 
 
@@ -285,11 +301,13 @@ In our study of the behavior of our model close to the critical temperature we l
 
 \section{List of codes}
 
-The codes developed for this project are:\\
+The codes developed and used for this project are:\\
 
 \noindent \verb@main.cpp@ -- main program (C++).
 
-\noindent \verb@plotting.m@ -- plotting program which makes plots to study the total number of accepted configurations as a function of total number of Monte Carlo cycles and temperature $T$ (Python).
+\noindent \verb@plotting.py@ -- plotting program which makes plots to study the total number of accepted configurations as a function of total number of Monte Carlo cycles and as a function of temperature $T$ (Python).
+
+\noindent \verb@visualization.py@ -- provided program for running the Metropolis algorithm and plotting the spin matrix, as shown in Fig.~\ref{fig:visualization} (Python).
 
 \end{multicols}
 
