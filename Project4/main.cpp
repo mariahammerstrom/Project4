@@ -158,13 +158,19 @@ int main()
         chi = (M_exp2-M_abs*M_abs)/T;
         fileT1 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
     }
-    /*
+
     T = 2.4;
-    for(int i=1;i<=10;i++){
+    E = 0;
+    M = 0;
+    // Set up array for possible energy changes
+    for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
+    for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
+    // Initialize array for expectation values
+    for(int i=0;i<5;i++) average[i] = 0;
+    initialize(n_spins,T,spin_matrix,E,M);
+    for(int i=1;i<=200;i++){
         MCsa[i-1] = i;
-        double E = 0;
-        double M = 0;
-        for(int cycles=1;cycles <= MCs;cycles++){
+        for(int cycles=1;cycles <= MCsa[i-1];cycles++){
             Metropolis(n_spins,spin_matrix,E,M,w);
 
             // Update expectation values
@@ -178,8 +184,8 @@ int main()
         double M_abs = average[4]/n_spins/n_spins;
         Cv = (E_exp2-E_exp*E_exp)/T/T;
         chi = (M_exp2-M_abs*M_abs)/T;
-        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_abs/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
-    }*/
+        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    }
     fileT24.close();
     fileT1.close();
 
