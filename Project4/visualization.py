@@ -7,6 +7,12 @@ screen = None
 font = None
 BLOCKSIZE = 10
 
+size = 100
+trials = 100000
+temp = 2.1
+method = 3
+screen = pygame.display.set_mode((size*10,size*10))
+
 def periodic (i, limit, add):
 	"""
 	Choose correct matrix index with periodic
@@ -65,10 +71,10 @@ def visualize(spin_matrix, temp, E, M, method):
 			for x in xrange(size):
 				if spin_matrix.item(x,y) == 1:
 					rect = pygame.Rect(x*BLOCKSIZE,y*BLOCKSIZE,BLOCKSIZE,BLOCKSIZE)
-					pygame.draw.rect(screen,(0,0,255),rect)
+					pygame.draw.rect(screen,(255,255,255),rect)
 				else:
 					rect = pygame.Rect(x*BLOCKSIZE,y*BLOCKSIZE,BLOCKSIZE,BLOCKSIZE)
-					pygame.draw.rect(screen,(255,0,0),rect)
+					pygame.draw.rect(screen,(0,0,0),rect)
 		screen.unlock()
 		pygame.display.flip()
 	#SDL block w/ data-display
@@ -165,21 +171,21 @@ def monteCarlo(temp, size, trials, visual_method):
 	return (E_av, E_variance, M_av, M_variance, Mabs_av)
 
 def main(argv):
-	size = 100
-	trials = 100000
-	temp = 2.1
-	method = 3
+	# size = 100
+	# trials = 100000
+	# temp = 2.1
+	# method = 3
 
 	#Initialize pygame
-	if method == 2 or method == 3 or method == 4:
-		pygame.init()
-		if method == 2:
-			screen = pygame.display.set_mode((size,size))
-		elif method == 3:
-			screen = pygame.display.set_mode((size*10,size*10))
-		elif method == 4:
-			screen = pygame.display.set_mode((size*10,size*10))
-			font = pygame.font.Font(None,12)
+	# if method == 2 or method == 3 or method == 4:
+		# pygame.init()
+		# if method == 2:
+			# screen = pygame.display.set_mode((size,size))
+		# elif method == 3:
+			# screen = pygame.display.set_mode((size*10,size*10))
+		# elif method == 4:
+			# screen = pygame.display.set_mode((size*10,size*10))
+			# font = pygame.font.Font(None,12)
 	(E_av, E_variance, M_av, M_variance, Mabs_av) = monteCarlo(temp,size,trials, method)
 	print "%15.8E %15.8E %15.8E %15.8E %15.8E %15.8E\n" % (temp, E_av, E_variance, M_av, M_variance, Mabs_av)
 	pygame.quit()
