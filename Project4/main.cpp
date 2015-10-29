@@ -15,7 +15,7 @@ int main()
 {
     double k = 1; // Boltzmann's constant
     int L,N;
-    double T=1; // units kT/J
+    double T = 1; // units kT/J
     double Cv,chi,Z;
     double E_exp,M_exp,E_exp2,M_exp2,sigmaE,sigmaM; // Expectation values
 
@@ -67,7 +67,7 @@ int main()
     delete[] spin;
     delete[] En;
     delete[] Ma;*/
-
+/*
     // b, Ising model; <E>, <|M|>, Cv, chi as functions of T
     int **spin_matrix,n_spins,MCs;
     double w[17],average[5],initial_temp,final_temp,temp_step;
@@ -111,28 +111,75 @@ int main()
         output(n_spins,MCs,temp,average);
 
 
-    }
+    }*/
 
 
     // Expectation Values as functions of MC cycles
     ofstream fileT1("ExpectationValues_MCsT1.txt"); // Expectation values, T = 1
     ofstream fileT24("ExpectationValues_MCsT24.txt"); // Expectation values, T = 2.4
     L = 20;
-    T= 1;
-    int MCs[10];
-    for(int i=0;i<10;i++) MCs[i] = i;
-    for(int cycles=1;cycles <= MCs;cycles++){
-        Metropolis(n_spins,spin_matrix,E,M,w);
-
-        // Update expectation values
-        average[0] += E; average[1] += E*E;
-        average[2] += M; average[3] += M*M; average[4] += fabs(M);
+    int n_spins = 20,MCs;
+    int **spin_matrix;
+    spin_matrix = new int*[n_spins];
+    for(int i=0;i<n_spins;i++)
+        spin_matrix[i] = new int[n_spins];
+    //spin_matrix = (int**)matrix(n_spins,n_spins,sizeof(int));
+    for(int i=0;i<n_spins;i++){
+        for(int j=0;j<n_spins;j++){
+            spin_matrix[i][j] = 1;
+        }
     }
-    //fileT1 << MCs << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    double w[17],average[5];
+    T= 1;
+    int MCsa[2000];
+    double E = 0;
+    double M = 0;
+    // Set up array for possible energy changes
+    for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
+    for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
+    // Initialize array for expectation values
+    for(int i=0;i<5;i++) average[i] = 0;
+    initialize(n_spins,T,spin_matrix,E,M);
+    for(int i=1;i<=2000;i++){
+        MCsa[i-1] = i;
+        for(int cycles=1;cycles <= MCsa[i-1];cycles++){
+            Metropolis(n_spins,spin_matrix,E,M,w);
 
+            // Update expectation values
+            average[0] += E; average[1] += E*E;
+            average[2] += M; average[3] += M*M; average[4] += fabs(M);
+        }
+        E_exp = average[0]/n_spins/n_spins;
+        E_exp2 = average[1]/n_spins/n_spins;
+        M_exp = average[2]/n_spins/n_spins;
+        M_exp2 = average[3]/n_spins/n_spins;
+        double M_abs = average[4]/n_spins/n_spins;
+        Cv = (E_exp2-E_exp*E_exp)/T/T;
+        chi = (M_exp2-M_abs*M_abs)/T;
+        fileT1 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    }
+    /*
     T = 2.4;
-    //fileT24 << MCs << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    for(int i=1;i<=10;i++){
+        MCsa[i-1] = i;
+        double E = 0;
+        double M = 0;
+        for(int cycles=1;cycles <= MCs;cycles++){
+            Metropolis(n_spins,spin_matrix,E,M,w);
 
+            // Update expectation values
+            average[0] += E; average[1] += E*E;
+            average[2] += M; average[3] += M*M; average[4] += fabs(M);
+        }
+        E_exp = average[0]/n_spins/n_spins;
+        E_exp2 = average[1]/n_spins/n_spins;
+        M_exp = average[2]/n_spins/n_spins;
+        M_exp2 = average[3]/n_spins/n_spins;
+        double M_abs = average[4]/n_spins/n_spins;
+        Cv = (E_exp2-E_exp*E_exp)/T/T;
+        chi = (M_exp2-M_abs*M_abs)/T;
+        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) (MCs)) << "\t" << M_exp/((double) (MCs)) << "\t" << Cv << "\t" << chi << endl; // Write solution to file
+    }*/
     fileT24.close();
     fileT1.close();
 
