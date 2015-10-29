@@ -35,10 +35,10 @@ def exp_values(filename):
     
     # Plotting
     plt.figure()
-    #plt.plot(MC_cycles,E_avg,label=r'$<E>$')
-    #plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
-    plt.plot(MC_cycles,C_v,label=r'$C_v$')
-    plt.plot(MC_cycles,X,label=r'$\chi$')
+    plt.plot(MC_cycles,E_avg,label=r'$<E>$')
+    plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
+    #plt.plot(MC_cycles,C_v,label=r'$C_v$')
+    #plt.plot(MC_cycles,X,label=r'$\chi$')
     #plt.title('Ising model, L = %d, T = %d kT/J' % (L,T))
     plt.xlabel('# of MC cycles',size=14)
     plt.ylabel('Expectation values',size=14)
