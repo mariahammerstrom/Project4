@@ -13,7 +13,51 @@ from matplotlib.pyplot import rc
 rc('font',**{'family':'serif'})
 
 
-def exp_values(filename):
+def exp_valuesT(filename):
+    """
+    Function that plots various expectation values as a function of temperature.
+    File structure: [Temperature,MC_cycles,E_avg,M_absavg,C_v,X, number of accepted]
+    """
+    
+    data = np.loadtxt(filename,unpack=True)     # Read data
+    
+    # Model   
+    T = data[0]                     # Temperature [kT/J]
+    # MC_cycles = data[1]             # Number of Monte Carlo cycles
+
+    # Expectation values
+    E_avg = data[2]                 # Mean energy
+    M_absavg = data[3]              # Mean magnetization (absolute value) 
+    C_v = data[4]                   # Specific heat
+    X = data[5] 					# Susceptibility
+    AC = data[6]					# Accepted configurations
+    
+    # Plotting
+    # plt.title('Expectation values vs temperature')
+	
+    plt.plot(T,E_avg,label=r'$<E>$')
+    plt.plot(T,M_absavg,label=r'$<|M|>$')
+    plt.ylim(-2.2,1.2)
+    plt.xlabel(r'Temperature ($kT/J$)')
+    plt.ylabel('Expectation values',size=14)
+    plt.legend()
+    plt.show()
+	
+    plt.plot(T,C_v,label=r'$C_v$')
+    plt.plot(T,X,label=r'$\chi$')
+    plt.xlabel(r'Temperature ($kT/J$)')
+    plt.ylabel('Expectation values',size=14)
+    plt.legend()
+    plt.show()
+	
+    plt.plot(T,AC,label=r'AC')
+    plt.xlabel(r'Temperature ($kT/J$)')
+    plt.ylabel('Accepted configurations',size=14)
+    plt.show()
+    
+    return 
+	
+def exp_valuesMC(filename):
     """
     Function that plots various expectation values as a function of 
     Monte Carlo cycles.
@@ -23,77 +67,145 @@ def exp_values(filename):
     data = np.loadtxt(filename,unpack=True)     # Read data
     
     # Model
-    # L = data[0]                          # Lattice dimension, L x L
-    T = data[0]                          # Temperature [kT/J]
-    MC_cycles = data[1]                  # Number of Monte Carlo cycles
+    # T = data[0]                     # Temperature [kT/J]
+    MC_cycles = data[1]             # Number of Monte Carlo cycles
 
     # Expectation values
-    E_avg = data[2]                      # Mean energy
-    M_absavg = data[3]                   # Mean magnetization (absolute value) 
-    C_v = data[4]                        # Specific heat
-    X = data[5] 					     # Susceptibility
-    AC = data[6]
+    E_avg = data[2]                 # Mean energy
+    M_absavg = data[3]              # Mean magnetization (absolute value) 
+    C_v = data[4]                   # Specific heat
+    X = data[5] 					# Susceptibility
+    AC = data[6]					# Accepted configurations
     
     # Plotting
-    plt.figure()
+    # plt.title('Expectation values vs MC cycles')
 	
-    # plt.plot(MC_cycles,E_avg,label=r'$<E>$')
-    # plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
-    # plt.plot(MC_cycles,C_v,label=r'$C_v$')
-    # plt.plot(MC_cycles,X,label=r'$\chi$')
-    # plt.plot(MC_cycles,AC,label=r'AC')
-    # plt.xlabel('# of MC cycles',size=14)
-    # plt.title('Ising model, L = %d, T = %d kT/J' % (L,T))
-	
-    # plt.plot(T,E_avg,label=r'$<E>$')
-    # plt.plot(T,M_absavg,label=r'$<|M|>$')
-    # plt.ylim(-2.2,1.2)
-    plt.plot(T,C_v,label=r'$C_v$')
-    plt.plot(T,X,label=r'$\chi$')
-    # plt.plot(T,AC,label=r'AC')
-    plt.xlabel(r'Temperature ($kT/J$)')
-	
+    plt.plot(MC_cycles,E_avg,label=r'$<E>$')
+    plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
+    plt.xlabel('# of MC cycles',size=14)
     plt.ylabel('Expectation values',size=14)
+    plt.legend()
+    plt.show()
+	
+    plt.plot(MC_cycles,C_v,label=r'$Cv$')
+    plt.plot(MC_cycles,X,label=r'$\chi$')
+    plt.xlabel('# of MC cycles',size=14)
+    plt.ylabel('Expectation values',size=14)
+    plt.legend()
+    plt.show()
+	
+    plt.plot(MC_cycles,AC)
+    plt.xlabel('# of MC cycles',size=14)
+    plt.ylabel('Accepted configurations',size=14)
+    plt.show()
+    
+    return 
+	
+def exp_valuesTL(filename2,filename4,filename6,filename8): # Is there a better way to write this??
+    """
+    Function that plots various expectation values as a function of temperature
+    for a given lattice size LxL.
+    File structure: [Temperature,E_avg,M_absavg,C_v,X]
+    """
+    
+    data2 = np.loadtxt(filename2,unpack=True)
+    data4 = np.loadtxt(filename4,unpack=True)
+    data6 = np.loadtxt(filename6,unpack=True)
+    data8 = np.loadtxt(filename8,unpack=True)
+    
+    # Model
+    T2 = data2[1]
+    T4 = data4[1]
+    T6 = data6[1]
+    T8 = data8[1]
+
+    # Expectation values
+    E_avg2 = data2[2]
+    M_absavg2 = data2[3] 
+    C_v2 = data2[4]
+    X2 = data2[5]
+	
+    E_avg4 = data4[2]
+    M_absavg4 = data4[3] 
+    C_v4 = data4[4]
+    X4 = data4[5]
+	
+    E_avg6 = data6[2]
+    M_absavg6 = data6[3] 
+    C_v6 = data6[4]
+    X6 = data6[5]
+	
+    E_avg8 = data8[2]
+    M_absavg8 = data8[3] 
+    C_v8 = data8[4]
+    X8 = data8[5]
+    
+    # Plotting, subplot possible
+    plt.plot(T2,E_avg2,label=r'$20\times20$')
+    plt.plot(T4,E_avg4,label=r'$40\times40$')
+    plt.plot(T6,E_avg6,label=r'$60\times60$')
+    plt.plot(T8,E_avg8,label=r'$80\times80$')
+    plt.xlabel(r'Temperature ($kT/J$)')
+    plt.ylabel('Mean energy',size=14)
+    plt.legend()
+    plt.show()
+	
+    plt.plot(T2,M_absavg2,label=r'$20\times20$')
+    plt.plot(T4,M_absavg4,label=r'$40\times40$')
+    plt.plot(T6,M_absavg6,label=r'$60\times60$')
+    plt.plot(T8,M_absavg8,label=r'$80\times80$')
+    plt.xlabel(r'Temperature ($kT/J$)')
+    plt.ylabel('Mean magnetization',size=14)
+    plt.legend()
+    plt.show()
+	
+    plt.plot(T2,C_v2,label=r'$20\times20$')
+    plt.plot(T4,C_v4,label=r'$40\times40$')
+    plt.plot(T6,C_v6,label=r'$60\times60$')
+    plt.plot(T8,C_v8,label=r'$80\times80$')
+    plt.xlabel(r'Temperature ($kT/J$)')
+    plt.ylabel('Specific heat',size=14)
+    plt.legend()
+    plt.show()
+	
+    plt.plot(T2,X2,label=r'$20\times20$')
+    plt.plot(T4,X4,label=r'$40\times40$')
+    plt.plot(T6,X6,label=r'$60\times60$')
+    plt.plot(T8,X8,label=r'$80\times80$')
+    plt.xlabel(r'Temperature ($kT/J$)')
+    plt.ylabel('Susceptibility',size=14)
     plt.legend()
     plt.show()
     
     return 
 
-
-def accepted_config(filename):
-    """
-    Function that plots the total no. of accepted configurations as a function 
-    of Monte Carlo cycles and of temperature.
-    File structure: [total no. of accepted configs,total no. of MC_cycles,T]
-    """
-    
-    data = np.loadtxt(filename,True)      # Read data
-    
-    accepted_tot = data[0]                # Total no. of accepted configurations
-    MC_cycles = data[1]                   # Total no. of Monte Carlo cycles
-    T = data[2]                           # Temperature [kT/J]
-    
-    plt.figure()
-    plt.plot(MC_cycles,accepted_tot)
-    plt.xlabel('# of MC cycles')
-    plt.ylabel('# of accepted configurations')
-    plt.title('T = %d' % T)
-    
-    plt.figure()
-    plt.plot(T,accepted_tot)
-    plt.xlabel('Temperature [kT/J]')
-    plt.ylabel('# of accepted configurations')
-    
-    plt.show()
-    
-    return
-
 	
 def main(argv):
-    # filename = 'ExpectationValues_temp.txt'
-    filename = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
-    exp_values(filename)
-    # accepted_config(filename)
+	
+	# Expectation values as functions of temperature, a given L
+    # filenameT = 'ExpectationValues_temp.txt'
+    filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
+    exp_valuesT(filenameT)
+	
+	
+	# Expectation values as functions of Monte Carlo cycles
+	# T = 1.0
+    # filenameMC1 = 'ExpectationValues_MCsT1.txt'
+    # filenameMC1 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT1.txt'
+    # exp_valuesMC(filenameMC1)
+	
+	# T = 2.4
+    # filenameMC24 = 'ExpectationValues_MCsT24.txt'
+    filenameMC24 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT24.txt'
+    exp_valuesMC(filenameMC24)
+	
+	
+	# Expectation values as functions of temperature
+	# L = 20,40,60,80
+    # filenameTL = 'ExpectationValues_TL.txt'
+    # filenameTL = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_TL.txt'
+	# exp_valuesT(filenameTL)
+	
 
 if __name__ == "__main__":
     main(sys.argv[1:]) 
