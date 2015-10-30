@@ -17,6 +17,7 @@ void Metropolis(int,int **,double &,double &,double *,int&);
 void initialize(int,double,int**,double&,double&);
 void output(int,int,double,double*);
 void ExpectationValues_toFile(double,ofstream&,int,int,int**);
+void analytical(double T,double Z,double E_exp,double M_exp,double Cv,double chi);
 
 
 int main()
@@ -104,12 +105,12 @@ int main()
 
 
     // ANALYTICAL SOLUTION: CLOSED-FORM
-    double Z_cf = 4*cosh(8*J*beta) + 12;
+    double Z_cf = 4*cosh(8/T) + 12;
     double Z_inv_cf = 1./Z_cf;
-    double E_exp_cf = -8*J*tanh(8*J*beta);
-    double C_V_cf = k*(8*J*beta/cosh(8*J*beta))*(8*J*beta/cosh(8*J*beta));
-    double M_exp_cf = 8*(exp(8*J*beta) + 2)*Z_inv_cf;
-    double chi_cf = 32*beta*(exp(8*J*beta) + 1)*Z_inv_cf*Z_inv_cf;
+    double E_exp_cf = -8*tanh(8/T);
+    double C_V_cf = (8/T/cosh(8/T))*(8/T/cosh(8/T));
+    double M_exp_cf = 8*(exp(8/T) + 2)*Z_inv_cf;
+    double chi_cf = 32/T*(exp(8/T) + 1)*Z_inv_cf*Z_inv_cf;
 
     cout << "ANALYTICAL SOLUTION: CLOSED-FORM" << endl;
     cout << "L" << "\t" << L << endl;
@@ -125,7 +126,7 @@ int main()
     //delete[] En;
     //delete[] Ma;
 */
-/*
+
     // METROPOLIS ALGORITHM
     cout << "METROPOLIS ALGORITHM" << endl;
 
@@ -180,15 +181,15 @@ int main()
         }
 
         // Print results
-        //output(n_spins,MCs,temp,average);
-    }*/
+        output(n_spins,MCs,temp,average);
+    }
 
 
     // Expectation Values as functions of MC cycles
     //ofstream fileT1("ExpectationValues_MCsT1.txt"); // Temperature T = 1.0
     //ofstream fileT24("ExpectationValues_MCsT24.txt"); // Temperature T = 2.4
 
-    int n_spins = 60;
+    /*int n_spins = 20;
 
     // Initialize a spin matrix
     int **spin_matrix;
@@ -199,12 +200,12 @@ int main()
         for(int j=0;j<n_spins;j++){
             spin_matrix[i][j] = 1;
         }
-    }
+    }*/
 
     // METROPOLIS ALGORITHM
-    int mc = 400;
+    int mc = 10000;
 
-/*
+    /*
     // Number of MC cycles
     int mc_steps = 100;
 
@@ -217,13 +218,13 @@ int main()
     fileT24.close();
     */
 
-
+/*
     // Temperature variations
     ofstream file("ExpectationValues_temp.txt");
 
-    for(T = 1.6; T<=3.0 ; T+=0.1)
+    for(T = 1.6; T<=3.0 ; T+=0.05)
         ExpectationValues_toFile(T,file,n_spins,mc,spin_matrix);
-    file.close();
+    file.close();*/
 
     // Accepted conficurations
     //ofstream fileACT("AcceptedConfigurationsT.txt"); // File for expectation values
@@ -231,10 +232,20 @@ int main()
     //fileACT.close();
 
 
-    // Probability
+    // Probability P(E_i), plot comparing to sigmaE
+    /*
+    int E_count,E_tot;
+    metropolis(...,counting=True)
+    if(counting){
+        E_tot++;
+        if(E == E_i) E_count++;
+    }
+    Probability = E_count/E_tot;
+
     //ofstream fileP("ProbabilityL" + to_string(L) + ".txt"); // File for expectation values
     //fileP << L << "\t" << Probability << "\t" << sigmaE << endl; // Write solution to file
     //fileP.close();
+    */
 
     // Ecpectation values for different L and T. Parallelization!
     //ofstream fileL("ExpectationValuesL" + to_string(n_spins) + ".txt"); // File for expectation values
@@ -244,19 +255,18 @@ int main()
     // Estimate critical temperature
     return 0;
 }
-/*
-void initialize(int n_spins,double temp,int** spin_matrix,double& E,double&M){
-    for(int y=0;y<n_spins;y++){
-        for(int x=0;x<n_spins;x++){
-            if (temp<1.5) spin_matrix[y][x] = 1;
-            M += (double) spin_matrix[y][x];
-            E -= (double) spin_matrix[y][x]*(spin_matrix[periodic(y,n_spins,-1)][x] + spin_matrix[y][periodic(x,n_spins,-1)]);
-        }
-    }
-}
-*/
 
-void initialize(int n_spins, int **spin_matrix,double& E, double& M){
+void analytical(double T,double Z,double E_exp,double M_exp,double Cv,double chi){
+    Z = 4*cosh(8/T) + 12;
+    double Z_inv_cf = 1./Z;
+    E_exp = -8*tanh(8/T);
+    Cv = (8/T/cosh(8/T))*(8/T/cosh(8/T));
+    M_exp = 8*(exp(8/T) + 2)*Z_inv_cf;
+    chi = 32/T*(exp(8/T) + 1)*Z_inv_cf*Z_inv_cf;
+}
+
+
+void initialize(int n_spins,double temp, int **spin_matrix,double& E, double& M){
   // setup spin matrix and intial magnetization
   for(int y =0; y < n_spins; y++) {
     for (int x= 0; x < n_spins; x++){
@@ -323,8 +333,8 @@ void output(int n_spins,int MCs,double temp,double *average){
 }
 
 void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**spin_matrix){
-    int countstart = mc;
-    double test;
+    //int countstart = mc;
+    //double test;
     double average[5];
     double E,M;
     int AC;
@@ -349,9 +359,10 @@ void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**sp
         average[0] += E; average[1] += E*E;
         average[2] += M; average[3] += M*M; average[4] += fabs(M);
 
-        test = fabs(Eprev-average[0]);
+        //test = fabs(Eprev-average[0]);
         //if (test < 0.05 && i < countstart) countstart = i;
     }
+
     double E_exp = average[0]/n_spins/n_spins;
     double E_exp2 = average[1]/n_spins/n_spins;
     double M_exp = average[2]/n_spins/n_spins;
@@ -359,6 +370,15 @@ void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**sp
     double M_abs = average[4]/n_spins/n_spins;
     double Cv = (E_exp2-E_exp*E_exp)/T/T;
     double chi = (M_exp2-M_abs*M_abs)/T;
+
+    /*
+    double E_exp,M_exp,Cv,chi,Z;
+    analytical(T,Z,E_exp,M_exp,Cv,chi);
+    E_exp /= n_spins*n_spins;
+    M_exp /= n_spins*n_spins;
+    Cv /= n_spins*n_spins;
+    chi /= n_spins*n_spins;
+    */
 
     // Write solution to file
     file << T << "\t" << mc << "\t" << E_exp/((double) mc) << "\t" << M_exp/((double) mc) << "\t" << Cv/((double) mc) << "\t" << chi/((double) mc) << "\t" << AC/((double) mc) << endl;

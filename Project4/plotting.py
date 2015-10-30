@@ -45,11 +45,11 @@ def exp_values(filename):
     # plt.xlabel('# of MC cycles',size=14)
     # plt.title('Ising model, L = %d, T = %d kT/J' % (L,T))
 	
-    plt.plot(T,E_avg,label=r'$<E>$')
-    plt.plot(T,M_absavg,label=r'$<|M|>$')
-    plt.ylim(-2.2,1.2)
-    # plt.plot(T,C_v,label=r'$C_v$')
-    # plt.plot(T,X,label=r'$\chi$')
+    # plt.plot(T,E_avg,label=r'$<E>$')
+    # plt.plot(T,M_absavg,label=r'$<|M|>$')
+    # plt.ylim(-2.2,1.2)
+    plt.plot(T,C_v,label=r'$C_v$')
+    plt.plot(T,X,label=r'$\chi$')
     # plt.plot(T,AC,label=r'AC')
     plt.xlabel(r'Temperature ($kT/J$)')
 	
@@ -90,7 +90,8 @@ def accepted_config(filename):
 
 	
 def main(argv):
-    filename = 'ExpectationValues_temp.txt'
+    # filename = 'ExpectationValues_temp.txt'
+    filename = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
     exp_values(filename)
     # accepted_config(filename)
 
