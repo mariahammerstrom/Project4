@@ -74,14 +74,14 @@ summing over all micro states $i$.
 The \textbf{magnetic moment} of a given microstate is
 
 \begin{equation}\label{eq:magnetization}
-	M_i = \sum_j s_j.
+	{\cal M}_i = \sum_j s_j.
 \end{equation} 
-Some quantities of interest are the \textbf{expection values} for the energy $\langle E\rangle$ and magnetic moment $\langle M\rangle$:
+Some quantities of interest are the \textbf{expection values} for the energy $\langle E\rangle$ and magnetic moment $\langle {\cal M}\rangle$:
 
 \begin{equation}
 \begin{aligned}
 	\langle E \rangle &= \frac{1}{Z} \sum_i E_i e^{- \beta E_i} = kT^2 \frac{\partial \textrm{ ln } Z}{\partial T} = - \frac{\partial \textrm{ ln } Z}{\partial \beta} \\
-	\langle M\rangle &= \frac{1}{Z} \sum_i M_i e^{- \beta E_i},
+	\langle {\cal M}\rangle &= \frac{1}{Z} \sum_i {\cal M}_i e^{- \beta E_i},
 \end{aligned}
 \end{equation}
 as well as the variances for the energy $\sigma_E^2$ and for the magnetic moment $\sigma_M^2$:
@@ -89,7 +89,7 @@ as well as the variances for the energy $\sigma_E^2$ and for the magnetic moment
 \begin{equation}\label{eq:expect_values}
 \begin{aligned}
 	\sigma_E^2 &= \langle E^2\rangle - \langle E\rangle^2 \\
-	\sigma_M^2 &= \langle M^2\rangle - \langle M\rangle^2,
+	\sigma_{\cal M}^2 &= \langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2,
 \end{aligned}
 \end{equation}
 These values can be used to calculate the \textbf{heat capacity} of a fixed volume given by
@@ -100,9 +100,11 @@ These values can be used to calculate the \textbf{heat capacity} of a fixed volu
 and the \textbf{susceptibility}, which describes whether a material is attracted into or repelled out of a magnetic field, given by
 
 \begin{equation}
-	\chi = \frac{\sigma_M^2}{kT} = \frac{\langle M^2\rangle - \langle M\rangle^2}{kT}.
+	\chi = \frac{\sigma_{\cal M}^2}{kT} = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT}.
 \end{equation}
-The model we are considering here undergoes a \textbf{phase transition}. Below a critical temperature $T_C$ there is spontaneous magnetization $\langle M\rangle \neq 0$ (magnetic phase), while above this temperature the average magnetization is zero (paramagnetic phase). Near $T_C$ we can characterize the behavior of many physical quantities by a power law behavior.
+We want to compute these quantities after the system has \textbf{thermalized}, which is when the system has reached its most likely state. The most likely state depends on the temperature $T$.
+
+The model we are considering here undergoes a \textbf{phase transition}. Below a critical temperature $T_C$ there is spontaneous magnetization $\langle {\cal M}\rangle \neq 0$ (magnetic phase), while above this temperature the average magnetization is zero (paramagnetic phase). Near $T_C$ we can characterize the behavior of many physical quantities by a power law behavior.
 
 An important quantity is the \textbf{correlation length}, which is expected to be of the order of the lattice spacing for $T \gg T_C$. Because the spins become more and more correlated as $T$ approaches $T_C$, the correlation length increases as we get closer to the critical temperature. The divergent behavior of $\xi$ near $T_C$ is
 
@@ -158,7 +160,7 @@ If going through this exercise for different configurations of spin up and spin 
 \begin{table*}
 \begin{center}
 \begin{tabular}{ l r r r }\hline
-	Number of spins up 			& Energy $E$	 			& Degeneracy $\Omega$		& Magnetization $M$		\\ \hline
+	Number of spins up 			& Energy $E$	 			& Degeneracy $\Omega$		& Magnetization ${\cal M}$		\\ \hline
 	4 						& $- 8J$ 					& 1						& 4		 \\
 	3 						& 0						& 4						& 2		 \\
 	2						& 0						& 4						& 0		\\
@@ -193,7 +195,7 @@ Similarly, using the values for magnetization in Table~\ref{table:quantities} an
 
 \begin{equation}\label{eq:M_avg_analytic}
 \begin{aligned}
-	\langle|M|\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 + 4\cdot|-2| + |-4|e^{8J\beta} \bigg) \\
+	\langle|{\cal M}|\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 + 4\cdot|-2| + |-4|e^{8J\beta} \bigg) \\
 					&= \frac{8}{Z}(e^{8J\beta} + 2), \\
 \end{aligned}
 \end{equation}
@@ -201,16 +203,16 @@ and
 
 \begin{equation}
 \begin{aligned}
-	\langle M\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0, \\
+	\langle {\cal M}\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0, \\
 	%\langle M\rangle^2 	&= 0 \\
-	\langle M^2\rangle 	&= \frac{1}{Z^2} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
+	\langle {\cal M}^2\rangle 	&= \frac{1}{Z^2} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
 			&= \frac{32}{Z^2} \bigg( e^{8J\beta} + 1  \bigg).
 \end{aligned}
 \end{equation}
 Thus
 
 \begin{equation}\label{eq:chi_analytic}
-	\chi(\beta) = \frac{\langle M^2\rangle - \langle M\rangle^2}{kT} = \frac{32 \beta}{Z^2} \bigg(e^{8J\beta} + 1  \bigg).
+	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32 \beta}{Z^2} \bigg(e^{8J\beta} + 1  \bigg).
 \end{equation}
 
 
@@ -231,16 +233,17 @@ We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
 \begin{enumerate}
 	\item Generate a random configuration in the lattice to create an initial state with energy $E_b$.
 	\item Change the initial configuration by flipping for example one spin only. Compute the energy of this state $E_t$.
-	\item Calculate $\Delta E = E_t - E_b$.
+	\item Calculate $\Delta E = E_t - E_b$ ($t$ = trial state, $b$ = beginning state).
 	\item \textit{The Metropolis test:} If $\Delta E \leq 0$ the new configuration is accepted, meaning the energy is lowered and we are moving towards the energy minimum at a given temperature. If $\Delta E > 0$, calculate $w = e^{- \beta \Delta E}$. If $w < r$ where $r$ is a random number, accept the new configuration. If else, keep the old configuration.
 	\item Compute the new energy $E' = E_t + \Delta E$. Calculate various expectation values using this energy.
 	\item Repeat steps $2-5$ for the chosen number of Monte Carlo cycles, meaning the number of times we should sweep through the lattice and summed over all spins.
 	\item Compute the various expectation values by dividing by the total number of cycles (and possibly the number of spins).
 \end{enumerate}
+During the computation we want to check how many Monte Carlo cycles we need before the system has reached its most likely state. This is done by comparing the new value of $\langle E \rangle$ with the previous value of $\langle E \rangle$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached.
 
 
 \subsection{Parallelization}
-We have parallelized our code using ...
+We have parallelized our code using the Open MPI library. ADD DETAILS.
 
 
 
@@ -272,7 +275,7 @@ By simply counting the number of times a given energy appears in our computation
 
 In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$.
 
-.... MORE.
+The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\ref{fig:visualization}, where white squares represent upward spins and black squares represent downward spins. It shows clearly that the net magnetization $\langle {\cal M}\rangle$ is higher for low $T$ with most spins pointing in the same direction (in this case upwards), while the $\langle {\cal M}\rangle$ approaches zero at higher $T$ where the number of spins pointing upward and downward are about the same.
 
 \begin{figure*}[t]
 \begin{center}
@@ -288,7 +291,9 @@ In our study of the behavior of our model close to the critical temperature we l
 \caption{Visualization of the spin matrix for a $80 \times 80$ lattice for different temperatures $T$. White = spin up, black = spin down.}\label{fig:visualization}
 \end{center}
 \end{figure*}
+.... MORE.
 
+Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamical limit $L \rightarrow \infty$ running simulations for different values of $L$ using Eq. (\ref{eq:T_C}). 
 
 
 \section{Conclusions}
