@@ -8,6 +8,7 @@
 #include <cmath>
 #include <random>
 #include <fstream>
+//#include <mpi.h>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ inline int periodic(int i, int limit, int add){return (i+limit+add)%(limit);}
 void Metropolis(int,int **,double &,double &,double *,int&);
 void initialize(int,double,int**,double&,double&);
 void output(int,int,double,double*);
+void ExpectationValues_toFile(double,ofstream&,int,int,int,int,int**);
 
 
 int main()
@@ -183,89 +185,44 @@ int main()
 
 
     // Expectation Values as functions of MC cycles
-    ofstream fileT1("ExpectationValues_MCsT1.txt"); // Expectation values, T = 1
-    ofstream fileT24("ExpectationValues_MCsT24.txt"); // Expectation values, T = 2.4
-    L = 20;
-    int n_spins = 20;
+    //ofstream fileT1("ExpectationValues_MCsT1.txt"); // Temperature T = 1.0
+    //ofstream fileT24("ExpectationValues_MCsT24.txt"); // Temperature T = 2.4
+
+    int n_spins = 60;
+
+    // Initialize a spin matrix
     int **spin_matrix;
     spin_matrix = new int*[n_spins];
     for(int i=0;i<n_spins;i++)
         spin_matrix[i] = new int[n_spins];
-    //spin_matrix = (int**)matrix(n_spins,n_spins,sizeof(int));
     for(int i=0;i<n_spins;i++){
         for(int j=0;j<n_spins;j++){
             spin_matrix[i][j] = 1;
         }
     }
-    double w[17],average[5];
-    double E_exp,E_exp2,M_exp,M_exp2,M_abs,Cv,chi;
+/*
+    // Number of MC cycles
+    int mc=10000;
+    int mc_steps = 100;
+
     T= 1.0;
-    int mc=10000; // Number of elements MC cycles array
-    int MCsa[mc];
-    double E = 0; double M = 0;
-    int AC;
-    // Set up array for possible energy changes
-    for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
-    for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
-    // Initialize array for expectation values
-    for(int i=0;i<5;i++) average[i] = 0;
-    initialize(n_spins,T,spin_matrix,E,M);
-    /*for(int i=1;i<=mc;i++){
-        E = M = 0;
-        AC = 0;
-        MCsa[i-1] = i;
-        for(int cycles=1;cycles <= MCsa[i-1];cycles++){
-            Metropolis(n_spins,spin_matrix,E,M,w,AC);
+    ExpectationValues_toFile(T,fileT1,n_spins,mc,mc_steps,1,spin_matrix);
 
-            // Update expectation values
-            average[0] += E; average[1] += E*E;
-            average[2] += M; average[3] += M*M; average[4] += fabs(M);
-        }
-        E_exp = average[0]/n_spins/n_spins;
-        E_exp2 = average[1]/n_spins/n_spins;
-        M_exp = average[2]/n_spins/n_spins;
-        M_exp2 = average[3]/n_spins/n_spins;
-        M_abs = average[4]/n_spins/n_spins;
-        Cv = (E_exp2-E_exp*E_exp)/T/T;
-        chi = (M_exp2-M_abs*M_abs)/T;
-        fileT1 << MCsa[i-1] << "\t" << E_exp/((double) MCsa[i-1]) << "\t" << M_exp/((double) MCsa[i-1]) << "\t" << Cv/((double) MCsa[i-1]) << "\t" << chi/((double) MCsa[i-1]) << "\t" << AC/((double) MCsa[i-1]) << endl; // Write solution to file
-    }*/
+    T = 2.4;
+    ExpectationValues_toFile(T,fileT24,n_spins,mc,mc_steps,1,spin_matrix);
 
-    T = 2.4; //M = E =0;
-    int countstart = mc;
-    double test;
-    // Set up array for possible energy changes
-    for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
-    for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
-    // Initialize array for expectation values
-    for(int i=0;i<5;i++) average[i] = 0;
-    initialize(n_spins,T,spin_matrix,E,M);
-    for(int i=1;i<=mc;i+=100){
-        M = E =0;
-        AC = 0;
-        MCsa[i-1] = i;
-        for(int cycles=1;cycles <= MCsa[i-1];cycles++){
-            Metropolis(n_spins,spin_matrix,E,M,w,AC);
-
-            // Update expectation values
-            double Eprev = average[0];
-            average[0] += E; average[1] += E*E;
-            average[2] += M; average[3] += M*M; average[4] += fabs(M);
-            test = fabs(Eprev-average[0]);
-            if (test < 0.05 && i < countstart) countstart = i;
-        }
-        E_exp = average[0]/n_spins/n_spins;        
-        E_exp2 = average[1]/n_spins/n_spins;
-        M_exp = average[2]/n_spins/n_spins;
-        M_exp2 = average[3]/n_spins/n_spins;
-        double M_abs = average[4]/n_spins/n_spins;
-        Cv = (E_exp2-E_exp*E_exp)/T/T;
-        chi = (M_exp2-M_abs*M_abs)/T;
-        fileT24 << MCsa[i-1] << "\t" << E_exp/((double) MCsa[i-1]) << "\t" << M_exp/((double) MCsa[i-1]) << "\t" << Cv/((double) MCsa[i-1]) << "\t" << chi/((double) MCsa[i-1]) << "\t" << AC/((double) MCsa[i-1]) << endl; // Write solution to file
-    }
-    cout << "Start to count at MC cycles = " << countstart << endl;
     fileT24.close();
-    fileT1.close();
+    fileT1.close();*/
+
+
+
+    // Separate functions for MC cycles and temperature??
+
+    ofstream file("ExpectationValues_temp.txt");
+    int mc = 400;
+    for(T = 1.6; T<=3.0 ; T+=0.1)
+        ExpectationValues_toFile(T,file,n_spins,mc,1,mc,spin_matrix);
+    file.close();
 
     // Accepted conficurations
     //ofstream fileACT("AcceptedConfigurationsT.txt"); // File for expectation values
@@ -302,7 +259,6 @@ void Metropolis(int n_spins, int **spin_matrix, double& E, double&M, double *w, 
 {
     default_random_engine generator;                            // start random number generator
     uniform_real_distribution<double> distribution(0.0,1.0);    // pick type of random distribution
-
     // Loop over all spins
     for(int y=0; y<n_spins*n_spins; y++) {
         //for (int x=0; x<n_spins; x++){
@@ -346,4 +302,44 @@ void output(int n_spins,int MCs,double temp,double *average){
     cout << "X = "             << "\t" << M2variance/temp << endl;
     cout << "<M> = "           << "\t" << Maverage << endl;
     cout << "<M>/spin = "      << "\t" << Mabsaverage/n_spins/n_spins << endl << endl;
+}
+
+void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int mc_steps,int mc_start,int**spin_matrix){
+    int countstart = mc;
+    double test;
+    double average[5],MCsa[mc];
+    double E,M;
+    int AC;
+
+    // Set up array for possible energy changes
+    double w[17];
+    for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
+    for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
+
+    // Initialize array for expectation values
+    M = E =0;
+    for(int i=0;i<5;i++) average[i] = 0;
+    initialize(n_spins,T,spin_matrix,E,M);
+    for(int i=mc_start;i<=mc;i+=mc_steps){
+        AC = 0;
+        MCsa[i-1] = i;
+        for(int cycles=1;cycles <= MCsa[i-1];cycles++){
+            Metropolis(n_spins,spin_matrix,E,M,w,AC);
+
+            // Update expectation values
+            double Eprev = average[0];
+            average[0] += E; average[1] += E*E;
+            average[2] += M; average[3] += M*M; average[4] += fabs(M);
+            test = fabs(Eprev-average[0]);
+            if (test < 0.05 && i < countstart) countstart = i;
+        }
+        double E_exp = average[0]/n_spins/n_spins;
+        double E_exp2 = average[1]/n_spins/n_spins;
+        double M_exp = average[2]/n_spins/n_spins;
+        double M_exp2 = average[3]/n_spins/n_spins;
+        double M_abs = average[4]/n_spins/n_spins;
+        double Cv = (E_exp2-E_exp*E_exp)/T/T;
+        double chi = (M_exp2-M_abs*M_abs)/T;
+        file << T << "\t" << MCsa[i-1] << "\t" << E_exp/((double) MCsa[i-1]) << "\t" << M_exp/((double) MCsa[i-1]) << "\t" << Cv/((double) MCsa[i-1]) << "\t" << chi/((double) MCsa[i-1]) << "\t" << AC/((double) MCsa[i-1]) << endl; // Write solution to file
+    }
 }

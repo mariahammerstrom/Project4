@@ -17,32 +17,42 @@ def exp_values(filename):
     """
     Function that plots various expectation values as a function of 
     Monte Carlo cycles.
-    File structure: [MC_cycles,E_avg,M_absavg,C_v,X, number of accepted]
+    File structure: [Temperature,MC_cycles,E_avg,M_absavg,C_v,X, number of accepted]
     """
     
     data = np.loadtxt(filename,unpack=True)     # Read data
     
     # Model
     # L = data[0]                          # Lattice dimension, L x L
-    # T = data[1]                          # Temperature [kT/J]
-    MC_cycles = data[0]                  # Number of Monte Carlo cycles
+    T = data[0]                          # Temperature [kT/J]
+    MC_cycles = data[1]                  # Number of Monte Carlo cycles
 
     # Expectation values
-    E_avg = data[1]                      # Mean energy
-    M_absavg = data[2]                   # Mean magnetization (absolute value) 
-    C_v = data[3]                        # Specific heat
-    X = data[4] 					     # Susceptibility
-    AC = data[5]
+    E_avg = data[2]                      # Mean energy
+    M_absavg = data[3]                   # Mean magnetization (absolute value) 
+    C_v = data[4]                        # Specific heat
+    X = data[5] 					     # Susceptibility
+    AC = data[6]
     
     # Plotting
     plt.figure()
+	
     # plt.plot(MC_cycles,E_avg,label=r'$<E>$')
     # plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
     # plt.plot(MC_cycles,C_v,label=r'$C_v$')
     # plt.plot(MC_cycles,X,label=r'$\chi$')
-    plt.plot(MC_cycles,AC,label=r'AC')
-    #plt.title('Ising model, L = %d, T = %d kT/J' % (L,T))
-    plt.xlabel('# of MC cycles',size=14)
+    # plt.plot(MC_cycles,AC,label=r'AC')
+    # plt.xlabel('# of MC cycles',size=14)
+    # plt.title('Ising model, L = %d, T = %d kT/J' % (L,T))
+	
+    plt.plot(T,E_avg,label=r'$<E>$')
+    plt.plot(T,M_absavg,label=r'$<|M|>$')
+    plt.ylim(-2.2,1.2)
+    # plt.plot(T,C_v,label=r'$C_v$')
+    # plt.plot(T,X,label=r'$\chi$')
+    # plt.plot(T,AC,label=r'AC')
+    plt.xlabel(r'Temperature ($kT/J$)')
+	
     plt.ylabel('Expectation values',size=14)
     plt.legend()
     plt.show()
@@ -80,7 +90,7 @@ def accepted_config(filename):
 
 	
 def main(argv):
-    filename = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT24.txt'
+    filename = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
     exp_values(filename)
     # accepted_config(filename)
 
