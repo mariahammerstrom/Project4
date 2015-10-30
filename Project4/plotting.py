@@ -90,7 +90,7 @@ def accepted_config(filename):
 
 	
 def main(argv):
-    filename = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
+    filename = 'ExpectationValues_temp.txt'
     exp_values(filename)
     # accepted_config(filename)
 
