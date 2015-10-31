@@ -13,7 +13,7 @@ from matplotlib.pyplot import rc
 rc('font',**{'family':'serif'})
 
 
-def exp_valuesT(filename):
+def exp_valuesT(filename,L):
     """
     Function that plots various expectation values as a function of temperature.
     File structure: [Temperature,MC_cycles,E_avg,M_absavg,C_v,X, number of accepted]
@@ -23,17 +23,19 @@ def exp_valuesT(filename):
     
     # Model   
     T = data[0]                     # Temperature [kT/J]
-    # MC_cycles = data[1]             # Number of Monte Carlo cycles
+    MC_cycles = data[1]             # Number of Monte Carlo cycles
+
 
     # Expectation values
     E_avg = data[2]                 # Mean energy
     M_absavg = data[3]              # Mean magnetization (absolute value) 
     C_v = data[4]                   # Specific heat
-    X = data[5] 					# Susceptibility
-    AC = data[6]					# Accepted configurations
+    X = data[5] 		    # Susceptibility
+    AC = data[6]		    # Accepted configurations
     
     # Plotting
-    # plt.title('Expectation values vs temperature')
+    plt.figure()
+    plt.title('Expectation values vs. temperature, L = %d, T = %.1f' % (L,MC_cycles[0]),size=12)
 	
     plt.plot(T,E_avg,label=r'$<E>$')
     plt.plot(T,M_absavg,label=r'$<|M|>$')
@@ -42,7 +44,8 @@ def exp_valuesT(filename):
     plt.ylabel('Expectation values',size=14)
     plt.legend()
     plt.show()
-	
+    
+    plt.figure()
     plt.plot(T,C_v,label=r'$C_v$')
     plt.plot(T,X,label=r'$\chi$')
     plt.xlabel(r'Temperature ($kT/J$)')
@@ -57,7 +60,7 @@ def exp_valuesT(filename):
     
     return 
 	
-def exp_valuesMC(filename):
+def exp_valuesMC(filename,L):
     """
     Function that plots various expectation values as a function of 
     Monte Carlo cycles.
@@ -67,7 +70,7 @@ def exp_valuesMC(filename):
     data = np.loadtxt(filename,unpack=True)     # Read data
     
     # Model
-    # T = data[0]                     # Temperature [kT/J]
+    T = data[0]                     # Temperature [kT/J]
     MC_cycles = data[1]             # Number of Monte Carlo cycles
 
     # Expectation values
@@ -78,15 +81,18 @@ def exp_valuesMC(filename):
     AC = data[6]					# Accepted configurations
     
     # Plotting
-    # plt.title('Expectation values vs MC cycles')
+    plt.figure()
+    plt.title('Expectation values vs. MC cycles, L = %d, T = %.1f' % (L,T[0]),size=12)
 	
     plt.plot(MC_cycles,E_avg,label=r'$<E>$')
     plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
-    plt.xlabel('# of MC cycles',size=14)
-    plt.ylabel('Expectation values',size=14)
+    plt.xlabel('# of MC cycles',size=12)
+    #plt.ylabel('Expectation values',size=12)
+    plt.ylim(min(E_avg)-1,max(M_absavg)+1)
     plt.legend()
     plt.show()
-	
+    
+    plt.figure()
     plt.plot(MC_cycles,C_v,label=r'$Cv$')
     plt.plot(MC_cycles,X,label=r'$\chi$')
     plt.xlabel('# of MC cycles',size=14)
@@ -181,23 +187,29 @@ def exp_valuesTL(filename2,filename4,filename6,filename8): # Is there a better w
 
 	
 def main(argv):
+    
+    # Expectation values as functions of Monte Carlo cycles
+    L = 2
+    filenameMC = 'ExpectationValues_MC_%d.txt' % L
+    # filenameMC1 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT1.txt'
+    exp_valuesMC(filenameMC,L)
 	
-	# Expectation values as functions of temperature, a given L
-    # filenameT = 'ExpectationValues_temp.txt'
-    filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
-    exp_valuesT(filenameT)
+    # Expectation values as functions of temperature, a given L
+    filenameT = 'ExpectationValues_temp_%d.txt' % L
+    #filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
+    exp_valuesT(filenameT,L)
 	
 	
 	# Expectation values as functions of Monte Carlo cycles
 	# T = 1.0
-    # filenameMC1 = 'ExpectationValues_MCsT1.txt'
+    #filenameMC1 = 'ExpectationValues_MCsT1.txt'
     # filenameMC1 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT1.txt'
-    # exp_valuesMC(filenameMC1)
+    #exp_valuesMC(filenameMC1)
 	
 	# T = 2.4
     # filenameMC24 = 'ExpectationValues_MCsT24.txt'
-    filenameMC24 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT24.txt'
-    exp_valuesMC(filenameMC24)
+    #filenameMC24 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT24.txt'
+    #exp_valuesMC(filenameMC24)
 	
 	
 	# Expectation values as functions of temperature
