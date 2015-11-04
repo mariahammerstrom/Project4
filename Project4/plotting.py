@@ -23,8 +23,6 @@ def exp_valuesT(filename,L):
     
     # Model   
     T = data[0]                     # Temperature [kT/J]
-    MC_cycles = data[1]             # Number of Monte Carlo cycles
-
 
     # Expectation values
     E_avg = data[2]                 # Mean energy
@@ -35,27 +33,29 @@ def exp_valuesT(filename,L):
     
     # Plotting
     plt.figure()
-    plt.title('Expectation values vs. temperature, L = %d, T = %.1f' % (L,MC_cycles[0]),size=12)
-	
-    plt.plot(T,E_avg,label=r'$<E>$')
-    plt.plot(T,M_absavg,label=r'$<|M|>$')
+    plt.title('Expectation values vs. temperature, L = %d' % L,size=12)
+    plt.plot(T,E_avg,'b',label=r'$<E>$')
+    plt.plot(T,M_absavg,'r',label=r'$<|M|>$')
     plt.ylim(-2.2,1.2)
     plt.xlabel(r'Temperature ($kT/J$)')
-    plt.ylabel('Expectation values',size=14)
+    plt.ylabel('Expectation values',size=12)
     plt.legend()
     plt.show()
     
     plt.figure()
-    plt.plot(T,C_v,label=r'$C_v$')
-    plt.plot(T,X,label=r'$\chi$')
+    plt.title('Expectation values vs. temperature, L = %d' % L,size=12)
+    plt.plot(T,C_v,'b',label=r'$C_v$')
+    plt.plot(T,X,'r',label=r'$\chi$')
     plt.xlabel(r'Temperature ($kT/J$)')
-    plt.ylabel('Expectation values',size=14)
+    plt.ylabel('Expectation values',size=12)
     plt.legend()
     plt.show()
-	
+    
+    plt.figure()
+    plt.title('Accepted configurations vs. temperature, L = %d' % L,size=12)
     plt.plot(T,AC,label=r'AC')
     plt.xlabel(r'Temperature ($kT/J$)')
-    plt.ylabel('Accepted configurations',size=14)
+    plt.ylabel('# of accepted configurations',size=12)
     plt.show()
     
     return 
@@ -83,23 +83,25 @@ def exp_valuesMC(filename,L):
     # Plotting
     plt.figure()
     plt.title('Expectation values vs. MC cycles, L = %d, T = %.1f' % (L,T[0]),size=12)
-	
-    plt.plot(MC_cycles,E_avg,label=r'$<E>$')
-    plt.plot(MC_cycles,M_absavg,label=r'$<|M|>$')
+    plt.plot(MC_cycles,E_avg,'b',label=r'$<E>$')
+    plt.plot(MC_cycles,M_absavg,'r',label=r'$<|M|>$')
     plt.xlabel('# of MC cycles',size=12)
-    #plt.ylabel('Expectation values',size=12)
+    plt.ylabel('Expectation values',size=12)
     plt.ylim(min(E_avg)-1,max(M_absavg)+1)
     plt.legend()
     plt.show()
     
     plt.figure()
-    plt.plot(MC_cycles,C_v,label=r'$Cv$')
-    plt.plot(MC_cycles,X,label=r'$\chi$')
-    plt.xlabel('# of MC cycles',size=14)
-    plt.ylabel('Expectation values',size=14)
+    plt.title('Expectation values vs. MC cycles, L = %d, T = %.1f' % (L,T[0]),size=12)
+    plt.plot(MC_cycles,C_v,'b',label=r'$Cv$')
+    plt.plot(MC_cycles,X,'r',label=r'$\chi$')
+    plt.xlabel('# of MC cycles',size=12)
+    plt.ylabel('Expectation values',size=12)
     plt.legend()
     plt.show()
-	
+    
+    plt.figure()
+    plt.title('Accepted configurations vs. MC cycles, L = %d, T = %.1f' % (L,T[0]),size=12)
     plt.plot(MC_cycles,AC)
     plt.xlabel('# of MC cycles',size=14)
     plt.ylabel('Accepted configurations',size=14)
@@ -189,34 +191,28 @@ def exp_valuesTL(filename2,filename4,filename6,filename8): # Is there a better w
 def main(argv):
     
     # Expectation values as functions of Monte Carlo cycles
-    L = 2
-    filenameMC = 'ExpectationValues_MC_%d.txt' % L
+    L = 20                                             # Lattice size
+    T = 1.0                                            # Temperature [kT/J]
+    
+    filenameMC = 'ExpectationValues_MC_%d_%.6f.txt' % (L,T)
     # filenameMC1 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT1.txt'
     exp_valuesMC(filenameMC,L)
 	
     # Expectation values as functions of temperature, a given L
-    filenameT = 'ExpectationValues_temp_%d.txt' % L
+    filenameT = 'ExpectationValues_temp_%d_%.6f.txt' % (L,T)
     #filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
     exp_valuesT(filenameT,L)
 	
 	
-	# Expectation values as functions of Monte Carlo cycles
-	# T = 1.0
-    #filenameMC1 = 'ExpectationValues_MCsT1.txt'
-    # filenameMC1 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT1.txt'
-    #exp_valuesMC(filenameMC1)
-	
-	# T = 2.4
-    # filenameMC24 = 'ExpectationValues_MCsT24.txt'
-    #filenameMC24 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT24.txt'
-    #exp_valuesMC(filenameMC24)
-	
-	
-	# Expectation values as functions of temperature
-	# L = 20,40,60,80
-    # filenameTL = 'ExpectationValues_TL.txt'
-    # filenameTL = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_TL.txt'
-	# exp_valuesT(filenameTL)
+    # Expectation values as functions of temperature
+    L = [20,40,60,80]                                 # Range of lattice sizes
+    T = 1.0                                           # Temperature [kT/J]
+    filenameTL = np.zeros(len(L))
+    
+    for i in range(len(L)):
+        filenameTL[i] = 'ExpectationValues_temp_%d_%.6f.txt' % (L,T)
+        
+    # exp_valuesT(filenameTL[0],filenameTL[1],filenameTL[2],filenameTL[3])
 	
 
 if __name__ == "__main__":
