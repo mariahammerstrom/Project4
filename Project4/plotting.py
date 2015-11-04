@@ -29,7 +29,8 @@ def exp_valuesT(filename,L):
     M_absavg = data[3]              # Mean magnetization (absolute value) 
     C_v = data[4]                   # Specific heat
     X = data[5] 		    # Susceptibility
-    AC = data[6]		    # Accepted configurations
+    E_var = data[6]                 # Variance of energy
+    AC = data[7]		    # Accepted configurations
     
     # Plotting
     plt.figure()
@@ -78,7 +79,8 @@ def exp_valuesMC(filename,L):
     M_absavg = data[3]              # Mean magnetization (absolute value) 
     C_v = data[4]                   # Specific heat
     X = data[5] 					# Susceptibility
-    AC = data[6]					# Accepted configurations
+    E_var = data[6]                 # Variance of energy
+    AC = data[7]					# Accepted configurations
     
     # Plotting
     plt.figure()
@@ -103,8 +105,8 @@ def exp_valuesMC(filename,L):
     plt.figure()
     plt.title('Accepted configurations vs. MC cycles, L = %d, T = %.1f' % (L,T[0]),size=12)
     plt.plot(MC_cycles,AC)
-    plt.xlabel('# of MC cycles',size=14)
-    plt.ylabel('Accepted configurations',size=14)
+    plt.xlabel('# of MC cycles',size=12)
+    plt.ylabel('Accepted configurations',size=12)
     plt.show()
     
     return 
@@ -186,7 +188,30 @@ def exp_valuesTL(filename2,filename4,filename6,filename8): # Is there a better w
     plt.show()
     
     return 
+    
 
+def probability(filename,L):
+    data = np.loadtxt(filename,unpack=True)     # Read data
+    T = data[0]                                 # Temperature [kT/J]
+    MC_cycles = data[1]                         # Number of Monte Carlo cycles
+    E_avg = data[2]
+    E_var = data[6]                 # Variance of energy
+
+    
+    plt.figure()
+    plt.title('Probability P(E), L = %d, T = %.1f' % (L,T[0]),size=12)
+    plt.hist(E_avg)
+    plt.xlabel('Energy values')
+    plt.ylabel('Frequency')
+    plt.show()
+    
+    #plt.figure()
+    #plt.title('Variance of the energy, L = %d, T = %.1f' % (L,T[0]),size=12)
+    #plt.plot(MC_cycles,E_var)
+    #plt.xlabel('# of MC cycles',size=12)
+    #plt.ylabel(r'$\sigma_E^2$')
+    #plt.show
+    return
 	
 def main(argv):
     
@@ -196,12 +221,14 @@ def main(argv):
     
     filenameMC = 'ExpectationValues_MC_%d_%.6f.txt' % (L,T)
     # filenameMC1 = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_MCsT1.txt'
-    exp_valuesMC(filenameMC,L)
+    #exp_valuesMC(filenameMC,L)
+    
+    probability(filenameMC,L)
 	
     # Expectation values as functions of temperature, a given L
     filenameT = 'ExpectationValues_temp_%d_%.6f.txt' % (L,T)
     #filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Project4\ExpectationValues_temp.txt'
-    exp_valuesT(filenameT,L)
+    #exp_valuesT(filenameT,L)
 	
 	
     # Expectation values as functions of temperature
@@ -210,7 +237,7 @@ def main(argv):
     filenameTL = np.zeros(len(L))
     
     for i in range(len(L)):
-        filenameTL[i] = 'ExpectationValues_temp_%d_%.6f.txt' % (L,T)
+        filenameTL[i] = 'ExpectationValues_temp_%d_%.6f.txt' % (L[i],T)
         
     # exp_valuesT(filenameTL[0],filenameTL[1],filenameTL[2],filenameTL[3])
 	

@@ -87,7 +87,7 @@ Some quantities of interest are the \textbf{expection values} for the energy $\l
 	\langle {\cal M}\rangle &= \frac{1}{Z} \sum_i {\cal M}_i e^{- \beta E_i},
 \end{aligned}
 \end{equation}
-as well as the variances for the energy $\sigma_E^2$ and for the magnetic moment $\sigma_M^2$:
+as well as the \textbf{variances} for the energy $\sigma_E^2$ and for the magnetic moment $\sigma_M^2$, describing how the calculated values of $E$ and $M$ deviates from the expectation values:
 
 \begin{equation}\label{eq:expect_values}
 \begin{aligned}
@@ -215,7 +215,8 @@ and
 Thus
 
 \begin{equation}\label{eq:chi_analytic}
-	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32 \beta}{Z} \bigg(e^{8J\beta} + 1  \bigg).
+	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32\beta}{Z} [e^{8J\beta} + 1] - \frac{\beta}{Z^2}[8e^{8J\beta} + 4]^2
+	% \frac{32 \beta}{Z} \bigg(e^{8J\beta} + 1  \bigg).
 \end{equation}
 
 
@@ -244,6 +245,8 @@ We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
 \end{enumerate}
 During the computation we want to check how many Monte Carlo cycles we need before the system has reached its most likely state. This is done by comparing the new value of $\langle E \rangle$ with the previous value of $\langle E \rangle$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached.
 
+After the most likely state has been reached, we want to 
+
 
 \subsection{Parallelization}
 We have parallelized our code using the Open MPI library. ADD DETAILS.
@@ -262,7 +265,7 @@ Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific hea
 	Mean energy $E$ 						& - 8.00 						& - 8		 \\
 	Mean magnetization $|{\cal M}|$ 			& 3.99						& 4		 \\
 	Specific heat $C_V$						& $2.88 \times 10^{-5}$			& 0 		\\
-	Susceptibility $\chi$						& $2.67 \times 10^{-3}$			& 0		\\
+	Susceptibility $\chi$						& ???			& 0		\\
 	\hline
 \end{tabular}
 \end{center}
