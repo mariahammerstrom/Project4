@@ -8,6 +8,7 @@
 #include <cmath>
 #include <random>
 #include <fstream>
+#include <chrono>
 //#include <mpi.h>
 
 using namespace std;
@@ -15,6 +16,7 @@ using namespace std;
 inline int periodic(int i, int limit, int add){return (i+limit+add)%(limit);}
 void Metropolis(int,int **,double &,double &,double *,int&);
 void initialize(int,int**,double&,double&);
+void initialize_random(int n_spins,int **spin_matrix,double& E, double& M);
 void output(int,int,double,double*);
 void ExpectationValues_toFile(double,ofstream&,int,int,int**,bool&);
 void analytical_cf(double T,double& Z,double& E_exp,double& M_exp,double& Cv,double& chi);
@@ -25,9 +27,9 @@ int main()
 {
     // CONSTANTS
     double T = 1.0;                                     // Temperature [kT/J]
-    int n_spins = 2;                                   // Number of spins
+    int n_spins = 40;                                   // Number of spins
     int N = n_spins*n_spins;                            // Lattice dimensions (square)
-    int MC_cycles = 1000;                                // Number of Monte Carlo cycles
+    int MC_cycles = 100000;                                // Number of Monte Carlo cycles
 
     double temp_step = 0.5;                             // Steps in temperature
     double initial_temp = 1.0;                          // Initial temperature
@@ -47,6 +49,10 @@ int main()
             spin_matrix[i][j] = 1;
         }
     }
+
+
+
+
 
     // ANALYTICAL SOLUTION: SUMS
     cout << "ANALYTICAL SOLUTION: SUMS" << endl;
@@ -82,6 +88,9 @@ int main()
 
     // METROPOLIS ALGORITHM
     cout << "METROPOLIS ALGORITHM" << endl;
+    //double E[3]; // Probability
+    //E[0] = E[1] = E[2] = 0;
+    //double E_tot = 0;
 
     // Expectation values as a function of MC cycles
     ofstream file_MC("ExpectationValues_MC_" + to_string(n_spins) + ".txt");
@@ -98,24 +107,19 @@ int main()
     for(T=initial_temp; T<=final_temp ; T+= temp_step)
         ExpectationValues_toFile(T,file_T,n_spins,MC_cycles,spin_matrix,first);
     file_T.close();
+    //cout << "Probabilities:" << endl;
+    //cout << "E = -8: " << E[0]/P\E_tot << endl;
+    //cout << "E = 0: " << E[1]/E_tot << endl;
+    //cout << "E = 8: " << E[2]/E_tot << endl;
 
 
 
 
-    // Probability P(E_i), plot comparing to sigmaE
-    /*
-    int E_count,E_tot;
-    metropolis(...,counting=true)
-    if(counting){
-        E_tot++;
-        if(E == E_i) E_count++;
-    }
-    Probability = E_count/E_tot;
+    // Probability P(E_i), plot(?) comparing to sigmaE
 
     //ofstream fileP("ProbabilityL" + to_string(L) + ".txt"); // File for expectation values
     //fileP << L << "\t" << Probability << "\t" << sigmaE << endl; // Write solution to file
     //fileP.close();
-    */
 
     // Ecpectation values for different L and T. Parallelization!
     //ofstream fileL("ExpectationValuesL" + to_string(n_spins) + ".txt"); // File for expectation values
@@ -205,6 +209,33 @@ void initialize(int n_spins,int **spin_matrix,double& E, double& M){
   }
 }
 
+void initialize_random(int n_spins,int **spin_matrix,double& E, double& M){
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine generator(seed);
+    uniform_real_distribution<double> distribution(0.0,1.0);
+    double random;
+    for(int x=0;x<n_spins;x++){
+        for(int y=0;y<n_spins;y++){
+            random = distribution(generator);
+            if(random<0.5) spin_matrix[x][y] = -1;
+            else spin_matrix[x][y] = 1;
+        }
+    }
+  // Setup spin matrix and intial magnetization
+  for(int y =0; y < n_spins; y++) {
+    for (int x= 0; x < n_spins; x++){
+      M +=  (double) spin_matrix[y][x];
+    }
+  }
+
+  // Setup initial energy
+  for(int y =0; y < n_spins; y++) {
+    for (int x= 0; x < n_spins; x++){
+      E -=  (double) spin_matrix[y][x]*(spin_matrix[periodic(y,n_spins,-1)][x] + spin_matrix[y][periodic(x,n_spins,-1)]);
+    }
+  }
+}
+
 
 void Metropolis(int n_spins, int **spin_matrix, double& E, double&M, double *w, int& accepted_configs){
     // Generate random number generator
@@ -257,7 +288,7 @@ void output(int n_spins,int MCs,double temp,double *average){
     cout << "<M>/spin = "      << "\t" << Mabsaverage/n_spins/n_spins << endl << endl;
 }
 
-void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**spin_matrix,bool &first){
+void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**spin_matrix,bool &first){//,double& Ptot,double*P){
     double test;
 
     // Set up array for possible energy changes
@@ -276,10 +307,15 @@ void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**sp
 
     for(int i=0;i<5;i++) average[i] = 0;
 
-    initialize(n_spins,spin_matrix,E,M);
+    //initialize(n_spins,spin_matrix,E,M);
+    initialize_random(n_spins,spin_matrix,E,M);
 
     for(int cycles=1;cycles <= mc;cycles++){
         Metropolis(n_spins,spin_matrix,E,M,w,accepted_configs);
+        //Ptot++;
+        //if(E == -8) P[0] += 1;
+        //else if(E == 0) P[1] += 1;
+        //else P[2] += 1;
 
         // Update expectation values
         double Eprev = average[0];
@@ -294,6 +330,7 @@ void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**sp
         cout << "Minimum MC cycles = " << "\t" << mc << endl;
         first = false;
     }
+
 
     double norm = 1/((double) (mc));
     double E_exp = average[0]*norm;
@@ -310,4 +347,5 @@ void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**sp
     chi /= n_spins*n_spins;
 
     // Write solution to file
-    file << T << "\t" << mc << "\t" << E_exp << "\t" << M_abs << "\t" << Cv << "\t" << chi << "\t" << accepted_configs*norm << endl;}
+    file << T << "\t" << mc << "\t" << E_exp << "\t" << M_abs << "\t" << Cv << "\t" << chi << "\t" << accepted_configs*norm << endl;
+}
