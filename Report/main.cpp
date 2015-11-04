@@ -8,8 +8,7 @@
 #include <cmath>
 #include <fstream>
 #include <random>
-#include <chrono>
-#include <vector>
+//#include <chrono>
 //#include <mpi.h>
 
 using namespace std;
@@ -73,29 +72,25 @@ int main()
     bool random = true; // True = Random lattice, False = Fixed lattice
     bool count = false;
 
-    double E_exp,M_abs,Cv,chi;
-    E_exp = M_abs = Cv = chi = 0.0;
-
     if (random){
         ofstream file_MC("ExpectationValues_MC_random_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
         ofstream file_E("Energy_MC_random_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
-        for(int MC = 1; MC<=MC_cycles; MC++)
-            ExpectationValues_toFile(T,file_MC,file_E,n_spins,MC,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi);
-        file_MC.close();
-        file_E.close();
     }
     else{
         ofstream file_MC("ExpectationValues_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
         ofstream file_E("Energy_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
-        for(int MC = 1; MC<=MC_cycles; MC++)
-            ExpectationValues_toFile(T,file_MC,file_E,n_spins,MC,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi);
-        file_MC.close();
-        file_E.close();
     }
 
     //ofstream file_MC("ExpectationValues_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
     //ofstream file_E("Energy_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
 
+    double E_exp,M_abs,Cv,chi;
+    E_exp = M_abs = Cv = chi = 0.0;
+
+    for(int MC = 1; MC<=MC_cycles; MC++)
+        ExpectationValues_toFile(T,file_MC,file_E,n_spins,MC,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi);
+    file_MC.close();
+    file_E.close();
 
     cout << "L" << "\t" << "\t" << N << endl;
     cout << "<E>/spins" << "\t" << "\t" << E_exp << endl;
@@ -224,7 +219,6 @@ void ExpectationValues_toFile(double T,ofstream &file,ofstream &fileE,int n_spin
     double E = 0;
     int accepted_configs = 0; // Initialize count of accepted configurations
     int countstart = 0;
-    vector<double> energy;
 
     for(int i=0;i<5;i++) average[i] = 0;
 
@@ -234,8 +228,7 @@ void ExpectationValues_toFile(double T,ofstream &file,ofstream &fileE,int n_spin
     for(int cycles=1;cycles <= mc;cycles++){
         Metropolis(n_spins,spin_matrix,E,M,w,accepted_configs);
         if(count){
-            energy.push_back(E); // Adds an element with value E to the end
-            //fileE << E/n_spins/n_spins << endl;
+            fileE << E/n_spins/n_spins << endl;
         }
 
         // Update expectation values
@@ -246,8 +239,6 @@ void ExpectationValues_toFile(double T,ofstream &file,ofstream &fileE,int n_spin
         test = fabs((Eprev-average[0])/Eprev);
         if (test < 0.05) countstart = 1;
     }
-
-    // E_tot = energy.size(); // Number of elements
 
     if (countstart == 1 && first){
         cout << "Min. # cycles " << "\t" << mc << endl;
