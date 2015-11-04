@@ -51,7 +51,10 @@
 
 The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}. This project deals with the Ising model in two dimensions without an external magnetic field. 
 
-\subsection{Theory}
+
+
+
+\subsection{Theory}\label{subsec:theory}
 In the two-dimensional Ising model, the simplest form of the \textbf{energy} for a specific microstate $i$ is expressed as
 
 \begin{equation}\label{eq:energy}
@@ -121,7 +124,7 @@ with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}).
 
 
 
-\subsection{Analytical solution}
+\subsection{Analytical solution}\label{subsec:analytical}
 First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the lattice length. The situation looks like this:
 
 \begin{equation*}
@@ -205,14 +208,14 @@ and
 \begin{aligned}
 	\langle {\cal M}\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0, \\
 	%\langle M\rangle^2 	&= 0 \\
-	\langle {\cal M}^2\rangle 	&= \frac{1}{Z^2} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
-			&= \frac{32}{Z^2} \bigg( e^{8J\beta} + 1  \bigg).
+	\langle {\cal M}^2\rangle 	&= \frac{1}{Z} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
+			&= \frac{32}{Z} \bigg( e^{8J\beta} + 1  \bigg).
 \end{aligned}
 \end{equation}
 Thus
 
 \begin{equation}\label{eq:chi_analytic}
-	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32 \beta}{Z^2} \bigg(e^{8J\beta} + 1  \bigg).
+	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32 \beta}{Z} \bigg(e^{8J\beta} + 1  \bigg).
 \end{equation}
 
 
@@ -247,27 +250,66 @@ We have parallelized our code using the Open MPI library. ADD DETAILS.
 
 
 
+
+
 \section{Results}
 
-Our numerical results from computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions, can be compared with expressions given in Eq. (\ref{eq:Z_analytic}) -- (\ref{eq:chi_analytic}) for a temperature $T=1.0$ (in units of $kT/J$). This gives the following results:
+Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ with periodic boundary conditions numerically using the expressions from Sec.~\ref{subsec:theory} can be compared with the results using the analytical closed form expressions given in Sec.~\ref{subsec:analytical}. For temperature $T=1.0$ (in units of $kT/J$), this gives the following results for a $2 \times 2$ spin system where the initial state has all spins pointing upwards:
 
 \begin{center}
 \begin{tabular}{ l l l }\hline
-	Quantity 								& Closed form	 				& Numerical		\\ \hline
-	Mean energy $E$ 						& -8 							& -		 \\
-	Mean magnetization $|{\cal M}|$ 			& 4							& -		 \\
-	Specific heat $C_V$						& $\sim 0$					& - 		\\
-	Susceptibility $\chi$						& $\sim 0$					& -		\\
+	Quantity 								& Closed form	 				& Numerical (sums)		\\ \hline
+	Mean energy $E$ 						& - 8.00 						& - 8		 \\
+	Mean magnetization $|{\cal M}|$ 			& 3.99						& 4		 \\
+	Specific heat $C_V$						& $2.88 \times 10^{-5}$			& 0 		\\
+	Susceptibility $\chi$						& $2.67 \times 10^{-3}$			& 0		\\
 	\hline
 \end{tabular}
 \end{center}
-COMMENT. The number of Monte Carlo cycles needed to achieve good agreement is XXX. COMMENT.
+The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. COMMENT. The minimum number of Monte Carlo cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22 cycles.
 
-Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of Monte Carlo cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. 
+Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of Monte Carlo cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of Monte Carlo cycles, for both $T = 1.0$ kT/J and T = $2.4$ kT/J, as shown in Fig. XXX. PLOT + COMMENTS!
 
-A rough and study is done by plotting the various expectation values as a function of number of Monte Carlo cycles, for both $T = 1.0$ kT/J and T = $2.4$ kT/J, as shown in Fig. XXX. PLOT + COMMENTS!
+\begin{figure*}[t]
+\begin{center}
+\begin{tabular}{ccc}
+  	\includegraphics[width=85mm]{images/exp_values_EM_vs_MC_cycles_20x20_T10.png}
+	& \includegraphics[width=85mm]{images/exp_values_CX_vs_MC_cycles_20x20_T10.png} \\
+	(a) $T = 1.0$					& (b) $T = 1.0$  \\
+	
+	 \includegraphics[width=85mm]{images/exp_values_EM_vs_MC_cycles_20x20_T24.png}
+	& \includegraphics[width=85mm]{images/exp_values_CX_vs_MC_cycles_20x20_T24.png} \\
+	(c) $T = 2.4$					& (d) $T = 2.4$  \\[6pt]
+\end{tabular}
+\caption{Expectation values as a function of number of Monte Carlo cycles.}\label{fig:L20_ex_values}
+\end{center}
+\end{figure*}
+We also study the total number of accepted configurations as a function of the total number of Monte Carlo cycles, shown in Fig.~\ref{fig:L20_accepted_configs_MC}. PLOT + COMMENTS! 
 
-We also study the total number of accepted configurations as a function of the total number of Monte Carlo cycles, shown in Fig. XXX. PLOT + COMMENTS! 
+\begin{figure*}[t]
+\begin{center}
+\begin{tabular}{ccc}
+  	\includegraphics[width=85mm]{images/accept_configs_MC_20x20_T10.png}
+	& \includegraphics[width=85mm]{images/accept_configs_MC_20x20_T24.png} \\
+	(a) $T = 1.0$					& (b) $T = 2.4$  \\[6pt]
+\end{tabular}
+\caption{Number of accepted configurations as a function of the total number of Monte Carlo cycles.}\label{fig:L20_accepted_configs_MC}
+\end{center}
+\end{figure*}
+How does the total number of accepted configurations vary as a function of temperature? This is shown in Fig.~\ref{fig:L20_accepted_configs_temp}. COMMENT.
+
+\begin{center}
+	\includegraphics[width=80mm]{images/accept_configs_T_20x20.png} 	
+	\captionof{figure}{Number of accepted configurations as a function of temperature.}
+	\label{fig:L20_accepted_configs_temp}
+\end{center}
+
+%\begin{figure*}
+%\begin{center}
+%  	\includegraphics[width=120mm]{images/accept_configs_T_20x20.png} \\
+%\caption{Number of accepted configurations as a function of temperature.}\label{fig:L20_accepted_configs_temp}
+%\end{center}
+%\end{figure*}
 
 ...
 
