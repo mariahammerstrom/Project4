@@ -8,8 +8,12 @@
 #include <cmath>
 #include <fstream>
 #include <random>
+<<<<<<< Updated upstream
 #include <chrono>
 #include <vector>
+=======
+//#include <chrono>
+>>>>>>> Stashed changes
 //#include <mpi.h>
 
 using namespace std;
@@ -25,9 +29,9 @@ int main()
 {
     // CONSTANTS
     double T = 1.0;                                     // Temperature [kT/J]
-    int n_spins = 20;                                   // Number of spins
+    int n_spins = 2;                                   // Number of spins
     int N = n_spins*n_spins;                            // Lattice dimensions (square)
-    int MC_cycles = 1000;                                // Number of Monte Carlo cycles
+    int MC_cycles = 10000;                                // Number of Monte Carlo cycles
 
     double temp_step = 0.5;                             // Steps in temperature
     double initial_temp = 1.0;                          // Initial temperature
@@ -73,6 +77,7 @@ int main()
     bool random = true; // True = Random lattice, False = Fixed lattice
     bool count = false;
 
+<<<<<<< Updated upstream
     double E_exp,M_abs,Cv,chi;
     E_exp = M_abs = Cv = chi = 0.0;
 
@@ -83,10 +88,17 @@ int main()
             ExpectationValues_toFile(T,file_MC,file_E,n_spins,MC,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi);
         file_MC.close();
         file_E.close();
+=======
+    /*
+    if (random){
+        ofstream file_MC("ExpectationValues_MC_random_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
+        ofstream file_E("Energy_MC_random_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
+>>>>>>> Stashed changes
     }
     else{
         ofstream file_MC("ExpectationValues_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
         ofstream file_E("Energy_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
+<<<<<<< Updated upstream
         for(int MC = 1; MC<=MC_cycles; MC++)
             ExpectationValues_toFile(T,file_MC,file_E,n_spins,MC,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi);
         file_MC.close();
@@ -102,14 +114,47 @@ int main()
     cout << "<M>/spins" << "\t" << "\t" << M_abs << endl;
     cout << "Cv/spins" << "\t" << "\t" << Cv << endl;
     cout << "chi/spins" << "\t" << "\t" << chi << endl << endl;
+=======
+    }
+    */
 
 
-    // Expectation values as a function of temperature variations
-    //ofstream file_T("ExpectationValues_temp_" + to_string(n_spins) + ".txt");
+    ofstream file_E("Energy_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
+    double E_exp,M_abs,Cv,chi;
+    E_exp = M_abs = Cv = chi = 0.0;
 
+
+    ofstream file_MC("ExpectationValues_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
+
+    //for(int MC = 1; MC<=MC_cycles; MC++)
+    for(int MC = 1; MC<=MC_cycles; MC+=4)
+        ExpectationValues_toFile(T,file_MC,file_E,n_spins,MC,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi);
+    file_MC.close();
+    file_E.close();
+>>>>>>> Stashed changes
+
+
+    cout << "L" << "\t" << "\t" << N << endl;
+    cout << "<E>/spins" << "\t" << "\t" << E_exp << endl;
+    cout << "<M>/spins" << "\t" << "\t" << M_abs << endl;
+    cout << "Cv/spins" << "\t" << "\t" << Cv << endl;
+    cout << "chi/spins" << "\t" << "\t" << chi << endl << endl;
+
+<<<<<<< Updated upstream
     //for(T=initial_temp; T<=final_temp ; T+= temp_step)
         //ExpectationValues_toFile(T,file_T,n_spins,MC_cycles,spin_matrix,first);
     //file_T.close();
+=======
+
+    /*
+    // Expectation values as a function of temperature variations
+    ofstream file_T("ExpectationValues_temp_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
+
+    for(T=initial_temp; T<=final_temp ; T+= temp_step)
+        ExpectationValues_toFile(T,file_T,file_E,n_spins,MC_cycles,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi);
+    file_T.close();
+    */
+>>>>>>> Stashed changes
 
 
     // Probability P(E_i), plot(?) comparing to sigmaE
@@ -233,20 +278,26 @@ void ExpectationValues_toFile(double T,ofstream &file,ofstream &fileE,int n_spin
 
     for(int cycles=1;cycles <= mc;cycles++){
         Metropolis(n_spins,spin_matrix,E,M,w,accepted_configs);
+<<<<<<< Updated upstream
         if(count){
             energy.push_back(E); // Adds an element with value E to the end
             //fileE << E/n_spins/n_spins << endl;
+=======
+        //if(count){
+        //    fileE << E/n_spins/n_spins << endl;
+>>>>>>> Stashed changes
         }
 
         // Update expectation values
-        double Eprev = average[0];
+        //double Eprev = average[0];
         average[0] += E; average[1] += E*E;
         average[2] += M; average[3] += M*M; average[4] += fabs(M);
 
-        test = fabs((Eprev-average[0])/Eprev);
-        if (test < 0.05) countstart = 1;
-    }
+        //test = fabs((Eprev-average[0])/Eprev);
+        //if (test < 0.05) countstart = 1;
+    //}
 
+<<<<<<< Updated upstream
     // E_tot = energy.size(); // Number of elements
 
     if (countstart == 1 && first){
@@ -254,6 +305,13 @@ void ExpectationValues_toFile(double T,ofstream &file,ofstream &fileE,int n_spin
         first = false;
         count = true;
     }
+=======
+    /*if (countstart == 1 && first){
+        cout << "Min. # cycles " << "\t" << mc << endl;
+        first = false;
+        count = true;
+    }*/
+>>>>>>> Stashed changes
 
     double norm = 1/((double) (mc));
     E_exp = average[0]*norm;
