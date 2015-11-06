@@ -181,6 +181,45 @@ def exp_values_T(L_list,random):
     plt.show()
     
     return
+
+def exp_rand(L,temp,random):
+    # Input: L = lattice size, temp = temperature, random = 0 (non-random spin matrix) or 1 (random spin matrix)
+    # Ouput: plot of expectation values <E> and <M> for random and non-random spin matrix
+    
+    # Define plots
+    plt.figure(11)
+    plt.title('Energy, L = %d, T = %.1f' % (L,temp),size=12)
+    plt.xlabel(r'$T \mathrm{[kT/J]}$',size=12)
+    plt.ylabel(r'$\langle E \rangle$',size=12)
+    
+    plt.figure(12)
+    plt.title('Magnetism, L = %d, T = %.1f' % (L,temp),size=12)
+    plt.xlabel(r'$T \mathrm{[kT/J]}$',size=12)
+    plt.ylabel(r'$\langle M \rangle$',size=12)
+    
+    for i in range(len(random)):
+        
+        # Read data
+        filenameMC = '../Datasets/ExpectationValues_MC_%d_%.1f_%d.txt' % (L,temp,random[i])
+        T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameMC)
+        
+        if random[i] == 0:
+            plot_label = 'Random start configuration'
+        else:
+            plot_label = 'Ground state as start'
+        
+        # Fill plots with values
+        plt.figure(1)
+        plt.plot(MC_cycles,E_avg,label=plot_label)
+        plt.legend()
+        
+        plt.figure(2)
+        plt.plot(MC_cycles,M_absavg,label=plot_label)
+        plt.legend()
+    
+    plt.show()
+        
+    return
     
     
 def probability(L,temp,random):
@@ -257,25 +296,26 @@ def T_C_estimate(L_list,random):
     return
     
 
-def main(argv):
+def main(argv): # Change these values according to run!
     
-    # Change these values according to run!
-    random = 0                                     # Is spin matrix initially random? True = 1, false = 0.
+    # Is the spin matrix initially random? True = 1, false = 0.
+    random = 0                                     
+    random_list = [0,1]
     
-    # Expectation values vs. # of Monte Carlo cycles
-    L = 10                                         # Lattice size
-    temps = [1.0]                              # list of temperatures
-    exp_values_MC(L,temps,random)
+    # How large is the lattice?
+    L = 10
+    L_list = [10,20]
     
-    # Expectation values vs. temperature
-    #L_list = [10,20]                            # List of lattice sizes
-    #exp_values_T(L_list,random)
+    # What is the temperature?
+    temp = 1.0
+    temps = [1.0]
     
-    # Calculate probabilty for <E>
-    #probability(L,temps[0],random)
-    
-    # Calculate estimate of T_crit
-    #T_C_estimate(L_list,random)
+    # Run calculations:
+    exp_values_MC(L,temps,random)         # Expectation values vs. # of Monte Carlo cycles
+    exp_rand(L,temp,random_list)          # Expectation values vs. # of Monte Carlo cycles: Different initial spin matrix!
+    #exp_values_T(L_list,random)          # Expectation values vs. temperature
+    #probability(L,temp,random)           # Calculate probabilty for <E>
+    #T_C_estimate(L_list,random)          # Calculate estimate of T_crit
 
 
 if __name__ == "__main__":
