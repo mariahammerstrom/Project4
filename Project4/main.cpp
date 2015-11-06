@@ -8,8 +8,7 @@
 #include <cmath>
 #include <fstream>
 #include <random>
-//#include <chrono>
-//#include <mpi.h>
+#include <mpi.h>
 
 using namespace std;
 
@@ -17,21 +16,52 @@ inline int periodic(int i, int limit, int add){return (i+limit+add)%(limit);}
 void Metropolis(int,int **,double &,double &,double *,int&);
 void initialize(int,int**,double&,double&);
 void initialize_random(int n_spins,int **spin_matrix,double& E, double& M);
-void ExpectationValues_toFile(double,ofstream&,int,int,int**,bool&,bool &rand,bool &count,double&,double&,double&,double&,vector<double>&);
 void analytical_cf(double T,double& Z,double& E_exp,double& M_exp,double& Cv,double& chi,int N);
 void print(double E_exp,double M_abs,double Cv,double chi,int N);
+void write_to_file(ofstream &file,int mc, double T,double *average,int accepted_configs, int n_spins);
+void ExpectationValues_MC(double T,ofstream &file,int n_spins,int mc,int**spin_matrix,bool &rand,vector<double> &energy,double *w,int myloop_begin,int myloop_end);
+void ExpectationValues_T(double T,ofstream &file,int n_spins,int mc,int**spin_matrix,bool &rand,int myloop_begin,int myloop_end);
 
-int main()
+int main(int argc, char *argv[])
 {
     // CONSTANTS
-    double T = 1.0;                                     // Temperature [kT/J]
-    int n_spins = 2;                                   // Number of spins
+    double T = 2.4;                                     // Temperature [kT/J]
+    int n_spins = 20;                                   // Number of spins
     int N = n_spins*n_spins;                            // Lattice dimensions (square)
-    int MC_cycles = 100000;                                // Number of Monte Carlo cycles
+    int MC_cycles = 10000;                                // Number of Monte Carlo cycles
 
-    double temp_step = 0.5;                             // Steps in temperature
-    double initial_temp = 1.0;                          // Initial temperature
-    double final_temp = 3.0;                            // Final temperature
+    double temp_step = 0.05;                             // Steps in temperature
+    double initial_temp = 2.0;                          // Initial temperature
+    double final_temp = 2.4;                            // Final temperature
+
+
+    // MPI INITIALIZATIONS
+    int my_rank,numprocs;
+    MPI_Init (&argc, &argv);
+    MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
+    MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
+
+    /*
+    if (my_rank == 0 && argc <= 1) {
+        cout << "Bad Usage: " << argv[0] << " read output file" << endl;
+        exit(1);
+    }
+    if (my_rank == 0 && argc > 1) {
+        outfilename=argv[1];
+        ofile.open(outfilename);
+    }*/
+
+
+    int no_intervalls = MC_cycles/numprocs;
+    int myloop_begin = my_rank*no_intervalls + 1;
+    int myloop_end = (my_rank+1)*no_intervalls;
+    if ((my_rank == numprocs-1) &&( myloop_end < MC_cycles)) myloop_end = MC_cycles;
+
+    // broadcast to all nodes common variables
+    MPI_Bcast (&n_spins, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast (&initial_temp, 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Bcast (&final_temp, 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Bcast (&temp_step, 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
 
     // SPIN MATRIX
@@ -65,28 +95,31 @@ int main()
     cout << "METROPOLIS ALGORITHM" << endl;
     cout << "MC cycles" << "\t" << "\t" << MC_cycles << endl;
 
-    bool first = true;
-    bool random = true; // True = Random spin matrix, False = All spins pointing upwards
-    bool count = false;
+    bool random = false; // true = random spin matrix, false = all spins pointing upwards
 
-    vector<double> energy;
 
-    double E_exp,M_abs,Cv,chi;
-    E_exp = M_abs = Cv = chi = 0.0;
-
+    char filename_MC[1000];
+    sprintf(filename_MC, "ExpectationValues_MC_%d_%.1f_%d.txt", n_spins, T, random);
 
     // Expectation values as a function of MC cycles
-    ofstream file_MC("ExpectationValues_MC_" + to_string(n_spins) + "_" + to_string(T) + ".txt");
+    vector<double> energy;
+
+    // Set up array for possible energy changes
+    double w[17];
+    for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
+    for(int dE = -8; dE <= 8; dE+=4) w[dE+8] = exp(-dE/T);
+
+    ofstream file_MC(filename_MC);
 
     for(int MC = 1; MC<=MC_cycles; MC+=4)
-        ExpectationValues_toFile(T,file_MC,n_spins,MC,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi,energy);
+        ExpectationValues_MC(T,file_MC,n_spins,MC,spin_matrix,random,energy,w,myloop_begin,myloop_end);
     file_MC.close();
 
-    print(E_exp,M_abs,Cv,chi,N);
 
+    char filename_E[1000];
+    sprintf(filename_E, "Energy_MC_%d_%.1f_%d.txt", n_spins, T, random);
 
-    /*
-    ofstream file_E("Energy_MC_"+to_string(n_spins)+ "_" + to_string(T) + ".txt");
+    ofstream file_E(filename_E);
     double test;
     for(int i = 0; i <= MC_cycles; i++){
         test = (energy[i+1] - energy[i])/energy[i];
@@ -94,21 +127,19 @@ int main()
             file_E << energy[i+1] << endl;
         }
     }
-    */
 
-
-    /*
-    E_exp = M_abs = Cv = chi = 0.0;
 
     // Expectation values as a function of temperature variations
-    ofstream file_T("ExpectationValues_temp_" + to_string(n_spins) + ".txt");
+    char filename_T[1000];
+    sprintf(filename_T, "ExpectationValues_temp_%d_%d.txt", n_spins, random);
+    ofstream file_T(filename_T);
 
     for(T=initial_temp; T<=final_temp ; T+= temp_step)
-        ExpectationValues_toFile(T,file_T,n_spins,MC_cycles,spin_matrix,first,random,count,E_exp,M_abs,Cv,chi,energy);
+        ExpectationValues_T(T,file_T,n_spins,MC_cycles,spin_matrix,random,myloop_begin,myloop_end);
     file_T.close();
 
-    print(E_exp,M_abs,Cv,chi,N);
-    */
+    // End MPI
+    MPI_Finalize ();
 
     return 0;
 }
@@ -191,10 +222,7 @@ void Metropolis(int n_spins, int **spin_matrix, double& E, double&M, double *w, 
 }
 
 
-void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**spin_matrix,bool &first,bool &rand,bool &count,double &E_exp,double &M_abs,double &Cv, double &chi,vector<double> &energy)
-{
-    //double test;
-
+void ExpectationValues_T(double T,ofstream &file,int n_spins,int mc,int**spin_matrix,bool &rand,int myloop_begin,int myloop_end){
     // Set up array for possible energy changes
     double w[17];
     for(int dE = -8; dE <= 8; dE++) w[dE+8] = 0;
@@ -202,46 +230,78 @@ void ExpectationValues_toFile(double T,ofstream &file,int n_spins,int mc,int**sp
 
     // Initialize array for expectation values
     double average[5];
+    double total_average[5];
 
     // Initialize sums
     double M = 0;
     double E = 0;
     int accepted_configs = 0; // Initialize count of accepted configurations
-    //int countstart = 0;
 
     for(int i=0;i<5;i++) average[i] = 0;
 
     if(rand) initialize_random(n_spins,spin_matrix,E,M);
     else initialize(n_spins,spin_matrix,E,M);
 
-    for(int cycles=1; cycles <= mc;cycles++){
+    //for(int cycles=1; cycles <= mc;cycles++)
+    for (int cycles = myloop_begin; cycles <= myloop_end; cycles++){
         Metropolis(n_spins,spin_matrix,E,M,w,accepted_configs);
-        //energy.push_back(E);
 
         // Update expectation values
-        //double Eprev = average[0];
         average[0] += E; average[1] += E*E;
         average[2] += M; average[3] += M*M; average[4] += fabs(M);
-
-        //test = fabs((Eprev-average[0])/Eprev);
-        //if (test < 0.05) countstart = 1;
     }
 
-    /*
-    if (countstart == 1 && first){
-        cout << "Min. # cycles " << "\t" << mc << endl;
-        first = false;
-        count = true;
-    }*/
+    // Find total average
+    for( int i =0; i < 5; i++){
+      MPI_Reduce(&average[i], &total_average[i], 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    }
 
+    write_to_file(file,mc,T,total_average,accepted_configs,n_spins);
+}
+
+void ExpectationValues_MC(double T,ofstream &file,int n_spins,int mc,int**spin_matrix,bool &rand,vector<double> &energy,double *w,int myloop_begin,int myloop_end){
+
+    // Initialize array for expectation values
+    double average[5];
+    double total_average[5];
+
+    // Initialize sums
+    double M = 0;
+    double E = 0;
+    int accepted_configs = 0; // Initialize count of accepted configurations
+
+    for(int i=0;i<5;i++) average[i] = 0;
+
+    if(rand) initialize_random(n_spins,spin_matrix,E,M);
+    else initialize(n_spins,spin_matrix,E,M);
+
+    //for(int cycles=1; cycles <= mc;cycles++)
+    for (int cycles = myloop_begin; cycles <= myloop_end; cycles++){
+        Metropolis(n_spins,spin_matrix,E,M,w,accepted_configs);
+        energy.push_back(E);
+
+        // Update expectation values
+        average[0] += E; average[1] += E*E;
+        average[2] += M; average[3] += M*M; average[4] += fabs(M);
+    }
+
+    // Find total average
+    for( int i =0; i < 5; i++){
+      MPI_Reduce(&average[i], &total_average[i], 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    }
+
+    write_to_file(file,mc,T,total_average,accepted_configs,n_spins);
+}
+
+
+void write_to_file(ofstream &file,int mc, double T,double *average,int accepted_configs,int n_spins){
     double norm = 1/((double) (mc));
-    E_exp = average[0]*norm;
-    double E_exp2 = average[1]*norm;
-    //double M_exp = average[2]*norm;
+    double E_exp = average[0]*norm;
+    double E_exp2 = average[1]*norm; //double M_exp = average[2]*norm;
     double M_exp2 = average[3]*norm;
-    M_abs = average[4]*norm;
-    Cv = (E_exp2-E_exp*E_exp)/T/T;
-    chi = (M_exp2-M_abs*M_abs)/T;
+    double M_abs = average[4]*norm;
+    double Cv = (E_exp2-E_exp*E_exp)/T/T;
+    double chi = (M_exp2-M_abs*M_abs)/T;
     double sigmaE = (E_exp2 - E_exp*E_exp)/n_spins/n_spins;
 
     E_exp /= n_spins*n_spins;
