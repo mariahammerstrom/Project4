@@ -78,11 +78,19 @@ def exp_values_MC(L,temps,random):
         # Fill plots with values
         plt.figure(1)
         plt.plot(MC_cycles,E_avg,label=r'$T =$ %.2f' % temps[i])
+        coefficients = np.polyfit(MC_cycles,E_avg,6)
+        polynomial = np.poly1d(coefficients)
+        E_avg_smooth = polynomial(MC_cycles)
+        plt.plot(MC_cycles,E_avg_smooth,label=r'$T =$ %.2f' % temps[i])
         #plt.ylim(-2.2,-1.0)
         plt.legend()
         
         plt.figure(2)
         plt.plot(MC_cycles,M_absavg,label=r'$T =$ %.2f' % temps[i])
+        coefficients = np.polyfit(MC_cycles,M_absavg,6)
+        polynomial = np.poly1d(coefficients)
+        M_absavg_smooth = polynomial(MC_cycles)
+        plt.plot(MC_cycles,M_absavg_smooth,label=r'$T =$ %.2f' % temps[i])
         #plt.ylim(0.7,1.1)
         plt.legend()
         
@@ -144,7 +152,7 @@ def exp_values_T(L_list,random):
         # Fill plots with values
         plt.figure(6)
         plt.plot(T,E_avg,label='L = %d' % L_list[i])
-        #plt.ylim(-2.5,0)
+        plt.ylim(-2.5,0)
         plt.legend()
         
         plt.figure(7)
@@ -183,7 +191,7 @@ def probability(L,temp,random):
     E = np.loadtxt(filenameE,unpack=True)         # Energies
     
     # Round-offs to make counting possible
-    precision = 2 # Number of decimal points
+    precision = 1 # Number of decimal points
     E_avg = np.around(E_avg,decimals=precision)
     E = np.around(E,decimals=precision)
 
@@ -193,6 +201,7 @@ def probability(L,temp,random):
     prob = float(counter)/no_elements
     
     print "Probability: (T = %.2f)" % temp
+    print "E_avg = %.2f" % E_avg[-1]
     print "P(E) = %.2f" % prob
     print "Var(E) = %.2f" % E_var[-1]
 
@@ -203,23 +212,37 @@ def T_C_estimate(L_list,random):
     # Input: L = array or list of lattice sizes
     # Output: T_C = numerical estimate of critical temperature
     
-    T_C = np.zeros(len(L_list))
+    print "Critical temperature:"
+    
+    nu = 1
+    a = 1
+    T_C_exact = 2.269
+        
+    print "Exact = \t %.3f" % T_C_exact
+    
+    T_C_estimate = np.zeros(len(L_list))
+    T_max = np.zeros(len(L_list))
+    a_estimate = np.zeros(len(L_list))
+    
+    print "BEFORE"
     
     for i in range(len(L_list)):
         filenameT = '../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameT)
-        # X ...
-        # T_C[i] = ...
+        
+        T_max[i] = T[np.where(X == max(X))]
+        T_C_estimate[i] = T_max[i] - a*L_list[i]**(-1./nu)
+        
+        a_estimate[i] = (T_max[i] - T_C_exact)*L_list[i]
+        
+        print "Numerical = \t %.3f \t L = %d" % (T_C_estimate[i],L_list[i])
     
-    print "Critical temperature:"
-    print "Exact = \t 2.269"
-    
-    nu = 1
-    a = 1
-    
+    print "AFTER"
+    a_avg = np.average(a_estimate)
     for i in range(len(L_list)):
-        T_C_estimate = T_C[i] - a*L_list[i]**(-1./nu)
-        print "Numerical = \t %.3f \t L = %d" % (T_C_estimate,L_list[i])
+        print "Numerical = \t %.3f \t L = %d" % (T_max[i] - a_avg*L_list[i]**(-1./nu),L_list[i])
+        
+    
     
     return
     
@@ -228,21 +251,31 @@ def main(argv):
     
     # Change according to run!
     random = 0 # true = 1, false = 0
-    L = 2
-    temps = [1.0,2.4]
     
     # Expectation values vs. # of Monte Carlo cycles
-    exp_values_MC(L,temps,random)
+    L = 10
+    temps = [2.4]
+    #exp_values_MC(L,temps,random)
     
     # Expectation values vs. temperature
-    L_list = [2,20]
+    L_list = [2,10]
     #exp_values_T(L_list,random)
     
     # Calculate probabilty for <E>
     #probability(L,temps[0],random)
     
     # Calculate estimate of T_crit
-    #T_C_estimate(L_list,random)
+    T_C_estimate(L_list,random)
+    
+    
+    
+    
+    #data = np.loadtxt('../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_MC 18.37.24.txt')
+    #print data
+    
+    #data = np.loadtxt('../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_MC_2_1.0_0.txt')
+    #print data
+
 
 if __name__ == "__main__":
     main(sys.argv[1:]) 
