@@ -1,4 +1,6 @@
-"""THE 2-DIMENSIONAL ISING MODEL
+"""
+
+THE 2-DIMENSIONAL ISING MODEL
 
 A program that plots:
     1) Expectation values,
@@ -6,9 +8,12 @@ A program that plots:
     3) Number of Monte Carlo cycles
 as a function of temperature and number of Monte Carlo cycles.
 
-The program also calculates the probability of the average energy
-and compares it to the standard deviation for the average energy."""
+The program also calculates:
+    1) The probability of the average energy and compares it to the standard 
+    deviation for the average energy, and
+    2) An estimate for the critical temperature of the system.
 
+"""
 
 import sys
 import numpy as np
@@ -18,8 +23,8 @@ rc('font',**{'family':'serif'})
 
 
 def read_file(filename):
-    # Input: filename
-    # Output: Arrays of data values
+    # Input: filename for file with structure [T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC]
+    # Output: arrays of data values
     
     data = np.loadtxt(filename,unpack=True) # Read data
     
@@ -41,7 +46,7 @@ def read_file(filename):
     
 def exp_values_MC(L,temps,random):
     # Input: L = array or list with dimension of lattice(s), temps = array or list of temperatures
-    # Output: Plots of expectation values vs. # of Monte Carlo cycles
+    # Output: plots of expectation values vs. # of Monte Carlo cycles
     
     # Define plots
     plt.figure(1)
@@ -70,27 +75,26 @@ def exp_values_MC(L,temps,random):
     plt.ylabel('Accepted configurations',size=12)    
     
     for i in range(len(temps)):
-        # Read file
-        filenameMC = '../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_MC_%d_%.1f_%d.txt' % (L,temps[i],random)
-        #filenameMC = 'ExpectationValues_MC_%d_%.1f_%d.txt' % (L,temps[i],random)
+        # Read data
+        filenameMC = '../Datasets/ExpectationValues_MC_%d_%.1f_%d.txt' % (L,temps[i],random)
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameMC)
         
         # Fill plots with values
         plt.figure(1)
         plt.plot(MC_cycles,E_avg,label=r'$T =$ %.2f' % temps[i])
-        coefficients = np.polyfit(MC_cycles,E_avg,6)
-        polynomial = np.poly1d(coefficients)
-        E_avg_smooth = polynomial(MC_cycles)
-        plt.plot(MC_cycles,E_avg_smooth,label=r'$T =$ %.2f' % temps[i])
+        #coefficients = np.polyfit(MC_cycles,E_avg,6)
+        #polynomial = np.poly1d(coefficients)
+        #E_avg_smooth = polynomial(MC_cycles)
+        #plt.plot(MC_cycles,E_avg_smooth,label=r'$T =$ %.2f' % temps[i])
         #plt.ylim(-2.2,-1.0)
         plt.legend()
         
         plt.figure(2)
         plt.plot(MC_cycles,M_absavg,label=r'$T =$ %.2f' % temps[i])
-        coefficients = np.polyfit(MC_cycles,M_absavg,6)
-        polynomial = np.poly1d(coefficients)
-        M_absavg_smooth = polynomial(MC_cycles)
-        plt.plot(MC_cycles,M_absavg_smooth,label=r'$T =$ %.2f' % temps[i])
+        #coefficients = np.polyfit(MC_cycles,M_absavg,6)
+        #polynomial = np.poly1d(coefficients)
+        #M_absavg_smooth = polynomial(MC_cycles)
+        #plt.plot(MC_cycles,M_absavg_smooth,label=r'$T =$ %.2f' % temps[i])
         #plt.ylim(0.7,1.1)
         plt.legend()
         
@@ -116,7 +120,7 @@ def exp_values_MC(L,temps,random):
 
 def exp_values_T(L_list,random):
     # Input: L_list = array or list of lattice sizes
-    # Output: Plots expectation values vs. temperature
+    # Output: plots expectation values vs. temperature
     
     # Define plots
     plt.figure(6)
@@ -146,7 +150,7 @@ def exp_values_T(L_list,random):
 
     for i in range(len(L_list)):
         # Read file
-        filenameT = '../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
+        filenameT = '../Datasets/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameT)
         
         # Fill plots with values
@@ -181,17 +185,17 @@ def exp_values_T(L_list,random):
     
 def probability(L,temp,random):
     # Input: L = lattice size, temp = temperature
-    # Output: Probability P(E) of a given E and variance of E
+    # Output: probability P(E) of a given E and variance of E
     
-    filenameMC = '../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_MC_%d_%.1f_%d.txt' % (L,temp,random)
-    filenameE = '../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/Energy_MC_%d_%.1f_%d.txt' % (L,temp,random)
+    filenameMC = '../Datasets/ExpectationValues_MC_%d_%.1f_%d.txt' % (L,temp,random)
+    filenameE = '../Datasets/Energy_MC_%d_%.1f_%d.txt' % (L,temp,random)
     
+    # Read data
     T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameMC)
-        
-    E = np.loadtxt(filenameE,unpack=True)         # Energies
+    E = np.loadtxt(filenameE,unpack=True)
     
-    # Round-offs to make counting possible
-    precision = 1 # Number of decimal points
+    # Round-off to make counting possible
+    precision = 2 # Number of decimal points
     E_avg = np.around(E_avg,decimals=precision)
     E = np.around(E,decimals=precision)
 
@@ -202,6 +206,7 @@ def probability(L,temp,random):
     
     print "Probability: (T = %.2f)" % temp
     print "E_avg = %.2f" % E_avg[-1]
+    print "E = %.2f" % E[-1]
     print "P(E) = %.2f" % prob
     print "Var(E) = %.2f" % E_var[-1]
 
@@ -216,7 +221,7 @@ def T_C_estimate(L_list,random):
     
     nu = 1
     a = 1
-    T_C_exact = 2.269
+    T_C_exact = 2.269 # Exact critical temperature [kT/J]
         
     print "Exact = \t %.3f" % T_C_exact
     
@@ -224,57 +229,53 @@ def T_C_estimate(L_list,random):
     T_max = np.zeros(len(L_list))
     a_estimate = np.zeros(len(L_list))
     
-    print "BEFORE"
+    print "BEFORE:"
     
     for i in range(len(L_list)):
-        filenameT = '../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
-        T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameT)
+        filenameT = '../Datasets/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
+        T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameT) # Read data
         
+        # Find critical temperature from data set:
         T_max[i] = T[np.where(X == max(X))]
+        
+        # Make estimate for T(L -> inf) with a = 1:
         T_C_estimate[i] = T_max[i] - a*L_list[i]**(-1./nu)
         
+        # Find value of "a" to make the solution equal to the exact one:
         a_estimate[i] = (T_max[i] - T_C_exact)*L_list[i]
         
         print "Numerical = \t %.3f \t L = %d" % (T_C_estimate[i],L_list[i])
     
-    print "AFTER"
-    a_avg = np.average(a_estimate)
+    
+    print "AFTER:"
+    a_avg = np.average(a_estimate) # Average "a"-values
+    
+    # Calculate estimate for T(L -> inf) with a = a_avg:
     for i in range(len(L_list)):
         print "Numerical = \t %.3f \t L = %d" % (T_max[i] - a_avg*L_list[i]**(-1./nu),L_list[i])
         
-    
-    
     return
     
 
 def main(argv):
     
-    # Change according to run!
-    random = 0 # true = 1, false = 0
+    # Change these values according to run!
+    random = 0                                     # Is spin matrix initially random? True = 1, false = 0.
     
     # Expectation values vs. # of Monte Carlo cycles
-    L = 10
-    temps = [2.4]
-    #exp_values_MC(L,temps,random)
+    L = 10                                         # Lattice size
+    temps = [1.0]                              # list of temperatures
+    exp_values_MC(L,temps,random)
     
     # Expectation values vs. temperature
-    L_list = [2,10]
+    #L_list = [10,20]                            # List of lattice sizes
     #exp_values_T(L_list,random)
     
     # Calculate probabilty for <E>
     #probability(L,temps[0],random)
     
     # Calculate estimate of T_crit
-    T_C_estimate(L_list,random)
-    
-    
-    
-    
-    #data = np.loadtxt('../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_MC 18.37.24.txt')
-    #print data
-    
-    #data = np.loadtxt('../build-Project4-Desktop_Qt_5_5_0_clang_64bit-Debug/ExpectationValues_MC_2_1.0_0.txt')
-    #print data
+    #T_C_estimate(L_list,random)
 
 
 if __name__ == "__main__":
