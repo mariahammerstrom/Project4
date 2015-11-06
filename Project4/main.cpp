@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) // Leave second argument blank
 {
     // INITIAL CONDITIONS
     double T = 1.0;                                     // Temperature [kT/J]
-    int n_spins = 10;                                   // Number of spins
+    int n_spins = 20;                                   // Number of spins
     int N = n_spins*n_spins;                            // Lattice dimensions (square)
     int MC_cycles = 1000000;                                // Number of Monte Carlo cycles
 
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) // Leave second argument blank
     cout << "METROPOLIS ALGORITHM" << endl;
     cout << "MC cycles" << "\t" << "\t" << MC_cycles << endl;
 
-    bool random = false; // true = random spin matrix, false = all spins pointing upwards
+    bool random = true; // true = random spin matrix, false = all spins pointing upwards
 
     char filename_MC[1000];
     sprintf(filename_MC, "ExpectationValues_MC_%d_%.1f_%d.txt", n_spins, T, random);
