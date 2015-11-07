@@ -203,18 +203,20 @@ def exp_rand(L,temp,random_list):
         filenameMC = '../Datasets/ExpectationValues_MC_%d_%.1f_%d.txt' % (L,temp,random_list[i])
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameMC)
         
-        if random_list[i] == 0:
+        if i == 0:
             plot_label = 'Random start configuration'
         else:
             plot_label = 'Ground state as start'
         
         # Fill plots with values
-        plt.figure(1)
+        plt.figure(11)
         plt.plot(MC_cycles,E_avg,label=plot_label)
+        #plt.plot(MC_cycles,E_avg)
         plt.legend()
         
-        plt.figure(2)
+        plt.figure(12)
         plt.plot(MC_cycles,M_absavg,label=plot_label)
+        #plt.plot(MC_cycles,M_absavg)
         plt.legend()
     
     plt.show()
@@ -303,12 +305,12 @@ def main(argv): # Change these values according to run!
     random_list = [0,1]
     
     # How large is the lattice?
-    L = 20
-    L_list = [10,20]
+    L = 10
+    L_list = [10,20,40]
     
     # What is the temperature?
     temp = 1.0
-    temps = [1.0]
+    temps = [1.0,2.4]
     
     # Run calculations:
     #exp_values_MC(L,temps,random)         # Expectation values vs. # of Monte Carlo cycles
@@ -316,6 +318,9 @@ def main(argv): # Change these values according to run!
     #exp_values_T(L_list,random)          # Expectation values vs. temperature
     #probability(L,temp,random)           # Calculate probabilty for <E>
     #T_C_estimate(L_list,random)          # Calculate estimate of T_crit
+    
+    #filename = '../Datasets/ExpectationValues_MC_20_1.0_1.txt'
+    #print np.loadtxt(filename)
     
 
 if __name__ == "__main__":

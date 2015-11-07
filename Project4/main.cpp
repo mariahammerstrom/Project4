@@ -31,9 +31,11 @@ int main(int argc, char *argv[]) // Leave second argument blank
 {
     // INITIAL CONDITIONS
     double T = 1.0;                                     // Temperature [kT/J]
-    int n_spins = 20;                                   // Number of spins
+    int n_spins = 10;                                   // Number of spins
     int N = n_spins*n_spins;                            // Lattice dimensions (square)
     int MC_cycles = 1000000;                                // Number of Monte Carlo cycles
+
+    bool random = true; // true = random spin matrix, false = all spins pointing upwards
 
     double temp_step = 0.05;                             // Steps in temperature
     double initial_temp = 2.0;                          // Initial temperature
@@ -88,8 +90,8 @@ int main(int argc, char *argv[]) // Leave second argument blank
     cout << "METROPOLIS ALGORITHM" << endl;
     cout << "MC cycles" << "\t" << "\t" << MC_cycles << endl;
 
-    bool random = true; // true = random spin matrix, false = all spins pointing upwards
-
+    /*
+    // Expectation values as a function # of Monte Carlo cycles
     char filename_MC[1000];
     sprintf(filename_MC, "ExpectationValues_MC_%d_%.1f_%d.txt", n_spins, T, random);
     char filename_E[1000];
@@ -111,7 +113,7 @@ int main(int argc, char *argv[]) // Leave second argument blank
 
     file_MC.close();
     file_E.close();
-
+    */
 
     // Expectation values as a function of temperature variations
     char filename_T[1000];
@@ -243,12 +245,12 @@ void ExpectationValues_T(double T,ofstream &file,int n_spins,int mc,int**spin_ma
         average[2] += M; average[3] += M*M; average[4] += fabs(M);
     }
 
-    /*
+
     // Find total average
     for(int i=0;i<5; i++){
         MPI_Reduce(&average[i], &total_average[i], 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     }
-    */
+
 
     if (my_rank == 0) {
         write_to_file(file,mc,T,total_average,accepted_configs,n_spins);

@@ -119,7 +119,7 @@ A second-order phase transition is characterized by a correlation length which s
 \begin{equation}\label{eq:T_C}
 	T_C(L)-T_C(L=\infty) = aL^{-1/\nu},
 \end{equation}
-with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}).
+with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}). Here we will use $\nu = 1$.
 
 
 
@@ -251,11 +251,16 @@ After the most likely state has been reached, we want to
 \subsection{Parallelization}
 We have parallelized our code using the Open MPI library. ADD DETAILS.
 
+\subsection{Calculating $T_{\mathrm{C}}$}
+The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 kT/J. But we do not know what the constant $a$ should be. 
 
+...
 
 
 
 \section{Results}
+
+\subsection{Checking the 2 $\times$ 2 case}
 
 Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ with periodic boundary conditions numerically using the expressions from Sec.~\ref{subsec:theory} can be compared with the results using the analytical closed form expressions given in Sec.~\ref{subsec:analytical}. For temperature $T=1.0$ (in units of $kT/J$), this gives the following results for a $2 \times 2$ spin system where the initial state has all spins pointing upwards:
 
@@ -271,6 +276,7 @@ Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific hea
 \end{center}
 The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. COMMENT. The minimum number of Monte Carlo cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run.
 
+\subsection{The 20 $\times$ 20 case}
 Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of Monte Carlo cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of Monte Carlo cycles, for both $T = 1.0$ kT/J and T = $2.4$ kT/J, as shown in Fig. XXX. PLOT + COMMENTS!
 
 \begin{figure*}[t]
@@ -287,6 +293,12 @@ Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In t
 \caption{Expectation values as a function of number of Monte Carlo cycles.}\label{fig:L20_ex_values}
 \end{center}
 \end{figure*}
+
+
+
+
+\subsection{The number of accepted configurations}
+
 We also study the total number of accepted configurations as a function of the total number of Monte Carlo cycles, shown in Fig.~\ref{fig:L20_accepted_configs_MC}. PLOT + COMMENTS! 
 
 \begin{figure*}[t]
@@ -316,7 +328,13 @@ How does the total number of accepted configurations vary as a function of tempe
 
 ...
 
+\subsection{The probability P(E)}
+
 By simply counting the number of times a given energy appears in our computation we can compute the probability $P_i$. We start the counting after the steady state situation has been reached. This result is compared with the compute variance in energy $\sigma_E^2$. DISCUSS. 
+
+
+
+\subsection{Looking for phase transitions}
 
 In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$.
 
@@ -338,7 +356,27 @@ The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\re
 \end{figure*}
 .... MORE.
 
+
+
+\subsection{Estimating the critical temperature}
+
 Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamical limit $L \rightarrow \infty$ running simulations for different values of $L$ using Eq. (\ref{eq:T_C}). 
+
+\subsection{Parallelization}
+As described previously, we parallelized our code using MPI. Here we have gathered some time recordings:
+
+\begin{center}
+\begin{tabular}{ l l l }\hline
+	\# of processors: 		& $n = 2$	 	& $n = 4$			\\ \hline
+	$L = 10$				& - 			& -		 		\\
+	$L = 20$				& -			& 3m52.296s		 \\
+	$L = 40$				& -			& - 			\\
+	$L = 60$				& -			& -			\\
+	$L = 80$				& -			& -			\\
+	\hline
+\end{tabular}
+\end{center}
+COMMENT.
 
 
 \section{Conclusions}
