@@ -49,7 +49,7 @@
 
 \section{Introduction}
 
-The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}. This project deals with the Ising model in two dimensions without an external magnetic field. 
+In this project we look a the Ising model in two dimensions. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}. This project deals with the Ising model in two dimensions without an external magnetic field. 
 
 
 
@@ -282,15 +282,15 @@ Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In t
 \begin{figure*}[t]
 \begin{center}
 \begin{tabular}{ccc}
-  	\includegraphics[width=85mm]{images/exp_values_EM_vs_MC_cycles_20x20_T10.png}
-	& \includegraphics[width=85mm]{images/exp_values_CX_vs_MC_cycles_20x20_T10.png} \\
-	(a) $T = 1.0$					& (b) $T = 1.0$  \\
+  	\includegraphics[width=85mm]{images/E_avg_MC_L20.png}
+	& \includegraphics[width=85mm]{images/M_avg_MC_L20.png} \\
+	(a) Energy					& (b) Magnetization  \\
 	
-	 \includegraphics[width=85mm]{images/exp_values_EM_vs_MC_cycles_20x20_T24.png}
-	& \includegraphics[width=85mm]{images/exp_values_CX_vs_MC_cycles_20x20_T24.png} \\
-	(c) $T = 2.4$					& (d) $T = 2.4$  \\[6pt]
+	 \includegraphics[width=85mm]{images/chi_MC_L20.png}
+	& \includegraphics[width=85mm]{images/Cv_MC_L20.png} \\
+	(c) Susceptibility					& (d) Heat capacity  \\[6pt]
 \end{tabular}
-\caption{Expectation values as a function of number of Monte Carlo cycles.}\label{fig:L20_ex_values}
+\caption{Expectation values as a function of number of Monte Carlo cycles with the hottest temperature in red.}\label{fig:L20_ex_values}
 \end{center}
 \end{figure*}
 
@@ -304,27 +304,14 @@ We also study the total number of accepted configurations as a function of the t
 \begin{figure*}[t]
 \begin{center}
 \begin{tabular}{ccc}
-  	\includegraphics[width=85mm]{images/accept_configs_MC_20x20_T10.png}
-	& \includegraphics[width=85mm]{images/accept_configs_MC_20x20_T24.png} \\
-	(a) $T = 1.0$					& (b) $T = 2.4$  \\[6pt]
+  	\includegraphics[width=85mm]{images/accepted_configs_MC_L20.png}
+	& \includegraphics[width=85mm]{images/accepted_configs_temp.png} \\
+	(a) As a function of \# of Monte Carlo cycles.					& (b) As a function of temperature.  \\[6pt]
 \end{tabular}
-\caption{Number of accepted configurations as a function of the total number of Monte Carlo cycles.}\label{fig:L20_accepted_configs_MC}
+\caption{Number of accepted configurations.}\label{fig:L20_accepted_configs_MC}
 \end{center}
 \end{figure*}
 How does the total number of accepted configurations vary as a function of temperature? This is shown in Fig.~\ref{fig:L20_accepted_configs_temp}. COMMENT.
-
-\begin{center}
-	\includegraphics[width=80mm]{images/accept_configs_T_20x20.png} 	
-	\captionof{figure}{Number of accepted configurations as a function of temperature.}
-	\label{fig:L20_accepted_configs_temp}
-\end{center}
-
-%\begin{figure*}
-%\begin{center}
-%  	\includegraphics[width=120mm]{images/accept_configs_T_20x20.png} \\
-%\caption{Number of accepted configurations as a function of temperature.}\label{fig:L20_accepted_configs_temp}
-%\end{center}
-%\end{figure*}
 
 ...
 
@@ -336,7 +323,7 @@ By simply counting the number of times a given energy appears in our computation
 
 \subsection{Looking for phase transitions}
 
-In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$.
+In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}.
 
 The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\ref{fig:visualization}, where white squares represent upward spins and black squares represent downward spins. It shows clearly that the net magnetization $\langle {\cal M}\rangle$ is higher for low $T$ with most spins pointing in the same direction (in this case upwards), while the $\langle {\cal M}\rangle$ approaches zero at higher $T$ where the number of spins pointing upward and downward are about the same.
 
@@ -357,26 +344,52 @@ The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\re
 .... MORE.
 
 
+\begin{figure*}[t]
+\begin{center}
+\begin{tabular}{ccc}
+  	\includegraphics[width=85mm]{images/E_avg_temp.png}
+	& \includegraphics[width=85mm]{images/M_avg_temp.png} \\
+	(a) Energy					& (b) Magnetization  \\
+	
+	 \includegraphics[width=85mm]{images/chi_temp.png}
+	& \includegraphics[width=85mm]{images/Cv_temp.png} \\
+	(c) Susceptibility					& (d) Heat capacity  \\[6pt]
+\end{tabular}
+\caption{Expectation values as a function of temperature.}\label{fig:ex_values_temp}
+\end{center}
+\end{figure*}
+
+
+
+
 
 \subsection{Estimating the critical temperature}
 
 Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamical limit $L \rightarrow \infty$ running simulations for different values of $L$ using Eq. (\ref{eq:T_C}). 
 
 \subsection{Parallelization}
-As described previously, we parallelized our code using MPI. Here we have gathered some time recordings:
+As described previously, we parallelized our code using MPI. Here we have gathered some time recordings, using $n = 4$ processes on a 2,5 GHz Intel Core i5 processor:
 
 \begin{center}
-\begin{tabular}{ l l l }\hline
-	\# of processors: 		& $n = 2$	 	& $n = 4$			\\ \hline
-	$L = 10$				& - 			& -		 		\\
-	$L = 20$				& -			& 3m52.296s		 \\
-	$L = 40$				& -			& - 			\\
-	$L = 60$				& -			& -			\\
-	$L = 80$				& -			& -			\\
+\begin{tabular}{ l r }\hline
+	Lattice size $L$ 	 	& Time usage $t$		\\ \hline
+	$L = 10$				& 00m 57s		 	\\
+	$L = 20$				& 03m 52s			\\
+	$L = 40$				& 15m 23s 			\\
+	$L = 60$				& 48m 06s			\\
+	$L = 80$				& 2h 02m 00s			\\
+	$L = 100$				& -			\\
 	\hline
 \end{tabular}
 \end{center}
-COMMENT.
+These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curve which makes a good fit. The approximation is overestimating at first, but underestimating for large $L$.
+
+\begin{center}
+	\includegraphics[width=90mm]{images/time_usage.png} 	
+	\captionof{figure}{Time needed to run the program as a function of lattice size.}
+	\label{fig:time_usage}
+\end{center}
+
 
 
 \section{Conclusions}
