@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.15)  8 NOV 2015 18:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.15)  9 NOV 2015 08:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -643,16 +643,12 @@ Package pdftex.def Info: images/accepted_configs_temp.png used on input line 30
 8.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  [3]
-
-LaTeX Warning: Reference `fig:L20_accepted_configs_temp' on page 4 undefined on
- input line 314.
-
 <images/visualization_L80_T2_0_square.png, id=31, 797.98125pt x 707.64375pt>
 File: images/visualization_L80_T2_0_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_0_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_0_square.png used on input
- line 333.
+ line 337.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/visualization_L80_T2_2_square.png, id=32, 797.98125pt x 707.64375pt>
@@ -660,7 +656,7 @@ File: images/visualization_L80_T2_2_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_2_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_2_square.png used on input
- line 334.
+ line 338.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/visualization_L80_T2_4_square.png, id=33, 797.98125pt x 707.64375pt>
@@ -668,33 +664,33 @@ File: images/visualization_L80_T2_4_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_4_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_4_square.png used on input
- line 335.
+ line 339.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/E_avg_temp.png, id=34, 578.16pt x 433.62pt>
 File: images/E_avg_temp.png Graphic file (type png)
 
 <use images/E_avg_temp.png>
-Package pdftex.def Info: images/E_avg_temp.png used on input line 350.
+Package pdftex.def Info: images/E_avg_temp.png used on input line 354.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
 <images/M_avg_temp.png, id=35, 578.16pt x 433.62pt>
 File: images/M_avg_temp.png Graphic file (type png)
 
 <use images/M_avg_temp.png>
-Package pdftex.def Info: images/M_avg_temp.png used on input line 351.
+Package pdftex.def Info: images/M_avg_temp.png used on input line 355.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  <images/chi_temp.png, id=36, 578.16pt x 433.62pt>
 File: images/chi_temp.png Graphic file (type png)
 
 <use images/chi_temp.png>
-Package pdftex.def Info: images/chi_temp.png used on input line 354.
+Package pdftex.def Info: images/chi_temp.png used on input line 358.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  <images/Cv_temp.png, id=37, 578.16pt x 433.62pt>
 File: images/Cv_temp.png Graphic file (type png)
 
 <use images/Cv_temp.png>
-Package pdftex.def Info: images/Cv_temp.png used on input line 355.
+Package pdftex.def Info: images/Cv_temp.png used on input line 359.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  [4 <./images/E_avg_MC_L20.png> <./images/M_avg_MC_L20.png> <./images/chi_MC_L2
 0.png> <./images/Cv_MC_L20.png>]
@@ -702,49 +698,44 @@ Package pdftex.def Info: images/Cv_temp.png used on input line 355.
 File: images/time_usage.png Graphic file (type png)
 
 <use images/time_usage.png>
-Package pdftex.def Info: images/time_usage.png used on input line 388.
+Package pdftex.def Info: images/time_usage.png used on input line 392.
 (pdftex.def)             Requested size: 256.0748pt x 192.05052pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 405--406
+ [5 <./images/accepted_configs_MC_L20.png> <./images/accepted_configs_temp.png>
+ <./images/visualization_L80_T2_0_square.png (PNG copy)> <./images/visualizatio
+n_L80_T2_2_square.png (PNG copy)> <./images/visualization_L80_T2_4_square.png (
+PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 410--411
 
  []
 
-[5 <./images/accepted_configs_MC_L20.png> <./images/accepted_configs_temp.png> 
-<./images/visualization_L80_T2_0_square.png (PNG copy)> <./images/visualization
-_L80_T2_2_square.png (PNG copy)> <./images/visualization_L80_T2_4_square.png (P
-NG copy)> <./images/time_usage.png>]
-LaTeX Font Info:    Try loading font information for OT1+txtt on input line 407
+LaTeX Font Info:    Try loading font information for OT1+txtt on input line 412
 .
-
 (/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/ot1txtt.fd
 File: ot1txtt.fd 2000/12/15 v3.1
 ) [6 <./images/E_avg_temp.png> <./images/M_avg_temp.png> <./images/chi_temp.png
-> <./images/Cv_temp.png>] (./FYS4150-Report-Project4.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+> <./images/Cv_temp.png> <./images/time_usage.png>] (./FYS4150-Report-Project4.
+aux) ) 
 Here is how much of TeX's memory you used:
- 7389 strings out of 493117
- 107985 string characters out of 6135433
+ 7388 strings out of 493117
+ 107951 string characters out of 6135433
  299450 words of memory out of 5000000
- 10667 multiletter control sequences out of 15000+600000
+ 10666 multiletter control sequences out of 15000+600000
  54882 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,14n,75p,728b,602s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/local/texlive/
-2014/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/local/texlive/2014/texmf-di
-st/fonts/type1/public/txfonts/txex.pfb></usr/local/texlive/2014/texmf-dist/font
-s/type1/public/txfonts/txsy.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1
-/public/txfonts/txsyc.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/publi
-c/txfonts/txtt.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic
-/uhvb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvro8
-a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on FYS4150-Report-Project4.pdf (6 pages, 448553 bytes).
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/local/texl
+ive/2014/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive/20
+14/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/local/texlive/2014/texm
+f-dist/fonts/type1/public/txfonts/txex.pfb></usr/local/texlive/2014/texmf-dist/
+fonts/type1/public/txfonts/txsy.pfb></usr/local/texlive/2014/texmf-dist/fonts/t
+ype1/public/txfonts/txsyc.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/p
+ublic/txfonts/txtt.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helv
+etic/uhvb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uh
+vro8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/loca
+l/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on FYS4150-Report-Project4.pdf (6 pages, 453087 bytes).
 PDF statistics:
  100 PDF objects out of 1000 (max. 8388607)
  54 compressed objects within 1 object stream

@@ -267,10 +267,10 @@ Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific hea
 \begin{center}
 \begin{tabular}{ l l l }\hline
 	Quantity 								& Closed form	 				& Numerical		\\ \hline
-	Mean energy $E$ 						& $-8.00$ 						& -		 \\
-	Mean magnetization $|{\cal M}|$ 			& 3.99						& -		 \\
-	Specific heat $C_V$						& $2.88 \times 10^{-5}$			& - 		\\
-	Susceptibility $\chi$						& $8.02 \times 10^{-3}$			& -		\\
+	Mean energy $E$ 						& $-8.00$ 						& $-8$		 \\
+	Mean magnetization $|{\cal M}|$ 			& 3.99						& 4		 \\
+	Specific heat $C_V$						& $2.88 \times 10^{-5}$			& 0 		\\
+	Susceptibility $\chi$						& $8.02 \times 10^{-3}$			& 0		\\
 	\hline
 \end{tabular}
 \end{center}
@@ -299,7 +299,7 @@ Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In t
 
 \subsection{The number of accepted configurations}
 
-We also study the total number of accepted configurations as a function of the total number of Monte Carlo cycles, shown in Fig.~\ref{fig:L20_accepted_configs_MC}. PLOT + COMMENTS! 
+We also study the total number of accepted configurations as a function of the total number of Monte Carlo cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. COMMENTS! 
 
 \begin{figure*}[t]
 \begin{center}
@@ -308,22 +308,26 @@ We also study the total number of accepted configurations as a function of the t
 	& \includegraphics[width=85mm]{images/accepted_configs_temp.png} \\
 	(a) As a function of \# of Monte Carlo cycles.					& (b) As a function of temperature.  \\[6pt]
 \end{tabular}
-\caption{Number of accepted configurations.}\label{fig:L20_accepted_configs_MC}
+\caption{Number of accepted configurations.}\label{fig:L20_accepted_configs}
 \end{center}
 \end{figure*}
-How does the total number of accepted configurations vary as a function of temperature? This is shown in Fig.~\ref{fig:L20_accepted_configs_temp}. COMMENT.
+How does the total number of accepted configurations vary as a function of temperature? This is shown in Fig.~\ref{fig:L20_accepted_configs}b. COMMENT.
 
 ...
 
 \subsection{The probability P(E)}
 
-By simply counting the number of times a given energy appears in our computation we can compute the probability $P_i$. We start the counting after the steady state situation has been reached. This result is compared with the compute variance in energy $\sigma_E^2$. DISCUSS. 
+By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the compute variance in energy $\sigma_E^2$. 
+
+For $T = 1.0$ kT/J we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ kT/J we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ for an ordered initial spin matrix. 
+
+DISCUSS. 
 
 
 
 \subsection{Looking for phase transitions}
 
-In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}.
+In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d.
 
 The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\ref{fig:visualization}, where white squares represent upward spins and black squares represent downward spins. It shows clearly that the net magnetization $\langle {\cal M}\rangle$ is higher for low $T$ with most spins pointing in the same direction (in this case upwards), while the $\langle {\cal M}\rangle$ approaches zero at higher $T$ where the number of spins pointing upward and downward are about the same.
 
@@ -378,11 +382,11 @@ As described previously, we parallelized our code using MPI. Here we have gather
 	$L = 40$				& 15m 23s 			\\
 	$L = 60$				& 48m 06s			\\
 	$L = 80$				& 2h 02m 00s			\\
-	$L = 100$				& -			\\
+	$L = 100$				& 8h 	46m	22s	\\
 	\hline
 \end{tabular}
 \end{center}
-These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curve which makes a good fit. The approximation is overestimating at first, but underestimating for large $L$.
+These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curve which makes a good fit for lower values of $L$, and a $e^{L/9.5}$ curve which is a good approximation for higher values of $L$.
 
 \begin{center}
 	\includegraphics[width=90mm]{images/time_usage.png} 	
@@ -391,10 +395,11 @@ These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curv
 \end{center}
 
 
-
 \section{Conclusions}
 
 ...
+
+Something about lattice size vs. time vs. results.
 
 
 
