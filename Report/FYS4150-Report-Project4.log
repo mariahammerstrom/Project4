@@ -1,13 +1,16 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.11)  10 NOV 2015 12:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.15)  10 NOV 2015 15:19
 entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
 **FYS4150-Report-Project4.tex
-(FYS4150-Report-Project4.tex
-LaTeX2e <2015/01/01> patch level 2
-Babel <3.9m> and hyphenation patterns for 69 languages loaded.
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size10.clo"
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(./FYS4150-Report-Project4.tex
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 78 languages loaded.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -21,22 +24,22 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
@@ -51,26 +54,25 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen109
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks16
 \ex@=\dimen111
 ))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen112
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count90
@@ -111,8 +113,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\multicol.sty"
-Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2014/04/23 v1.8e multicolumn formatting (FMi)
 \c@tracingmulticols=\count102
 \mult@box=\box28
 \multicol@leftmargin=\dimen120
@@ -160,18 +162,18 @@ Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
 \colbreak@box=\box53
 \mc@col@check@num=\count110
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithm2e\algorithm2e.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
 \c@AlgoLine=\count111
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\xspace.sty"
-Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\relsize.sty"
-Package: relsize 2003/07/04 ver 3.1
+(/usr/local/texlive/2014/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
 )
 ********************************************************
 Package `algorithm2e' Release 5.0 -- january 06 2013 --
@@ -213,11 +215,11 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \c@algocf=\count114
 \algocf@algoframe=\box60
 \algocf@algobox=\box61
-) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lipsum\lipsum.sty"
-Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/lipsum/lipsum.sty
+Package: lipsum 2011/04/14 v1.2 150 paragraphs of Lorem Ipsum dummy text
 \c@lips@count=\count115
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\txfonts.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/txfonts.sty
 Package: txfonts 2008/01/22 v3.2.1
 LaTeX Font Info:    Redeclaring symbol font `operators' on input line 21.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
@@ -293,27 +295,27 @@ LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `bold'
 (Font)                  U/txexa/m/n --> U/txexa/bx/n on input line 129.
 LaTeX Info: Redefining \not on input line 1043.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
-File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 94.
+Package graphics Info: Driver file: pdftex.def on input line 91.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count116
@@ -321,13 +323,13 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen135
 \Gin@req@width=\dimen136
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\subcaption.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption3.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen137
@@ -343,39 +345,37 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \c@subfigure=\count118
 \c@subtable=\count119
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen144
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
-Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2014/04/23 v1.1a Standard LaTeX Color (DPC)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package color Info: Driver file: pdftex.def on input line 142.
+Package color Info: Driver file: pdftex.def on input line 137.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\adjustbox.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
-Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/05/09 v2.6d package option processing (HA)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex"
+(/usr/local/texlive/2014/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 \XKV@toks=\toks21
 \XKV@tempa@toks=\toks22
-)
 \XKV@depth=\count120
-File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+File: xkeyval.tex 2014/05/09 v2.6d key=value parser (HA)
 ))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\adjcalc.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
 -ends (calc, etex, pgfmath)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\trimclip.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/trimclip.sty
 Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\collectbox\collectbox.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
 \collectedbox=\box62
 )
@@ -385,7 +385,7 @@ Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
 \tc@ury=\dimen148
 Package trimclip Info: Using driver 'tc-pdftex.def'.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\tc-pdftex.def"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
 ))
 \adjbox@Width=\dimen149
@@ -393,18 +393,18 @@ File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
 \adjbox@Depth=\dimen151
 \adjbox@Totalheight=\dimen152
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ifoddpage\ifoddpage.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
 \c@checkoddpage=\count121
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\varwidth.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box63
 \sift@deathcycles=\count122
 \@vwid@loff=\dimen153
 \@vwid@roff=\dimen154
 ))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\titlesec\titlesec.sty"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \ttl@box=\box64
 \beforetitleunit=\skip64
@@ -416,12 +416,14 @@ Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \titlewidthlast=\dimen158
 \titlewidthfirst=\dimen159
 )
-(FYS4150-Report-Project4.aux)
+(./FYS4150-Report-Project4.aux)
+\openout1 = `FYS4150-Report-Project4.aux'.
+
 LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 34.
 LaTeX Font Info:    Try loading font information for OML+txmi on input line 34.
 
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\omltxmi.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    ... okay on input line 34.
@@ -433,7 +435,7 @@ LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 34.
 LaTeX Font Info:    Try loading font information for OMS+txsy on input line 34.
 
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\omstxsy.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    ... okay on input line 34.
@@ -441,20 +443,20 @@ LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 34.
 LaTeX Font Info:    Try loading font information for OMX+txex on input line 34.
 
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\omxtxex.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/omxtxex.fd
 File: omxtxex.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    ... okay on input line 34.
 LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 34.
 LaTeX Font Info:    Try loading font information for U+txexa on input line 34.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\utxexa.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/utxexa.fd
 File: utxexa.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    ... okay on input line 34.
 LaTeX Font Info:    Try loading font information for OT1+txr on input line 34.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\ot1txr.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
 )
 *geometry* driver: auto-detecting
@@ -491,7 +493,7 @@ File: ot1txr.fd 2000/12/15 v3.1
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count123
 \scratchdimen=\dimen160
@@ -504,31 +506,75 @@ File: ot1txr.fd 2000/12/15 v3.1
 \MPnumerator=\count127
 \makeMPintoPDFobject=\count128
 \everyMPtoPDFconversion=\toks25
+) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for U+txmia on input line 36.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\utxmia.fd"
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/utxmia.fd
 File: utxmia.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Try loading font information for U+txsya on input line 36.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\utxsya.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/utxsya.fd
 File: utxsya.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Try loading font information for U+txsyb on input line 36.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\utxsyb.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/utxsyb.fd
 File: utxsyb.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Try loading font information for U+txsyc on input line 36.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\utxsyc.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/utxsyc.fd
 File: utxsyc.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 50.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1phv.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
@@ -540,11 +586,11 @@ LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 57.
  [1
 
-{C:/Users/mariefoss/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Try loading font information for OT1+txss on input line 175
 .
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\ot1txss.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/ot1txss.fd
 File: ot1txss.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
@@ -553,148 +599,146 @@ LaTeX Font Info:    Font shape `OT1/txss/bx/n' in size <9> not available
 (Font)              Font shape `OT1/txss/b/n' tried instead on input line 175.
 LaTeX Font Info:    Font shape `OT1/txss/b/n' will be
 (Font)              scaled to size 8.54997pt on input line 175.
- [2] [3]
-<images/E_avg_MC_L20.png, id=23, 578.16pt x 433.62pt>
+ [2]
+<images/E_avg_MC_L20.png, id=20, 578.16pt x 433.62pt>
 File: images/E_avg_MC_L20.png Graphic file (type png)
 
 <use images/E_avg_MC_L20.png>
-Package pdftex.def Info: images/E_avg_MC_L20.png used on input line 286.
+Package pdftex.def Info: images/E_avg_MC_L20.png used on input line 282.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
-<images/M_avg_MC_L20.png, id=25, 578.16pt x 433.62pt>
+<images/M_avg_MC_L20.png, id=22, 578.16pt x 433.62pt>
 File: images/M_avg_MC_L20.png Graphic file (type png)
 
 <use images/M_avg_MC_L20.png>
-Package pdftex.def Info: images/M_avg_MC_L20.png used on input line 287.
+Package pdftex.def Info: images/M_avg_MC_L20.png used on input line 283.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
-<images/chi_MC_L20.png, id=26, 578.16pt x 433.62pt>
+<images/chi_MC_L20.png, id=23, 578.16pt x 433.62pt>
 File: images/chi_MC_L20.png Graphic file (type png)
 
 <use images/chi_MC_L20.png>
-Package pdftex.def Info: images/chi_MC_L20.png used on input line 290.
+Package pdftex.def Info: images/chi_MC_L20.png used on input line 286.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
- <images/Cv_MC_L20.png, id=27, 578.16pt x 433.62pt>
+ <images/Cv_MC_L20.png, id=24, 578.16pt x 433.62pt>
 File: images/Cv_MC_L20.png Graphic file (type png)
 
 <use images/Cv_MC_L20.png>
-Package pdftex.def Info: images/Cv_MC_L20.png used on input line 291.
+Package pdftex.def Info: images/Cv_MC_L20.png used on input line 287.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
-
-<images/accepted_configs_MC_L20.png, id=28, 578.16pt x 433.62pt>
+ [3]
+<images/accepted_configs_MC_L20.png, id=29, 578.16pt x 433.62pt>
 File: images/accepted_configs_MC_L20.png Graphic file (type png)
 
 <use images/accepted_configs_MC_L20.png>
 Package pdftex.def Info: images/accepted_configs_MC_L20.png used on input line 
-308.
+309.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
-<images/accepted_configs_temp.png, id=29, 578.16pt x 433.62pt>
+<images/accepted_configs_temp.png, id=30, 578.16pt x 433.62pt>
 File: images/accepted_configs_temp.png Graphic file (type png)
 
 <use images/accepted_configs_temp.png>
-Package pdftex.def Info: images/accepted_configs_temp.png used on input line 30
-9.
+Package pdftex.def Info: images/accepted_configs_temp.png used on input line 31
+0.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
-<images/visualization_L80_T2_0_square.png, id=30, 797.98125pt x 707.64375pt>
+<images/visualization_L80_T2_0_square.png, id=31, 797.98125pt x 707.64375pt>
 File: images/visualization_L80_T2_0_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_0_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_0_square.png used on input
- line 337.
+ line 335.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
-<images/visualization_L80_T2_2_square.png, id=31, 797.98125pt x 707.64375pt>
+<images/visualization_L80_T2_2_square.png, id=32, 797.98125pt x 707.64375pt>
 File: images/visualization_L80_T2_2_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_2_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_2_square.png used on input
- line 338.
+ line 336.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
-<images/visualization_L80_T2_4_square.png, id=32, 797.98125pt x 707.64375pt>
+<images/visualization_L80_T2_4_square.png, id=33, 797.98125pt x 707.64375pt>
 File: images/visualization_L80_T2_4_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_4_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_4_square.png used on input
- line 339.
+ line 337.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
-
-<images/E_avg_temp.png, id=33, 578.16pt x 433.62pt>
+ [4 <./images/E_avg_MC_L20.png> <./images/M_avg_MC_L20.png> <./images/chi_MC_L2
+0.png> <./images/Cv_MC_L20.png>]
+<images/E_avg_temp.png, id=41, 578.16pt x 433.62pt>
 File: images/E_avg_temp.png Graphic file (type png)
 
 <use images/E_avg_temp.png>
-Package pdftex.def Info: images/E_avg_temp.png used on input line 354.
+Package pdftex.def Info: images/E_avg_temp.png used on input line 363.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
-<images/M_avg_temp.png, id=34, 578.16pt x 433.62pt>
+<images/M_avg_temp.png, id=42, 578.16pt x 433.62pt>
 File: images/M_avg_temp.png Graphic file (type png)
 
 <use images/M_avg_temp.png>
-Package pdftex.def Info: images/M_avg_temp.png used on input line 355.
+Package pdftex.def Info: images/M_avg_temp.png used on input line 364.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
- <images/chi_temp.png, id=35, 578.16pt x 433.62pt>
+ <images/chi_temp.png, id=43, 578.16pt x 433.62pt>
 File: images/chi_temp.png Graphic file (type png)
 
 <use images/chi_temp.png>
-Package pdftex.def Info: images/chi_temp.png used on input line 358.
+Package pdftex.def Info: images/chi_temp.png used on input line 367.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
- <images/Cv_temp.png, id=36, 578.16pt x 433.62pt>
+ <images/Cv_temp.png, id=44, 578.16pt x 433.62pt>
 File: images/Cv_temp.png Graphic file (type png)
 
 <use images/Cv_temp.png>
-Package pdftex.def Info: images/Cv_temp.png used on input line 359.
+Package pdftex.def Info: images/Cv_temp.png used on input line 368.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
- <images/time_usage.png, id=37, 578.16pt x 433.62pt>
+ [5 <./images/accepted_configs_MC_L20.png> <./images/accepted_configs_temp.png>
+ <./images/visualization_L80_T2_0_square.png (PNG copy)> <./images/visualizatio
+n_L80_T2_2_square.png (PNG copy)> <./images/visualization_L80_T2_4_square.png (
+PNG copy)>]
+<images/time_usage.png, id=50, 578.16pt x 433.62pt>
 File: images/time_usage.png Graphic file (type png)
 
 <use images/time_usage.png>
-Package pdftex.def Info: images/time_usage.png used on input line 392.
+Package pdftex.def Info: images/time_usage.png used on input line 404.
 (pdftex.def)             Requested size: 256.0748pt x 192.05052pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+ [6 <./images/E_avg_temp.png> <./images/M_avg_temp.png> <./images/chi_temp.png>
+ <./images/Cv_temp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 422--423
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+txtt on input line 412
+LaTeX Font Info:    Try loading font information for OT1+txtt on input line 424
 .
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\ot1txtt.fd"
+(/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/ot1txtt.fd
 File: ot1txtt.fd 2000/12/15 v3.1
-) [4 <./images/time_usage.png>] [5 <./images/E_avg_MC_L20.png> <./images/M_avg_
-MC_L20.png> <./images/chi_MC_L20.png> <./images/Cv_MC_L20.png> <./images/accept
-ed_configs_MC_L20.png> <./images/accepted_configs_temp.png>] [6 <./images/visua
-lization_L80_T2_0_square.png (PNG copy)> <./images/visualization_L80_T2_2_squar
-e.png (PNG copy)> <./images/visualization_L80_T2_4_square.png (PNG copy)> <./im
-ages/E_avg_temp.png> <./images/M_avg_temp.png> <./images/chi_temp.png> <./image
-s/Cv_temp.png>] (FYS4150-Report-Project4.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+) [7 <./images/time_usage.png>] (./FYS4150-Report-Project4.aux) ) 
 Here is how much of TeX's memory you used:
- 7061 strings out of 493673
- 101950 string characters out of 3141518
- 311399 words of memory out of 3000000
- 10248 multiletter control sequences out of 15000+200000
- 54882 words of font info for 127 fonts, out of 3000000 for 9000
- 1025 hyphenation exceptions out of 8191
- 42i,14n,75p,746b,606s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/txfonts/rtxi.pfb><C:/Program Files 
-(x86)/MiKTeX 2.9/fonts/type1/public/txfonts/rtxmi.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/txfonts/rtxr.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/txfonts/txex.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/txfonts/txsy.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
-blic/txfonts/txsyc.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/tx
-fonts/txtt.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb
-8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on FYS4150-Report-Project4.pdf (6 pages, 485809 bytes).
+ 7388 strings out of 493117
+ 107951 string characters out of 6135433
+ 299450 words of memory out of 5000000
+ 10666 multiletter control sequences out of 15000+600000
+ 54882 words of font info for 127 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 42i,14n,75p,749b,603s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/te
+xlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2014/texm
+f-dist/fonts/type1/public/txfonts/rtxi.pfb></usr/local/texlive/2014/texmf-dist/
+fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive/2014/texmf-dist/fonts/
+type1/public/txfonts/rtxr.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/p
+ublic/txfonts/txex.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/t
+xfonts/txsy.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/txfonts/
+txsyc.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/txfonts/txtt.p
+fb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/loca
+l/texlive/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/
+2014/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on FYS4150-Report-Project4.pdf (7 pages, 478176 bytes).
 PDF statistics:
- 98 PDF objects out of 1000 (max. 8388607)
+ 105 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

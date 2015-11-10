@@ -276,10 +276,6 @@ Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific hea
 \end{center}
 The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. However, since we have done some approximations in order to derive these closed form expressions, some deviation is expected. The minimum number of MC cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run.
 
-\subsection{The 20 $\times$ 20 case}
-Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ kT/J and $T = 2.4$ kT/J, as shown in Fig.~\ref{fig:L20_ex_values}. For $T = 1.0$ kTJ, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than 1.5 kTJ
-For $T = 2.4$ kTJ, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point.
-
 \begin{figure*}[t]
 \begin{center}
 \begin{tabular}{ccc}
@@ -295,12 +291,17 @@ For $T = 2.4$ kTJ, on the other hand, the calculated values shows large variatio
 \end{center}
 \end{figure*}
 
+\subsection{The 20 $\times$ 20 case}
+Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ kT/J and $T = 2.4$ kT/J, as shown in Fig.~\ref{fig:L20_ex_values}. For $T = 1.0$ kT/J, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than 1.5 kT/J.
+
+For $T = 2.4$ kT/J, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point.
+
 
 
 
 \subsection{The number of accepted configurations}
 
-We also study the total number of accepted configurations as a function of the total number of MC cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows number of accepted configurations divided by total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ kTJ there are no accepted configurations since no spin in the lattice is changed from up to down.
+We also study the total number of accepted configurations as a function of the total number of MC cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows number of accepted configurations divided by total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ kT/J there are no accepted configurations since no spin in the lattice is changed from up to down. 
 
 \begin{figure*}[t]
 \begin{center}
@@ -312,8 +313,9 @@ We also study the total number of accepted configurations as a function of the t
 \caption{Number of accepted configurations.}\label{fig:L20_accepted_configs}
 \end{center}
 \end{figure*}
-How the total number of accepted configurations vary as a function of temperature is shown in Fig.~\ref{fig:L20_accepted_configs}b. The number of accepted configurations increases with higher temperature.
-We see that this increase is greater with higher lattice size.
+How the total number of accepted configurations vary as a function of temperature is shown in Fig.~\ref{fig:L20_accepted_configs}b. The number of accepted configurations increases with higher temperature. We see that this increase is greater with higher lattice size. EXPLAIN WHY?
+
+
 
 \subsection{The probability P(E)}
 
@@ -327,11 +329,7 @@ DISCUSS.
 
 \subsection{Looking for phase transitions}
 
-In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d.
-
-The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\ref{fig:visualization}, where white squares represent upward spins and black squares represent downward spins. It shows clearly that the net magnetization $\langle {\cal M}\rangle$ is higher for low $T$ with most spins pointing in the same direction (in this case upwards), while the $\langle {\cal M}\rangle$ approaches zero at higher $T$ where the number of spins pointing upward and downward are about the same.
-
-\begin{figure*}[t]
+\begin{figure*}[b!]
 \begin{center}
 \begin{tabular}{ccc}
   	\includegraphics[width=56mm,frame]{images/visualization_L80_T2_0_square.png}
@@ -345,7 +343,18 @@ The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\re
 \caption{Visualization of the spin matrix for a $80 \times 80$ lattice for different temperatures $T$. White = spin up, black = spin down.}\label{fig:visualization}
 \end{center}
 \end{figure*}
-.... MORE.
+
+A phase transition in a magnetic system is defined as the transition between the ferromagnetic and paramagnetic phases of the system. The transition occurs at a critical point, often referred to as the Curie point, which is dependent on temperature. Beyond the critical point defined by a critical temperature $T_C$ (see next subsection) the system will loose its magnetic properties and the magnetic spins will be randomly aligned in our case where there is no external magnetic field affecting the spin directions.
+
+The spin matrix in the case of $L = 80$ for different temperatures is visualized in Fig.~\ref{fig:visualization}, where white squares represent upward spins and black squares represent downward spins. It shows clearly that the net magnetization $\langle {\cal M}\rangle$ is higher for low $T$ with most spins pointing in the same direction (in this case upwards), while the $\langle {\cal M}\rangle$ approaches zero at higher $T$ where the number of spins pointing upward and downward are about the same.
+
+We see the same behavior in Fig.~\ref{fig:ex_values_temp}b, which shows that for higher temperatures $\langle {\cal M}\rangle$ decreases more and more, with a particularly steep decrease around $T \approx 2.25$ kT/J and the value start to stabilize around $T \approx 2.35$ kT/J in the $L = 100$ case. Here $\langle {\cal M}\rangle$ approaches zero, meaning the net magnetization is expected to disappear more and more. This transition becomes steeper and steeper for increasing values of $L$.
+
+These observations tells us that we might be witnessing a phase transition, going from an ordered, magnetic state to a random, nearly unmagnetized state.
+
+Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behavior. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_C \approx 2.3$ kT/J. Similar behavior can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
+
+Both susceptibility and heat capacity are extensive quantities meaning they are proportional to the size of the system, $L$, which is clear from the graphs in Fig.~\ref{fig:ex_values_temp}c-d, both increasing with $L$.
 
 
 \begin{figure*}[t]
@@ -369,7 +378,10 @@ The spin matrix for $L = 80$ in this temperature range is visualized in Fig.~\re
 
 \subsection{Estimating the critical temperature}
 
-Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamical limit $L \rightarrow \infty$ running simulations for different values of $L$ using Eq. (\ref{eq:T_C}). 
+Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamical limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d.
+
+MORE!
+
 
 \subsection{Parallelization}
 As described previously, we parallelized our code using MPI. Here we have gathered some time recordings, using $n = 4$ processes on a 2,5 GHz Intel Core i5 processor:
