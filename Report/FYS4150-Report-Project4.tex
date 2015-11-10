@@ -240,10 +240,10 @@ We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
 	\item Calculate $\Delta E = E_t - E_b$ ($t$ = trial state, $b$ = beginning state).
 	\item \textit{The Metropolis test:} If $\Delta E \leq 0$ the new configuration is accepted, meaning the energy is lowered and we are moving towards the energy minimum at a given temperature. If $\Delta E > 0$, calculate $w = e^{- \beta \Delta E}$. If $w < r$ where $r$ is a random number, accept the new configuration. If else, keep the old configuration.
 	\item Compute the new energy $E' = E_t + \Delta E$. Calculate various expectation values using this energy.
-	\item Repeat steps $2-5$ for the chosen number of Monte Carlo cycles, meaning the number of times we should sweep through the lattice and summed over all spins.
+	\item Repeat steps $2-5$ for the chosen number of Monte Carlo (MC) cycles, meaning the number of times we should sweep through the lattice and summed over all spins.
 	\item Compute the various expectation values by dividing by the total number of cycles (and possibly the number of spins).
 \end{enumerate}
-During the computation we want to check how many Monte Carlo cycles we need before the system has reached its most likely state. This is done by comparing the new value of $\langle E \rangle$ with the previous value of $\langle E \rangle$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached.
+During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $\langle E \rangle$ with the previous value of $\langle E \rangle$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached.
 
 After the most likely state has been reached, we want to 
 
@@ -274,10 +274,11 @@ Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific hea
 	\hline
 \end{tabular}
 \end{center}
-The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. COMMENT. The minimum number of Monte Carlo cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run.
+The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. However, since we have done some approximations in order to derive these closed form expressions, some deviation is expected. The minimum number of MC cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run.
 
 \subsection{The 20 $\times$ 20 case}
-Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of Monte Carlo cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of Monte Carlo cycles, for both $T = 1.0$ kT/J and T = $2.4$ kT/J, as shown in Fig. XXX. PLOT + COMMENTS!
+Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ kT/J and $T = 2.4$ kT/J, as shown in Fig.~\ref{fig:L20_ex_values}. For $T = 1.0$ kTJ, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than 1.5 kTJ
+For $T = 2.4$ kTJ, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point.
 
 \begin{figure*}[t]
 \begin{center}
@@ -290,7 +291,7 @@ Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In t
 	& \includegraphics[width=85mm]{images/Cv_MC_L20.png} \\
 	(c) Susceptibility					& (d) Heat capacity  \\[6pt]
 \end{tabular}
-\caption{Expectation values as a function of number of Monte Carlo cycles with the hottest temperature in red.}\label{fig:L20_ex_values}
+\caption{Expectation values as a function of number of MC cycles with the hottest temperature in red.}\label{fig:L20_ex_values}
 \end{center}
 \end{figure*}
 
@@ -299,21 +300,20 @@ Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In t
 
 \subsection{The number of accepted configurations}
 
-We also study the total number of accepted configurations as a function of the total number of Monte Carlo cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. COMMENTS! 
+We also study the total number of accepted configurations as a function of the total number of MC cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows number of accepted configurations divided by total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ kTJ there are no accepted configurations since no spin in the lattice is changed from up to down.
 
 \begin{figure*}[t]
 \begin{center}
 \begin{tabular}{ccc}
   	\includegraphics[width=85mm]{images/accepted_configs_MC_L20.png}
 	& \includegraphics[width=85mm]{images/accepted_configs_temp.png} \\
-	(a) As a function of \# of Monte Carlo cycles.					& (b) As a function of temperature.  \\[6pt]
+	(a) As a function of \# of MC cycles.					& (b) As a function of temperature.  \\[6pt]
 \end{tabular}
 \caption{Number of accepted configurations.}\label{fig:L20_accepted_configs}
 \end{center}
 \end{figure*}
-How does the total number of accepted configurations vary as a function of temperature? This is shown in Fig.~\ref{fig:L20_accepted_configs}b. COMMENT.
-
-...
+How the total number of accepted configurations vary as a function of temperature is shown in Fig.~\ref{fig:L20_accepted_configs}b. The number of accepted configurations increases with higher temperature.
+We see that this increase is greater with higher lattice size.
 
 \subsection{The probability P(E)}
 
@@ -411,7 +411,7 @@ The codes developed and used for this project are:\\
 
 \noindent \verb@main.cpp@ -- main program (C++).
 
-\noindent \verb@plotting.py@ -- plotting program which makes plots to study the total number of accepted configurations as a function of total number of Monte Carlo cycles and as a function of temperature $T$ (Python).
+\noindent \verb@plotting.py@ -- plotting program which makes plots to study the total number of accepted configurations as a function of total number of MC cycles and as a function of temperature $T$ (Python).
 
 \noindent \verb@visualization.py@ -- provided program for running the Metropolis algorithm and plotting the spin matrix, as shown in Fig.~\ref{fig:visualization} (Python).
 
