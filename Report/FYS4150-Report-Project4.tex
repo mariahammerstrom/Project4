@@ -127,32 +127,26 @@ with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}). Here we will use $\
 \subsection{Analytical solution}\label{subsec:analytical}
 First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the lattice length. The situation looks like this:
 
-\begin{equation*}
-\begin{aligned}
-	\uparrow_{(1)} \quad \uparrow_{(2)}   \\
-	\uparrow_{(3)} \quad \uparrow_{(4)}   
-\end{aligned}
-\end{equation*}
+\begin{align*}
+	\uparrow_{(1)} \quad &\uparrow_{(2)}   \\
+	\uparrow_{(3)} \quad &\uparrow_{(4)}\,,   
+\end{align*}
 where an upward arrow denotes spin up. We will make use of \textbf{periodic boundary conditions}, which means that the neighbor to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbor to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this mean we will treat our system as though it looked like this (where the original system is highlighted in magenta):
 
-\begin{equation*}
-\begin{aligned}
-	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \quad \textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
-	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{magenta}{\uparrow_{(1)}} \quad \textcolor{magenta}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \\
-	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{magenta}{\uparrow_{(3)}} \quad \textcolor{magenta}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \\
-	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \quad \textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}}
-\end{aligned}
-\end{equation*}
-Closed form expression can be found for the partition function in Eq. (\ref{eq:partition_func}) and the corresponding expectation values for $E$, $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions. In the case $L = 2$ we can write Eq. (\ref{eq:energy}) for the different components as, making use of the periodic boundary conditions, giving
+\begin{align*}
+	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \quad \textcolor{black}{\uparrow_{(4)}} \quad &\textcolor{black}{\uparrow_{(3)}} \\
+	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{magenta}{\uparrow_{(1)}} \quad \textcolor{magenta}{\uparrow_{(2)}} \quad &\textcolor{black}{\uparrow_{(1)}} \\
+	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{magenta}{\uparrow_{(3)}} \quad \textcolor{magenta}{\uparrow_{(4)}} \quad &\textcolor{black}{\uparrow_{(3)}} \\
+	\textcolor{black}{\uparrow_{(2)}} \quad \textcolor{black}{\uparrow_{(1)}} \quad \textcolor{black}{\uparrow_{(2)}} \quad &\textcolor{black}{\uparrow_{(1)}}\,.
+\end{align*}
+Closed form expression can be found for the partition function in Eq. (\ref{eq:partition_func}), and the corresponding expectation values for $E$, $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of $T$ using periodic boundary conditions. In the case $L = 2$ we can write Eq. (\ref{eq:energy}) for the different components, making use of the periodic boundary conditions, giving
 
-\begin{equation*}
-\begin{aligned}
+\begin{align*}
 	E_1 &= - J (s_1 s_2 + s_1 s_3) = - 2J, \\
 	E_2 &= - J (s_1 s_2 + s_2 s_4) = - 2J, \\
 	E_3 &= - J (s_1 s_3 + s_3 s_4) = - 2J, \\
 	E_4 &= - J (s_3 s_4 + s_2 s_4) = - 2J. 
-\end{aligned}
-\end{equation*}
+\end{align*}
 Thus the total energy for the system is
 
 \begin{equation*}
@@ -178,12 +172,10 @@ If going through this exercise for different configurations of spin up and spin 
 
 These calculations can be used to find the closed-form expressions, starting with the partition function, which can be expressed as
 
-\begin{equation}\label{eq:Z_analytic}
-\begin{aligned}
+\begin{align}\label{eq:Z_analytic}
 	Z(\beta) 	&= \sum_E \Omega(E) e^{- \beta E} = 2 e^{8J\beta} + 2 e^{- 8J \beta} + 12 \\
 			&= 4 \textrm{ cosh}(8J \beta) + 12.
-\end{aligned}
-\end{equation}
+\end{align}
 Then the expectation value can be written, using the expression in Eq. (\ref{eq:expect_values}), as
 
 \begin{equation}\label{eq:E_avg_analytic}
@@ -196,24 +188,18 @@ where we have used that cosh$(8J\beta) \gg 3$ in the approximation. Using this a
 \end{equation}
 Similarly, using the values for magnetization in Table~\ref{table:quantities} and Eq. (\ref{eq:magnetization}), gives
 
-\begin{equation}\label{eq:M_avg_analytic}
-\begin{aligned}
+\begin{align}\label{eq:M_avg_analytic}
 	\langle|{\cal M}|\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 + 4\cdot|-2| + |-4|e^{8J\beta} \bigg) \\
 					&= \frac{8}{Z}(e^{8J\beta} + 2), \\
-\end{aligned}
-\end{equation}
+\end{align}
 and
-
-\begin{equation}
-\begin{aligned}
+\begin{align}
 	\langle {\cal M}\rangle 	&= \frac{1}{Z} \bigg( 4e^{8J\beta} + 4\cdot2 - 4\cdot2 - 4e^{8J\beta} \bigg) = 0, \\
 	%\langle M\rangle^2 	&= 0 \\
 	\langle {\cal M}^2\rangle 	&= \frac{1}{Z} \bigg( 4^2 e^{8J\beta} + 4\cdot2^2 + 4\cdot(-2)^2 + (-4)^2e^{8J\beta}   \bigg) \\
 			&= \frac{32}{Z} \bigg( e^{8J\beta} + 1  \bigg).
-\end{aligned}
-\end{equation}
+\end{align}
 Thus
-
 \begin{equation}\label{eq:chi_analytic}
 	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32\beta}{Z} [e^{8J\beta} + 1] - \frac{\beta}{Z^2}[8e^{8J\beta} + 4]^2
 	% \frac{32 \beta}{Z} \bigg(e^{8J\beta} + 1  \bigg).
@@ -252,7 +238,7 @@ After the most likely state has been reached, we want to
 We have parallelized our code using the Open MPI library. ADD DETAILS.
 
 \subsection{Calculating $T_{\mathrm{C}}$}
-The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 kT/J. But we do not know what the constant $a$ should be. 
+The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). But we do not know what the constant $a$ should be. 
 
 ...
 
@@ -262,7 +248,7 @@ The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), wh
 
 \subsection{Checking the 2 $\times$ 2 case}
 
-Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ with periodic boundary conditions numerically using the expressions from Sec.~\ref{subsec:theory} can be compared with the results using the analytical closed form expressions given in Sec.~\ref{subsec:analytical}. For temperature $T=1.0$ (in units of $kT/J$), this gives the following results for a $2 \times 2$ spin system where the initial state has all spins pointing upwards:
+Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ numerically with periodic boundary conditions, using the expressions from Sec.~\ref{subsec:theory}, gives values which can be compared with the results of the analytical closed-form expressions given in Sec.~\ref{subsec:analytical}. For temperature $T=1.0$ (in units of $kT/J$), this gives the following results for a $2 \times 2$ spin system where the initial state has all spins pointing upwards:
 
 \begin{center}
 \begin{tabular}{ l l l }\hline
@@ -292,16 +278,16 @@ The numerical results follow that of Table \ref{table:quantities}. The result fr
 \end{figure*}
 
 \subsection{The 20 $\times$ 20 case}
-Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ kT/J and $T = 2.4$ kT/J, as shown in Fig.~\ref{fig:L20_ex_values}. For $T = 1.0$ kT/J, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than 1.5 kT/J.
+Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ and $T = 2.4$, as shown in Fig.~\ref{fig:L20_ex_values}. For $T = 1.0$, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$.
 
-For $T = 2.4$ kT/J, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point.
+For $T = 2.4$, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point.
 
 
 
 
 \subsection{The number of accepted configurations}
 
-We also study the total number of accepted configurations as a function of the total number of MC cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows number of accepted configurations divided by total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ kT/J there are no accepted configurations since no spin in the lattice is changed from up to down. 
+We also study the number of accepted configurations as a function of the total number of MC cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows the number of accepted configurations divided by the total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ there are no accepted configurations since no spin in the lattice is changed from up to down. 
 
 \begin{figure*}[t]
 \begin{center}
@@ -319,9 +305,10 @@ How the total number of accepted configurations vary as a function of temperatur
 
 \subsection{The probability P(E)}
 
-By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the compute variance in energy $\sigma_E^2$. 
+By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the computed variance in energy $\sigma_E^2$. 
 
-For $T = 1.0$ kT/J we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ kT/J we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ for an ordered initial spin matrix. 
+For $T = 1.0$ we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ for an ordered initial spin matrix. 
+Where there are small deviation in energy values, we see a high probability of finding a specific value. When the deviation is large as for $T=2.4$, the probability of finding a specific energy value is small.
 
 DISCUSS. 
 
@@ -348,18 +335,18 @@ A phase transition in a magnetic system is defined as the transition between the
 
 The spin matrix in the case of $L = 80$ for different temperatures is visualized in Fig.~\ref{fig:visualization}, where white squares represent upward spins and black squares represent downward spins. It shows clearly that the net magnetization $\langle {\cal M}\rangle$ is higher for low $T$ with most spins pointing in the same direction (in this case upwards), while the $\langle {\cal M}\rangle$ approaches zero at higher $T$ where the number of spins pointing upward and downward are about the same.
 
-We see the same behavior in Fig.~\ref{fig:ex_values_temp}b, which shows that for higher temperatures $\langle {\cal M}\rangle$ decreases more and more, with a particularly steep decrease around $T \approx 2.25$ kT/J and the value start to stabilize around $T \approx 2.35$ kT/J in the $L = 100$ case. Here $\langle {\cal M}\rangle$ approaches zero, meaning the net magnetization is expected to disappear more and more. This transition becomes steeper and steeper for increasing values of $L$.
+We see the same behaviour in Fig.~\ref{fig:ex_values_temp}b, which shows that for higher temperatures $\langle {\cal M}\rangle$ decreases more and more, with a particularly steep decrease around $T \approx 2.25$ and the value start to stabilize around $T \approx 2.35$ in the $L = 100$ case. Here $\langle {\cal M}\rangle$ approaches zero, meaning the net magnetization is expected to disappear more and more. This transition becomes steeper and steeper for increasing values of $L$.
 
-These observations tells us that we might be witnessing a phase transition, going from an ordered, magnetic state to a random, nearly unmagnetized state.
+These observations tells us that we might be witnessing a phase transition, going from an ordered, magnetic state to a random, nearly non-magnetized state.
 
-Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behavior. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_C \approx 2.3$ kT/J. Similar behavior can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
+Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behavior. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_C \approx 2.3$. Similar behavior can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
 
 Both susceptibility and heat capacity are extensive quantities meaning they are proportional to the size of the system, $L$, which is clear from the graphs in Fig.~\ref{fig:ex_values_temp}c-d, both increasing with $L$.
 
 
 \begin{figure*}[t]
 \begin{center}
-\begin{tabular}{ccc}
+\begin{tabular}{c c c}
   	\includegraphics[width=85mm]{images/E_avg_temp.png}
 	& \includegraphics[width=85mm]{images/M_avg_temp.png} \\
 	(a) Energy					& (b) Magnetization  \\
@@ -378,7 +365,7 @@ Both susceptibility and heat capacity are extensive quantities meaning they are 
 
 \subsection{Estimating the critical temperature}
 
-Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamical limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d.
+Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamic limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d.
 
 MORE!
 
@@ -387,21 +374,23 @@ MORE!
 As described previously, we parallelized our code using MPI. Here we have gathered some time recordings, using $n = 4$ processes on a 2,5 GHz Intel Core i5 processor:
 
 \begin{center}
-\begin{tabular}{ l r }\hline
-	Lattice size $L$ 	 	& Time usage $t$		\\ \hline
-	$L = 10$				& 00m 57s		 	\\
-	$L = 20$				& 03m 52s			\\
-	$L = 40$				& 15m 23s 			\\
-	$L = 60$				& 48m 06s			\\
-	$L = 80$				& 2h 02m 00s			\\
-	$L = 100$				& 8h 	46m	22s	\\
+\begin{tabular}{ l r }
+	\hline
+	Lattice size $L$ 	 	& Time usage $t$\\
+	\hline
+	$L = 10$				& 00m 57s		\\
+	$L = 20$				& 03m 52s		\\
+	$L = 40$				& 15m 23s 		\\
+	$L = 60$				& 48m 06s		\\
+	$L = 80$				& 2h 02m 00s	\\
+	$L = 100$				& 8h 46m 22s	\\
 	\hline
 \end{tabular}
 \end{center}
 These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curve which makes a good fit for lower values of $L$, and a $e^{L/9.5}$ curve which is a good approximation for higher values of $L$.
 
 \begin{center}
-	\includegraphics[width=90mm]{images/time_usage.png} 	
+	\includegraphics[width=90mm]{images/time_usage.png}	
 	\captionof{figure}{Time needed to run the program as a function of lattice size.}
 	\label{fig:time_usage}
 \end{center}
