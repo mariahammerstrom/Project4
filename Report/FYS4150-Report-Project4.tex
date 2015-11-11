@@ -234,6 +234,11 @@ During the computation we want to check how many MC cycles we need before the sy
 \subsection{Parallelization}
 We have parallelized our code using the Open MPI library. 
 
+<<<<<<< HEAD
+=======
+\subsection{Calculating $T_{\mathrm{C}}$}
+The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). But we do not know what the constant $a$ should be. To estimate $T_C$, we look at how $T_C(L)$ varies with $L$, and how $a$ changes from case to case.
+>>>>>>> origin/master
 
 \subsection{Calculating $T_{\mathrm{C}}$}
 The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). The equation has two unknowns, $T_{\mathrm{C}}(L = \infty)$ and the constant $a$. By looking at our calculations for two different lattice sizes, we can solve this equation and get an estimate for $a$ and thus the critical temperature $T_C$. 
@@ -316,15 +321,25 @@ For the case of $T = 2.4$ kT/J the number of accepted configurations increases r
 \caption{Number of accepted configurations.}\label{fig:L20_accepted_configs}
 \end{center}
 \end{figure*}
+<<<<<<< HEAD
 The total number of accepted configurations increases with higher temperature as shown in Fig.~\ref{fig:L20_accepted_configs}b. This is because of the test in the Metropolis algorithm saying that a configuration is accepted if $r < e^{\Delta E/kT}$ where $r$ is a random number between 0 and 1. When the temperature is higher, the exponential will have a higher value and many more values of $r$ will fulfill the test, leading to more accepted configurations.
 
 The figure also shows that this increase is greater with higher lattice size. This is natural as a larger lattice size means that we have many more spins we can flip, creating the possibility of many more accepted configurations. 
+=======
+How the total number of accepted configurations vary as a function of temperature is shown in Fig.~\ref{fig:L20_accepted_configs}b. The number of accepted configurations increases with higher temperature. We see that this increase is greater with higher lattice size. 
+When the temperature is higher, the value of $e^{-\mathrm{d}E/T}$ is larger, thus the probability of a spin flip is larger. For larger lattices, there are a larger number of spins that can change direction, thus a higher number of accepted configurations.
+>>>>>>> origin/master
 
 
 
+<<<<<<< HEAD
 \subsection{The probability P(E)}
 
 By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for getting that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the computed variance in energy $\sigma_E^2$. 
+=======
+For $T = 1.0$ we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ for an ordered initial spin matrix. 
+Where there are small deviation in energy values, we see a high probability of energy to be equal to the expectation value. When the deviation is large, as for $T=2.4$, the probability of finding this specific energy value is small.
+>>>>>>> origin/master
 
 For $T = 1.0$ kT/J we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ kT/J we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ in the case of an ordered initial spin matrix (according to Fig.~\ref{fig:random} this result would not be different for a randomly oriented spin matrix because we are excluding the first number of Monte Carlo cycles where having a different initial configuration would make a difference). This means that where there is a small deviation in energy values, described by the variance, there will be a high probability of getting the specific value $E$. When the deviation is large as for $T=2.4$ kT/J, the probability of getting the value $E$ is small.
 
