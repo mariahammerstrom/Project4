@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.15)  11 NOV 2015 16:33
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.11)  11 NOV 2015 15:20
->>>>>>> origin/master
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.15)  11 NOV 2015 16:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -687,11 +683,7 @@ File: images/visualization_L80_T2_0_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_0_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_0_square.png used on input
-<<<<<<< HEAD
  line 337.
-=======
- line 320.
->>>>>>> origin/master
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/visualization_L80_T2_2_square.png, id=50, 797.98125pt x 707.64375pt>
@@ -699,11 +691,7 @@ File: images/visualization_L80_T2_2_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_2_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_2_square.png used on input
-<<<<<<< HEAD
  line 338.
-=======
- line 321.
->>>>>>> origin/master
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/visualization_L80_T2_4_square.png, id=51, 797.98125pt x 707.64375pt>
@@ -711,60 +699,39 @@ File: images/visualization_L80_T2_4_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_4_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_4_square.png used on input
-<<<<<<< HEAD
  line 339.
-=======
- line 322.
->>>>>>> origin/master
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/E_avg_temp.png, id=52, 578.16pt x 433.62pt>
 File: images/E_avg_temp.png Graphic file (type png)
 
 <use images/E_avg_temp.png>
-<<<<<<< HEAD
 Package pdftex.def Info: images/E_avg_temp.png used on input line 365.
-=======
-Package pdftex.def Info: images/E_avg_temp.png used on input line 348.
->>>>>>> origin/master
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
 <images/M_avg_temp.png, id=53, 578.16pt x 433.62pt>
 File: images/M_avg_temp.png Graphic file (type png)
 
 <use images/M_avg_temp.png>
-<<<<<<< HEAD
 Package pdftex.def Info: images/M_avg_temp.png used on input line 366.
-=======
-Package pdftex.def Info: images/M_avg_temp.png used on input line 349.
->>>>>>> origin/master
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  <images/chi_temp.png, id=54, 578.16pt x 433.62pt>
 File: images/chi_temp.png Graphic file (type png)
 
 <use images/chi_temp.png>
-<<<<<<< HEAD
 Package pdftex.def Info: images/chi_temp.png used on input line 369.
-=======
-Package pdftex.def Info: images/chi_temp.png used on input line 352.
->>>>>>> origin/master
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  <images/Cv_temp.png, id=55, 578.16pt x 433.62pt>
 File: images/Cv_temp.png Graphic file (type png)
 
 <use images/Cv_temp.png>
-<<<<<<< HEAD
 Package pdftex.def Info: images/Cv_temp.png used on input line 370.
-=======
-Package pdftex.def Info: images/Cv_temp.png used on input line 353.
->>>>>>> origin/master
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  [6 <./images/accepted_configs_MC_L20.png> <./images/accepted_configs_temp.png>
 ] <images/time_usage.png, id=61, 578.16pt x 433.62pt>
 File: images/time_usage.png Graphic file (type png)
 
 <use images/time_usage.png>
-<<<<<<< HEAD
 Package pdftex.def Info: images/time_usage.png used on input line 430.
 (pdftex.def)             Requested size: 256.0748pt x 192.05052pt.
 
@@ -773,16 +740,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 450--451
  []
 
 LaTeX Font Info:    Try loading font information for OT1+txtt on input line 452
-=======
-Package pdftex.def Info: images/time_usage.png used on input line 413.
-(pdftex.def)             Requested size: 256.0748pt x 192.05052pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 431--432
-
- []
-
-LaTeX Font Info:    Try loading font information for OT1+txtt on input line 433
->>>>>>> origin/master
 .
 (/usr/local/texlive/2014/texmf-dist/tex/latex/txfonts/ot1txtt.fd
 File: ot1txtt.fd 2000/12/15 v3.1
@@ -792,7 +749,6 @@ lization_L80_T2_4_square.png (PNG copy)>] [8 <./images/E_avg_temp.png> <./image
 s/M_avg_temp.png> <./images/chi_temp.png> <./images/Cv_temp.png>]
 (./FYS4150-Report-Project4.aux) ) 
 Here is how much of TeX's memory you used:
-<<<<<<< HEAD
  7410 strings out of 493117
  108708 string characters out of 6135433
  300467 words of memory out of 5000000
@@ -813,29 +769,7 @@ fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/
 type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/
 times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on FYS4150-Report-Project4.pdf (8 pages, 598590 bytes).
-=======
- 7062 strings out of 493673
- 101967 string characters out of 3141518
- 300408 words of memory out of 3000000
- 10249 multiletter control sequences out of 15000+200000
- 54882 words of font info for 127 fonts, out of 3000000 for 9000
- 1025 hyphenation exceptions out of 8191
- 42i,14n,75p,733b,607s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvi
-ps/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/txfont
-s/rtxi.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/txfonts/rtxmi.
-pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/txfonts/rtxr.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/txfonts/txex.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/public/txfonts/txsy.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/txfonts/txsyc.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/txfonts/txtt.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/urw/helvetic/uhvro8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw
-/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr
-8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on FYS4150-Report-Project4.pdf (7 pages, 490033 bytes).
->>>>>>> origin/master
+Output written on FYS4150-Report-Project4.pdf (8 pages, 598699 bytes).
 PDF statistics:
  116 PDF objects out of 1000 (max. 8388607)
  60 compressed objects within 1 object stream
