@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) // Leave second argument blank
 {
     // INITIAL CONDITIONS
     double T = 1.0;                                     // Temperature [kT/J]
-    int n_spins = 10;                                   // Number of spins
+    int n_spins = 100;                                   // Number of spins
     int N = n_spins*n_spins;                            // Lattice dimensions (square)
     int MC_cycles = 1000000;                                // Number of Monte Carlo cycles
 
     bool random = true; // true = random spin matrix, false = all spins pointing upwards
 
-    double temp_step = 0.05;                             // Steps in temperature
+    double temp_step = 0.01;                             // Steps in temperature
     double initial_temp = 2.0;                          // Initial temperature
     double final_temp = 2.4;                            // Final temperature
 

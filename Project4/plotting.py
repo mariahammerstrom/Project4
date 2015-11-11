@@ -205,12 +205,14 @@ def exp_rand_MC(L,temp,random_list):
     plt.figure(11)
     plt.title('Energy, L = %d, T = %.1f' % (L,temp),size=12)
     plt.xlim(0,2000) # L = 20
+    #plt.ylim(-2.1,-0.6) # T = 1.0
     plt.xlabel('# of MC cycles',size=12)
     plt.ylabel(r'$\langle E \rangle$',size=12)
     
     plt.figure(12)
     plt.title('Magnetism, L = %d, T = %.1f' % (L,temp),size=12)
     plt.xlim(0,35000) # L = 20
+    #plt.ylim(0.2,1.2) # T = 1.0
     plt.xlabel('# of MC cycles',size=12)
     plt.ylabel(r'$\langle M \rangle$',size=12)
     
@@ -221,10 +223,10 @@ def exp_rand_MC(L,temp,random_list):
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameMC)
         
         if i == 0:
-            plot_label = 'Random start configuration'
+            plot_label = 'Ground state as start'
             color = 'b'
         else:
-            plot_label = 'Ground state as start'
+            plot_label = 'Random start configuration'
             color = 'r'
         
         # Fill plots with values
