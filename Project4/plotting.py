@@ -269,8 +269,6 @@ def probability(L,temp,random):
     print "P(E) = %.2f" % prob
     print "Var(E) = %.2f" % E_var[-1]
     
-    #print len(E[3000-2:-1]),len(MC_cycles[20+3000:-1])
-
     return
 
 
@@ -293,8 +291,8 @@ def T_C_estimate(L_list,random):
     print "\nBEFORE:"
     
     for i in range(len(L_list)):
-        #filenameT = '../Datasets/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
-        filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Datasets\ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
+        filenameT = '../Datasets/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
+        #filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Datasets\ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameT) # Read data
         
         # Find critical temperature from data set:
@@ -307,17 +305,12 @@ def T_C_estimate(L_list,random):
         # Find value of "a" to make the solution equal to the exact one:
         a_estimate[i] = (T_max[i] - T_C_exact)*L_list[i]
         
-<<<<<<< HEAD
         
-        print "Numerical = \t %.3f \t L = %d \t a = %.2f \t T_max = %.5f" % (T_C_estimate[i],L_list[i],a_estimate[i],T_max[i])
-=======
+        #print "Numerical = \t %.3f \t L = %d \t a = %.2f \t T_max = %.5f" % (T_C_estimate[i],L_list[i],a_estimate[i],T_max[i])
         #print "Numerical = \t %.3f \t L = %d" % (T_C_estimate[i],L_list[i])
->>>>>>> origin/master
-    
     
     print "\nAFTER:"
     a_avg = np.average(a_estimate) # Average "a"-values
-    #a_avg = 0.75
     
     # Calculate estimate for T(L -> inf) with a = a_avg:
     for i in range(len(L_list)):
@@ -350,11 +343,7 @@ def main(argv): # Change these values according to run!
     random_list = [0,1]
     
     # How large is the lattice?
-<<<<<<< HEAD
     L = 20
-=======
-    L = 10
->>>>>>> origin/master
     L_list = [10,20,40,60,80,100]
     
     # What is the temperature?
@@ -362,23 +351,12 @@ def main(argv): # Change these values according to run!
     temp_list = [1.0,2.4]
     
     # Run calculations:
-<<<<<<< HEAD
     #exp_values_MC(L,temp_list,random)      # Expectation values vs. # of Monte Carlo cycles
-    #exp_rand_MC(L,temp,random_list)        # Expectation values vs. # of Monte Carlo cycles: Different initial spin matrix!
+    exp_rand_MC(L,temp,random_list)        # Expectation values vs. # of Monte Carlo cycles: Different initial spin matrix!
     #exp_values_T(L_list,random)            # Expectation values vs. temperature
-    probability(L,temp,random)             # Calculate probabilty for <E>
+    #probability(L,temp,random)             # Calculate probabilty for <E>
     #T_C_estimate(L_list,random)            # Calculate estimate of T_crit
     #timeusage()                         # Plot time usage to run code (based on dataset)
-=======
-    #exp_values_MC(L,temps,random)         # Expectation values vs. # of Monte Carlo cycles
-    #exp_rand(L,temp,random_list)          # Expectation values vs. # of Monte Carlo cycles: Different initial spin matrix!
-    #exp_values_T(L_list,random)          # Expectation values vs. temperature
-    #probability(L,temp,random)           # Calculate probabilty for <E>
-    T_C_estimate(L_list,random)          # Calculate estimate of T_crit
-    
-    #filename = '../Datasets/ExpectationValues_MC_20_1.0_1.txt'
-    #print np.loadtxt(filename)
->>>>>>> origin/master
     
 
 if __name__ == "__main__":
