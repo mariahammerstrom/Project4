@@ -201,8 +201,7 @@ and
 \end{align}
 Thus
 \begin{equation}\label{eq:chi_analytic}
-	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32\beta}{Z} [e^{8J\beta} + 1] - \frac{\beta}{Z^2}[8e^{8J\beta} + 4]^2
-	% \frac{32 \beta}{Z} \bigg(e^{8J\beta} + 1  \bigg).
+	\chi(\beta) = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT} = \frac{32\beta}{Z} [e^{8J\beta} + 1] - \frac{\beta}{Z^2}[8e^{8J\beta} + 4]^2.
 \end{equation}
 
 
@@ -215,32 +214,29 @@ Thus
 
 \section{Methods}
 
-We wrote a code for the Ising model which computes the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of  $T$ using periodic boundary conditions for in the $x$ and $y$ directions. Using the Ising model in two dimensions, the number of configurations is given by $2^N$ with $N = L \times L$ number of spins for a lattice of length $L$. 
+We wrote a code for the Ising model in two dimensions which computes the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ as functions of  $T$ using periodic boundary conditions for a lattice of size $L$ in the $x$ and $y$ directions. The total number of configurations is given by $2^N$ with $N = L \times L$ the number of spins for a lattice of width $L$. 
 
 \subsection{Algorithm}
-We will use the \textbf{Metropolis algorithm}. The algorithm goes as follows:
+We made use of the \textbf{Metropolis algorithm}:
 
 \begin{enumerate}
-	\item Generate a random configuration in the lattice to create an initial state with energy $E_b$.
-	\item Change the initial configuration by flipping for example one spin only. Compute the energy of this state $E_t$.
-	\item Calculate $\Delta E = E_t - E_b$ ($t$ = trial state, $b$ = beginning state).
-	\item \textit{The Metropolis test:} If $\Delta E \leq 0$ the new configuration is accepted, meaning the energy is lowered and we are moving towards the energy minimum at a given temperature. If $\Delta E > 0$, calculate $w = e^{- \beta \Delta E}$. If $w < r$ where $r$ is a random number, accept the new configuration. If else, keep the old configuration.
+	\item Generate a random configuration in the lattice to create an initial state with energy $E_b$ ($b$ = beginning state).
+	\item Change the initial configuration by flipping one spin. Compute the energy of this state $E_t$ ($t$ = trial state).
+	\item Calculate $\Delta E = E_t - E_b$.
+	\item \textit{The Metropolis test:} If $\Delta E \leq 0$ the new configuration is accepted, meaning the energy is lowered and we are moving towards the energy minimum at a given temperature. If $\Delta E > 0$, calculate $w = e^{- \beta \Delta E}$. If $w < r$ where $r$ is a random number between 0 and 1, accept the new configuration. Keep the old configuration otherwise.
 	\item Compute the new energy $E' = E_t + \Delta E$. Calculate various expectation values using this energy.
-	\item Repeat steps $2-5$ for the chosen number of Monte Carlo (MC) cycles, meaning the number of times we should sweep through the lattice and summed over all spins.
+	\item Repeat steps $2-5$ for the chosen number of Monte Carlo (MC) cycles, meaning the number of times we should sweep through the lattice.
 	\item Compute the various expectation values by dividing by the total number of cycles (and possibly the number of spins).
 \end{enumerate}
-During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $\langle E \rangle$ with the previous value of $\langle E \rangle$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached.
-
-After the most likely state has been reached, we want to 
+During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $E$ with the previous value of $E$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached.
 
 
 \subsection{Parallelization}
-We have parallelized our code using the Open MPI library. ADD DETAILS.
+We have parallelized our code using the Open MPI library. 
+
 
 \subsection{Calculating $T_{\mathrm{C}}$}
-The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). But we do not know what the constant $a$ should be. 
-
-...
+The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). The equation has two unknowns, $T_{\mathrm{C}}(L = \infty)$ and the constant $a$. By looking at our calculations for two different lattice sizes, we can solve this equation and get an estimate for $a$ and thus the critical temperature $T_C$. 
 
 
 
@@ -260,7 +256,7 @@ Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific hea
 	\hline
 \end{tabular}
 \end{center}
-The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. However, since we have done some approximations in order to derive these closed form expressions, some deviation is expected. The minimum number of MC cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run.
+The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. However, since we have done some approximations in order to derive these closed form expressions, some deviation is expected. The minimum number of MC cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run, according to our energy difference test described earlier.
 
 \begin{figure*}[t]
 \begin{center}
@@ -273,21 +269,42 @@ The numerical results follow that of Table \ref{table:quantities}. The result fr
 	& \includegraphics[width=85mm]{images/Cv_MC_L20.png} \\
 	(c) Susceptibility					& (d) Heat capacity  \\[6pt]
 \end{tabular}
-\caption{Expectation values as a function of number of MC cycles with the hottest temperature in red.}\label{fig:L20_ex_values}
+\caption{Expectation values as a function of number of MC cycles with the hottest temperature in red (for an ordered initial spin state)).}\label{fig:L20_ex_values}
 \end{center}
 \end{figure*}
 
+
 \subsection{The 20 $\times$ 20 case}
-Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ and $T = 2.4$, as shown in Fig.~\ref{fig:L20_ex_values}. For $T = 1.0$, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$.
+Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ kT/J and $T = 2.4$ kT/J, as shown in Fig.~\ref{fig:L20_ex_values}a-d. 
 
-For $T = 2.4$, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point.
+For $T = 1.0$ kT/J, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$. Here, as for the $L = 2$ case, the minimum number of MC cycles is around 22.
 
+For $T = 2.4$ kT/J, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point. From studying the graphs in Fig.~\ref{fig:L20_ex_values}a-d this occurs after about 5000 MC cycles.  
+
+We also want to study the effect of having an ordered (all spins pointing in one direction) versus a random spin matrix as the starting configuration. Fig.~\ref{fig:random}a-b shows that for the low temperature of $T = 1.0$ kT/J the randomly oriented spin matrix will take longer to reach the most likely state, while the ordered spin matrix will hit the expectation value right away. This is different for a higher temperature though. In the case of $T = 2.4$ kT/J both configurations deviate from the long-term expectation value in the beginning, then slowly oscillates towards a value close to the expectation value. 
+
+\begin{figure*}[t]
+\begin{center}
+\begin{tabular}{c c c}
+  	\includegraphics[width=85mm]{images/E_avg_MC_L20_random_T10.png}
+	& \includegraphics[width=85mm]{images/M_avg_MC_L20_random_T10.png} \\
+	(a) Energy	, $T = 1.0$				& (b) Magnetization, $T = 1.0$  \\
+	
+	 \includegraphics[width=85mm]{images/E_avg_MC_L20_random_T24.png}
+	& \includegraphics[width=85mm]{images/M_avg_MC_L20_random_T24.png} \\
+	(c) Energy, $T = 2.4$				& (d) Magnetization, $T = 2.4$  \\[6pt]
+\end{tabular}
+\caption{Expectation values as a function of \# of Monte Carlo cycles with random and non-random initial spin matrix.}\label{fig:random}
+\end{center}
+\end{figure*}
 
 
 
 \subsection{The number of accepted configurations}
 
-We also study the number of accepted configurations as a function of the total number of MC cycles, shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows the number of accepted configurations divided by the total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ there are no accepted configurations since no spin in the lattice is changed from up to down. 
+The number of accepted configurations as a function of the total number of MC cycles is shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows the number of accepted configurations divided by the total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ kT/J there are no accepted configurations since no spin in the lattice is changed from up to down. 
+
+For the case of $T = 2.4$ kT/J the number of accepted configurations increases rapidly in the beginning, then stabilizing, as the most likely state has been reached. 
 
 \begin{figure*}[t]
 \begin{center}
@@ -299,19 +316,17 @@ We also study the number of accepted configurations as a function of the total n
 \caption{Number of accepted configurations.}\label{fig:L20_accepted_configs}
 \end{center}
 \end{figure*}
-How the total number of accepted configurations vary as a function of temperature is shown in Fig.~\ref{fig:L20_accepted_configs}b. The number of accepted configurations increases with higher temperature. We see that this increase is greater with higher lattice size. EXPLAIN WHY?
+The total number of accepted configurations increases with higher temperature as shown in Fig.~\ref{fig:L20_accepted_configs}b. This is because of the test in the Metropolis algorithm saying that a configuration is accepted if $r < e^{\Delta E/kT}$ where $r$ is a random number between 0 and 1. When the temperature is higher, the exponential will have a higher value and many more values of $r$ will fulfill the test, leading to more accepted configurations.
+
+The figure also shows that this increase is greater with higher lattice size. This is natural as a larger lattice size means that we have many more spins we can flip, creating the possibility of many more accepted configurations. 
 
 
 
 \subsection{The probability P(E)}
 
-By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the computed variance in energy $\sigma_E^2$. 
+By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for getting that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the computed variance in energy $\sigma_E^2$. 
 
-For $T = 1.0$ we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ for an ordered initial spin matrix. 
-Where there are small deviation in energy values, we see a high probability of finding a specific value. When the deviation is large as for $T=2.4$, the probability of finding a specific energy value is small.
-
-DISCUSS. 
-
+For $T = 1.0$ kT/J we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ kT/J we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ in the case of an ordered initial spin matrix (according to Fig.~\ref{fig:random} this result would not be different for a randomly oriented spin matrix because we are excluding the first number of Monte Carlo cycles where having a different initial configuration would make a difference). This means that where there is a small deviation in energy values, described by the variance, there will be a high probability of getting the specific value $E$. When the deviation is large as for $T=2.4$ kT/J, the probability of getting the value $E$ is small.
 
 
 \subsection{Looking for phase transitions}
@@ -405,7 +420,7 @@ As described previously, we parallelized our code using MPI. Here we have gather
 	$40$				& 15m 23s 		\\
 	$60$				& 48m 06s		\\
 	$80$				& 2h 02m 00s	\\
-	$100$				& 8h 46m 22s	\\
+	$100$			& 8h 46m 22s	\\
 	\hline
 \end{tabular}
 \end{center}
@@ -420,7 +435,9 @@ These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curv
 
 \section{Conclusions}
 
-...
+The quality of our simulation can be discussed by comparing our numerical results to the exact value of the critical temperature $T_C$. It is obvious that the lattice size $L$ is extremely important in some cases. Reviewing the results for the expectation values in Fig.~\ref{fig:ex_values_temp}, the value of $\langle {\cal E}\rangle$ does not vary much with lattice size, but the lattice size is highly important in the case of $\langle {\cal M}\rangle$, which in turn tells us whether a phase transition has occurred or not. 
+
+... MORE!
 
 Something about lattice size vs. time vs. results.
 
