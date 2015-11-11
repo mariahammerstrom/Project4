@@ -261,7 +261,7 @@ def T_C_estimate(L_list,random):
     print "Critical temperature:"
     
     nu = 1
-    a = 1
+    a = 5
     T_C_exact = 2.269 # Exact critical temperature [kT/J]
         
     print "Exact = \t %.3f" % T_C_exact
@@ -273,11 +273,13 @@ def T_C_estimate(L_list,random):
     print "BEFORE:"
     
     for i in range(len(L_list)):
-        filenameT = '../Datasets/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
+        #filenameT = '../Datasets/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
+        filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Datasets\ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameT) # Read data
         
         # Find critical temperature from data set:
         T_max[i] = T[np.where(X == max(X))]
+        print "L = ", L_list[i], ", T_max = ", T_max[i]
         
         # Make estimate for T(L -> inf) with a = 1:
         T_C_estimate[i] = T_max[i] - a*L_list[i]**(-1./nu)
@@ -285,7 +287,7 @@ def T_C_estimate(L_list,random):
         # Find value of "a" to make the solution equal to the exact one:
         a_estimate[i] = (T_max[i] - T_C_exact)*L_list[i]
         
-        print "Numerical = \t %.3f \t L = %d" % (T_C_estimate[i],L_list[i])
+        #print "Numerical = \t %.3f \t L = %d" % (T_C_estimate[i],L_list[i])
     
     
     print "AFTER:"
@@ -306,7 +308,7 @@ def main(argv): # Change these values according to run!
     
     # How large is the lattice?
     L = 10
-    L_list = [10,20,40]
+    L_list = [10,20,40,60,80,100]
     
     # What is the temperature?
     temp = 1.0
@@ -314,10 +316,10 @@ def main(argv): # Change these values according to run!
     
     # Run calculations:
     #exp_values_MC(L,temps,random)         # Expectation values vs. # of Monte Carlo cycles
-    exp_rand(L,temp,random_list)          # Expectation values vs. # of Monte Carlo cycles: Different initial spin matrix!
+    #exp_rand(L,temp,random_list)          # Expectation values vs. # of Monte Carlo cycles: Different initial spin matrix!
     #exp_values_T(L_list,random)          # Expectation values vs. temperature
     #probability(L,temp,random)           # Calculate probabilty for <E>
-    #T_C_estimate(L_list,random)          # Calculate estimate of T_crit
+    T_C_estimate(L_list,random)          # Calculate estimate of T_crit
     
     #filename = '../Datasets/ExpectationValues_MC_20_1.0_1.txt'
     #print np.loadtxt(filename)

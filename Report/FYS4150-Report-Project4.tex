@@ -60,7 +60,7 @@ In the two-dimensional Ising model, the simplest form of the \textbf{energy} for
 \begin{equation}\label{eq:energy}
 	E_i = -J \sum_{\langle kl\rangle}^{N}s_k s_l,
 \end{equation}
-with  $s_k=\pm 1$ where $+ 1$ denotes spin up and $ - 1$ denotes spin down, $N$ is the total number of spins and $J$ is a coupling constant expressing the strength of the interaction between neighboring spins. The symbol $\langle kl\rangle$ indicates that the sum is over nearest neighbors only. We assume ferromagnetic ordering, meaning $J> 0$ and will make use of periodic boundary conditions.
+with  $s_k=\pm 1$ where $+ 1$ denotes spin up and $ - 1$ denotes spin down, $N$ is the total number of spins and $J$ is a coupling constant expressing the strength of the interaction between neighbouring spins. The symbol $\langle kl\rangle$ indicates that the sum is over nearest neighbours only. We assume ferromagnetic ordering, meaning $J> 0$ and will make use of periodic boundary conditions.
 
 The probability of finding the system in a given microstate $i$ is expressed by the \textbf{Boltzmann probability distribution}
 
@@ -79,7 +79,7 @@ The \textbf{magnetic moment} of a given microstate is
 \begin{equation}\label{eq:magnetization}
 	{\cal M}_i = \sum_j s_j.
 \end{equation} 
-Some quantities of interest are the \textbf{expection values} for the energy $\langle E\rangle$ and magnetic moment $\langle {\cal M}\rangle$:
+Some quantities of interest are the \textbf{expectation values} for the energy $\langle E\rangle$ and magnetic moment $\langle {\cal M}\rangle$:
 
 \begin{equation}
 \begin{aligned}
@@ -107,14 +107,14 @@ and the \textbf{susceptibility}, which describes whether a material is attracted
 \end{equation}
 We want to compute these quantities after the system has \textbf{thermalized}, which is when the system has reached its most likely state. The most likely state depends on the temperature $T$.
 
-The model we are considering here undergoes a \textbf{phase transition}. Below a critical temperature $T_C$ there is spontaneous magnetization $\langle {\cal M}\rangle \neq 0$ (magnetic phase), while above this temperature the average magnetization is zero (paramagnetic phase). Near $T_C$ we can characterize the behavior of many physical quantities by a power law behavior.
+The model we are considering here undergoes a \textbf{phase transition}. Below a critical temperature $T_C$ there is spontaneous magnetization $\langle {\cal M}\rangle \neq 0$ (magnetic phase), while above this temperature the average magnetization is zero (paramagnetic phase). Near $T_C$ we can characterize the behaviour of many physical quantities by a power law behaviour.
 
-An important quantity is the \textbf{correlation length}, which is expected to be of the order of the lattice spacing for $T \gg T_C$. Because the spins become more and more correlated as $T$ approaches $T_C$, the correlation length increases as we get closer to the critical temperature. The divergent behavior of $\xi$ near $T_C$ is
+An important quantity is the \textbf{correlation length}, which is expected to be of the order of the lattice spacing for $T \gg T_C$. Because the spins become more and more correlated as $T$ approaches $T_C$, the correlation length increases as we get closer to the critical temperature. The divergent behaviour of $\xi$ near $T_C$ is
 
 \begin{equation}\label{eq:xi}
 	\xi(T) \sim \left|T_C-T\right|^{-\nu}.
 \end{equation}
-A second-order phase transition is characterized by a correlation length which spans the whole system. Since we are always limited to a finite lattice, $\xi$ will be proportional with the size of the lattice. Through so-called finite size scaling relations it is possible to relate the behavior at finite lattices with the results for an infinitely large lattice. The critical temperature then scales as
+A second-order phase transition is characterized by a correlation length which spans the whole system. Since we are always limited to a finite lattice, $\xi$ will be proportional with the size of the lattice. Through so-called finite size scaling relations it is possible to relate the behaviour at finite lattices with the results for an infinitely large lattice. The critical temperature then scales as
 
 \begin{equation}\label{eq:T_C}
 	T_C(L)-T_C(L=\infty) = aL^{-1/\nu},
@@ -131,7 +131,7 @@ First we will assume that we only have two spins in each dimension, that is $L =
 	\uparrow_{(1)} \quad &\uparrow_{(2)}   \\
 	\uparrow_{(3)} \quad &\uparrow_{(4)}\,,   
 \end{align*}
-where an upward arrow denotes spin up. We will make use of \textbf{periodic boundary conditions}, which means that the neighbor to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbor to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this mean we will treat our system as though it looked like this (where the original system is highlighted in magenta):
+where an upward arrow denotes spin up. We will make use of \textbf{periodic boundary conditions}, which means that the neighbour to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbour to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this mean we will treat our system as though it looked like this (where the original system is highlighted in magenta):
 
 \begin{align*}
 	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \quad \textcolor{black}{\uparrow_{(4)}} \quad &\textcolor{black}{\uparrow_{(3)}} \\
@@ -339,7 +339,7 @@ We see the same behaviour in Fig.~\ref{fig:ex_values_temp}b, which shows that fo
 
 These observations tells us that we might be witnessing a phase transition, going from an ordered, magnetic state to a random, nearly non-magnetized state.
 
-Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behavior. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_C \approx 2.3$. Similar behavior can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
+Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behaviour. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_C \approx 2.3$. Similar behaviour can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
 
 Both susceptibility and heat capacity are extensive quantities meaning they are proportional to the size of the system, $L$, which is clear from the graphs in Fig.~\ref{fig:ex_values_temp}c-d, both increasing with $L$.
 
@@ -365,9 +365,31 @@ Both susceptibility and heat capacity are extensive quantities meaning they are 
 
 \subsection{Estimating the critical temperature}
 
-Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamic limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behavior of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d.
+Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamic limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behaviour of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d. Rewriting Eq. (\ref{eq:T_C}) gives
+\begin{equation}\label{eg:T_C_estimate}
+	T_C = T_C(L) - \frac{a}{L}.
+\end{equation}
+The calculated $T_C(L)$ obtained from the datasets, with a temperature step length of 0.05, is listed in the following table:
+\begin{center}
+\begin{tabular}{ c c }
+	\hline
+	Lattice size $L$ & $T_C(L)$\\
+	\hline
+	$10$			& 2.40	\\
+	$20$			& 2.35	\\
+	$40$			& 2.30 	\\
+	$60$			& 2.30	\\
+	$80$			& 2.30	\\
+	$100$			& 2.30	\\
+	\hline
+\end{tabular}
+\end{center}
+Because $T_C(L)>T_C$, we will never get closer to $T_C$ no matter how large $L$ is, due to the step length. Assuming that $a$ is of the order unity, Eg. (\ref{eg:T_C_estimate}) would thus result in $T_C = 2.3$ when $L\rightarrow\infty$.
+Decreasing the temperature step length to $0.01$ could result in $T_C(L) = 2.27$, which is a much better estimate.
 
-MORE!
+% However this took far to long time, so in order to make the deadline, this was not done.
+
+% If time: set up table with new $T_C(L)$ values, and estimate $T_C$ from them.
 
 
 \subsection{Parallelization}
@@ -376,14 +398,14 @@ As described previously, we parallelized our code using MPI. Here we have gather
 \begin{center}
 \begin{tabular}{ l r }
 	\hline
-	Lattice size $L$ 	 	& Time usage $t$\\
+	Lattice size $L$ 	& Time usage $t$\\
 	\hline
-	$L = 10$				& 00m 57s		\\
-	$L = 20$				& 03m 52s		\\
-	$L = 40$				& 15m 23s 		\\
-	$L = 60$				& 48m 06s		\\
-	$L = 80$				& 2h 02m 00s	\\
-	$L = 100$				& 8h 46m 22s	\\
+	$10$				& 00m 57s		\\
+	$20$				& 03m 52s		\\
+	$40$				& 15m 23s 		\\
+	$60$				& 48m 06s		\\
+	$80$				& 2h 02m 00s	\\
+	$100$				& 8h 46m 22s	\\
 	\hline
 \end{tabular}
 \end{center}

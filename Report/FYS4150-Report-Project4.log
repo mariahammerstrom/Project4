@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.11)  11 NOV 2015 10:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.11)  11 NOV 2015 12:07
 entering extended mode
 **FYS4150-Report-Project4.tex
 (FYS4150-Report-Project4.tex
@@ -652,14 +652,14 @@ Package pdftex.def Info: images/Cv_temp.png used on input line 355.
 File: images/time_usage.png Graphic file (type png)
 
 <use images/time_usage.png>
-Package pdftex.def Info: images/time_usage.png used on input line 393.
+Package pdftex.def Info: images/time_usage.png used on input line 415.
 (pdftex.def)             Requested size: 256.0748pt x 192.05052pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--412
+Underfull \hbox (badness 10000) in paragraph at lines 433--434
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+txtt on input line 413
+LaTeX Font Info:    Try loading font information for OT1+txtt on input line 435
 .
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\ot1txtt.fd"
 File: ot1txtt.fd 2000/12/15 v3.1
@@ -669,10 +669,10 @@ lization_L80_T2_4_square.png (PNG copy)>] [7 <./images/E_avg_temp.png> <./image
 s/M_avg_temp.png> <./images/chi_temp.png> <./images/Cv_temp.png>]
 (FYS4150-Report-Project4.aux) ) 
 Here is how much of TeX's memory you used:
- 7061 strings out of 493673
- 101950 string characters out of 3141518
- 300399 words of memory out of 3000000
- 10248 multiletter control sequences out of 15000+200000
+ 7062 strings out of 493673
+ 101967 string characters out of 3141518
+ 300408 words of memory out of 3000000
+ 10249 multiletter control sequences out of 15000+200000
  54882 words of font info for 127 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  42i,14n,75p,733b,607s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -688,7 +688,7 @@ fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
 pe1/urw/helvetic/uhvro8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw
 /times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr
 8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on FYS4150-Report-Project4.pdf (7 pages, 489444 bytes).
+Output written on FYS4150-Report-Project4.pdf (7 pages, 490199 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
