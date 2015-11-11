@@ -113,14 +113,14 @@ The model we are considering here undergoes a \textbf{phase transition}. Below a
 An important quantity is the \textbf{correlation length}, which is expected to be of the order of the lattice spacing for $T \gg T_{\mathrm{C}}$. Because the spins become more and more correlated as $T$ approaches $T_{\mathrm{C}}$, the correlation length increases as we get closer to the critical temperature. The divergent behaviour of $\xi$ near $T_{\mathrm{C}}$ is
 
 \begin{equation}\label{eq:xi}
-	\xi(T) \sim \left|T_C-T\right|^{-\nu}.
+	\xi(T) \sim \left|T_{\mathrm{C}} - T\right|^{-\nu}.
 \end{equation}
 A second-order phase transition is characterized by a correlation length which spans the whole system. Since we are always limited to a finite lattice, $\xi$ will be proportional with the size of the lattice. Through so-called finite size scaling relations it is possible to relate the behaviour at finite lattices with the results for an infinitely large lattice. The critical temperature then scales as
 
 \begin{equation}\label{eq:T_C}
-	T_C(L)-T_C(L=\infty) = aL^{-1/\nu},
+	T_{\mathrm{C}}(L) - T_{\mathrm{C}}(L=\infty) = aL^{-1/\nu},
 \end{equation}
-with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}). In this project we will use $\nu = 1$.
+with $a$ a constant and $\nu$ defined in Eq.~(\ref{eq:xi}). In this project we will use $\nu = 1$.
 
 
 
@@ -349,7 +349,7 @@ For $T = 1.0$ kT/J we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for
 \end{center}
 \end{figure*}
 
-A phase transition in a magnetic system is defined as the transition between the ferromagnetic and paramagnetic phases of the system. The transition occurs at a critical point, often referred to as the Curie point, which is dependent on temperature. Beyond the critical point defined by a critical temperature $T_C$ (see next subsection) the system will loose its magnetic properties and the magnetic spins will be randomly aligned in our case where there is no external magnetic field affecting the spin directions.
+A phase transition in a magnetic system is defined as the transition between the ferromagnetic and paramagnetic phases of the system. The transition occurs at a critical point, often referred to as the Curie point, which is dependent on temperature. Beyond the critical point defined by a critical temperature $T_{\mathrm{C}}$ (see next subsection) the system will loose its magnetic properties and the magnetic spins will be randomly aligned in our case where there is no external magnetic field affecting the spin directions.
 
 The spin matrix in the case of $L = 80$ for different temperatures is visualized in Fig.~\ref{fig:visualization}, where white squares represent upward spins and black squares represent downward spins. It shows clearly that the net magnetization $\langle {\cal M}\rangle$ is higher for low $T$ with most spins pointing in the same direction (in this case upwards), while the $\langle {\cal M}\rangle$ approaches zero at higher $T$ where the number of spins pointing upward and downward are about the same.
 
@@ -357,7 +357,7 @@ We see the same behaviour in Fig.~\ref{fig:ex_values_temp}b, which shows that fo
 
 These observations tells us that we might be witnessing a phase transition, going from an ordered, magnetic state to a random, nearly non-magnetized state.
 
-Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behaviour. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_C \approx 2.3$. Similar behaviour can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
+Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behaviour. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_{\mathrm{C}} \approx 2.3$. Similar behaviour can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
 
 Both susceptibility and heat capacity are extensive quantities meaning they are proportional to the size of the system, $L$, which is clear from the graphs in Fig.~\ref{fig:ex_values_temp}c-d, both increasing with $L$.
 
@@ -381,13 +381,14 @@ Both susceptibility and heat capacity are extensive quantities meaning they are 
 
 
 
-\subsection{Estimating the critical temperature}
+\subsection{Estimating the critical temperature $T_{\mathrm{C}}$}
 
-Lastly, we want to estimate the critical temperature $T_C$ in the thermodynamic limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behaviour of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d. Rewriting Eq. (\ref{eq:T_C}) gives
+Lastly, we want to estimate the critical temperature $T_{\mathrm{C}}$ in the thermodynamic limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behaviour of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d. Rewriting Eq. (\ref{eq:T_C}) gives
+
 \begin{equation}\label{eg:T_C_estimate}
-	T_C = T_C(L) - \frac{a}{L}.
+	T_{\mathrm{C}} = T_{\mathrm{C}}(L) - \frac{a}{L}.
 \end{equation}
-The calculated $T_C(L)$ obtained from the datasets, with a temperature step length of 0.05, is listed in the following table:
+The calculated $T_{\mathrm{C}}(L)$ obtained from the datasets, with a temperature step length of 0.05, is listed in the following table:
 \begin{center}
 \begin{tabular}{ c c }
 	\hline
@@ -402,8 +403,9 @@ The calculated $T_C(L)$ obtained from the datasets, with a temperature step leng
 	\hline
 \end{tabular}
 \end{center}
-Because $T_C(L)>T_C$, we will never get closer to $T_C$ no matter how large $L$ is, due to the step length. Assuming that $a$ is of the order unity, Eg. (\ref{eg:T_C_estimate}) would thus result in $T_C = 2.3$ when $L\rightarrow\infty$.
-Decreasing the temperature step length to $0.01$ could result in $T_C(L) = 2.27$, which is a much better estimate.
+Because $T_{\mathrm{C}}(L)>T_{\mathrm{C}}$, we will never get closer to $T_{\mathrm{C}}$ no matter how large $L$ is, due to the step length. Assuming that $a$ is of the order unity, Eg. (\ref{eg:T_C_estimate}) would thus result in $T_{\mathrm{C}} = 2.3$ when $L\rightarrow\infty$.
+
+Decreasing the temperature step length to $0.01$ could result in $T_{\mathrm{C}}(L) = 2.27$, which is a much better estimate.
 
 % However this took far to long time, so in order to make the deadline, this was not done.
 
@@ -442,11 +444,11 @@ We have studied the phase transition of a spin system using the Ising model in t
 
 MORE.
 
-From Fig.~\ref{fig:time_usage} it is evident that the time usage of the code increases significantly with larger lattice size $L$, making it desirable to get away with as low a value for $L$ as possible. How low $L$ can we get away with?
+From Fig.~\ref{fig:time_usage} it is evident that the time consumption of the code increases significantly with larger lattice size $L$, making it desirable to get away with as low a value for $L$ as possible. How low $L$ can we get away with?
 
 Something about lattice size vs. time vs. results.
 
-The quality of our simulation can be discussed by comparing our numerical results to the exact value of the critical temperature $T_C$. It is obvious that the lattice size $L$ is extremely important in some cases. Reviewing the results for the expectation values in Fig.~\ref{fig:ex_values_temp}, the value of $\langle {\cal E}\rangle$ does not vary much with lattice size, but the lattice size is highly important in the case of $\langle {\cal M}\rangle$, which can tell us whether a phase transition has occurred or not. 
+The quality of our simulation can be discussed by comparing our numerical results to the exact value of the critical temperature $T_{\mathrm{C}}$. We see that the lattice size $L$ is extremely important in some cases. Reviewing the results for the expectation values in Fig.~\ref{fig:ex_values_temp}, the value of $\langle E \rangle$ does not vary much with lattice size, but the lattice size is highly important in the case of $\langle {\cal M}\rangle$, which can tell us whether a phase transition has occurred or not. 
 
 ... MORE!
 
@@ -464,7 +466,7 @@ The codes developed and used for this project are:\\
 
 \noindent \verb@plotting.py@ -- plotting program which makes plots to study the total number of accepted configurations as a function of total number of MC cycles and as a function of temperature $T$ (Python).
 
-\noindent \verb@visualization.py@ -- provided program for running the Metropolis algorithm and plotting the spin matrix, as shown in Fig.~\ref{fig:visualization} (Python).
+\noindent \verb@visualization.py@ -- a provided program for running the Metropolis algorithm and plotting the spin matrix, as shown in Fig.~\ref{fig:visualization} (Python).
 
 \end{multicols}
 
