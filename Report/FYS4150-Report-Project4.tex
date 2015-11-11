@@ -36,7 +36,8 @@
 \maketitle
 
 \begin{abstract}
-	\noindent \lipsum[1]
+	\noindent We study the Ising model in two dimensions for different lattice sizes $L$ and estimates the critical temperature $T_{\mathrm{C}}$ of the system as it experiences a magnetic phase transition using Monte Carlo simulations. FINDINGS, etc.
+	% \lipsum[1]
 	\vspace*{2ex}
 	
 	\noindent \textbf{Github:} \textit{https://github.com/mariahammerstrom/Project4}
@@ -49,7 +50,7 @@
 
 \section{Introduction}
 
-In this project we look a the Ising model in two dimensions. The Ising model is a model to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}. This project deals with the Ising model in two dimensions without an external magnetic field. 
+In this project we study the Ising model in two dimensions without an external magnetic field. The Ising model is used to study phase transitions at finite temperature for magnetic systems. The model was invented in 1920\footnote{Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Eigenschaften in festen Körpern". \textit{Physikalische Zeitschrift} 21: 613-615.} and the analytical solution to the two-dimensional case was found in 1944\footnote{Onsager, Lars (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition". \textit{Physical Review}, Series II 65 (3-4): 117-149.}.
 
 
 
@@ -105,11 +106,11 @@ and the \textbf{susceptibility}, which describes whether a material is attracted
 \begin{equation}
 	\chi = \frac{\sigma_{\cal M}^2}{kT} = \frac{\langle {\cal M}^2\rangle - \langle {\cal M}\rangle^2}{kT}.
 \end{equation}
-We want to compute these quantities after the system has \textbf{thermalized}, which is when the system has reached its most likely state. The most likely state depends on the temperature $T$.
+We want to compute these quantities after the system has \textbf{thermalized}, which is when the system has reached its most likely state. This will depend on the temperature $T$.
 
-The model we are considering here undergoes a \textbf{phase transition}. Below a critical temperature $T_C$ there is spontaneous magnetization $\langle {\cal M}\rangle \neq 0$ (magnetic phase), while above this temperature the average magnetization is zero (paramagnetic phase). Near $T_C$ we can characterize the behaviour of many physical quantities by a power law behaviour.
+The model we are considering here undergoes a \textbf{phase transition}. Below a critical temperature $T_{\mathrm{C}}$ there is spontaneous magnetization $\langle {\cal M}\rangle \neq 0$ (magnetic phase), while above this temperature the average magnetization is zero (paramagnetic phase). Near $T_{\mathrm{C}}$ we can characterize the behaviour of many physical quantities by a power law behaviour.
 
-An important quantity is the \textbf{correlation length}, which is expected to be of the order of the lattice spacing for $T \gg T_C$. Because the spins become more and more correlated as $T$ approaches $T_C$, the correlation length increases as we get closer to the critical temperature. The divergent behaviour of $\xi$ near $T_C$ is
+An important quantity is the \textbf{correlation length}, which is expected to be of the order of the lattice spacing for $T \gg T_{\mathrm{C}}$. Because the spins become more and more correlated as $T$ approaches $T_{\mathrm{C}}$, the correlation length increases as we get closer to the critical temperature. The divergent behaviour of $\xi$ near $T_{\mathrm{C}}$ is
 
 \begin{equation}\label{eq:xi}
 	\xi(T) \sim \left|T_C-T\right|^{-\nu}.
@@ -119,19 +120,19 @@ A second-order phase transition is characterized by a correlation length which s
 \begin{equation}\label{eq:T_C}
 	T_C(L)-T_C(L=\infty) = aL^{-1/\nu},
 \end{equation}
-with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}). Here we will use $\nu = 1$.
+with $a$ a constant and  $\nu$ defined in Eq.~(\ref{eq:xi}). In this project we will use $\nu = 1$.
 
 
 
 
 \subsection{Analytical solution}\label{subsec:analytical}
-First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the lattice length. The situation looks like this:
+First we will assume that we only have two spins in each dimension, that is $L = 2$, where $L$ is the width of the lattice. The situation looks like this:
 
 \begin{align*}
 	\uparrow_{(1)} \quad &\uparrow_{(2)}   \\
 	\uparrow_{(3)} \quad &\uparrow_{(4)}\,,   
 \end{align*}
-where an upward arrow denotes spin up. We will make use of \textbf{periodic boundary conditions}, which means that the neighbour to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbour to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this mean we will treat our system as though it looked like this (where the original system is highlighted in magenta):
+where an upward arrow denotes spin up and the numbers are just a way to identify the different spins. We will make use of \textbf{periodic boundary conditions}, which means that the neighbour to the right of a given spin $s_N$ takes the value of $s_1$. Similarly, the neighbour to the left of $s_1$ takes the value of $s_N$. This way of treating the boundaries are often used when approximating an infinite system that has a repeating structure. In our case, this means that we will treat our system as though it looked like this (where the original system is highlighted in magenta):
 
 \begin{align*}
 	\textcolor{black}{\uparrow_{(4)}} \quad \textcolor{black}{\uparrow_{(3)}} \quad \textcolor{black}{\uparrow_{(4)}} \quad &\textcolor{black}{\uparrow_{(3)}} \\
@@ -176,7 +177,7 @@ These calculations can be used to find the closed-form expressions, starting wit
 	Z(\beta) 	&= \sum_E \Omega(E) e^{- \beta E} = 2 e^{8J\beta} + 2 e^{- 8J \beta} + 12 \\
 			&= 4 \textrm{ cosh}(8J \beta) + 12.
 \end{align}
-Then the expectation value can be written, using the expression in Eq. (\ref{eq:expect_values}), as
+Then the expectation value for the energy can be written, using the expression in Eq. (\ref{eq:expect_values}), as
 
 \begin{equation}\label{eq:E_avg_analytic}
 	\langle E\rangle = - \frac{8J \textrm{ sinh}(8J \beta)}{\textrm{cosh}(8J\beta) + 3} \approx - 8J \textrm{ tanh} (8J\beta),
@@ -228,7 +229,7 @@ We made use of the \textbf{Metropolis algorithm}:
 	\item Repeat steps $2-5$ for the chosen number of Monte Carlo (MC) cycles, meaning the number of times we should sweep through the lattice.
 	\item Compute the various expectation values by dividing by the total number of cycles (and possibly the number of spins).
 \end{enumerate}
-During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $E$ with the previous value of $E$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached.
+During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $E$ with the previous value of $E$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached. In total we run 1 million MC cycles.
 
 
 \subsection{Parallelization}
@@ -236,15 +237,17 @@ We have parallelized our code using the Open MPI library.
 
 
 \subsection{Calculating $T_{\mathrm{C}}$}
-The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). The equation has two unknowns, $T_{\mathrm{C}}(L = \infty)$ and the constant $a$. By looking at our calculations for two different lattice sizes, we can solve Eq. (\ref{eq:T_C}) in the two cases and get an estimate for $a$ and thus the critical temperature $T_C$. 
+The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). The equation has two unknowns, $T_{\mathrm{C}}(L = \infty)$ and the constant $a$. By using our calculations for two different lattice sizes to calculate $T_{\mathrm{C}}(L)$, we can solve Eq. (\ref{eq:T_C}) in the two cases and get an estimate for $a$ and thus the critical temperature $T_{\mathrm{C}}$. 
 
 
 
-\section{Results}
+\section{Results \& comments}
 
 \subsection{Checking the 2 $\times$ 2 case}
 
-Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ numerically with periodic boundary conditions, using the expressions from Sec.~\ref{subsec:theory}, gives values which can be compared with the results of the analytical closed-form expressions given in Sec.~\ref{subsec:analytical}. For temperature $T=1.0$ (in units of $kT/J$), this gives the following results for a $2 \times 2$ spin system where the initial state has all spins pointing upwards:
+Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ numerically with periodic boundary conditions, using the expressions from Sec.~\ref{subsec:theory}, gives results which can be compared with the results of the analytical closed-form expressions given in Sec.~\ref{subsec:analytical} to check that our code is working properly. 
+
+For temperature $T=1.0$ (in units of $kT/J$), this gives the following results for a $2 \times 2$ spin system where the initial state has all spins pointing upwards:
 
 \begin{center}
 \begin{tabular}{ l l l }\hline
@@ -256,7 +259,7 @@ Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific hea
 	\hline
 \end{tabular}
 \end{center}
-The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good. However, since we have done some approximations in order to derive these closed form expressions, some deviation is expected. The minimum number of MC cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run, according to our energy difference test described earlier.
+The numerical results follow that of Table \ref{table:quantities}. The result from the closed form expressions are not as good as the numerical result. However, since we have done some approximations in order to derive these closed form expressions, some deviation is expected. The minimum number of MC cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run, according to our energy difference test described earlier.
 
 \begin{figure*}[t]
 \begin{center}
@@ -277,11 +280,11 @@ The numerical results follow that of Table \ref{table:quantities}. The result fr
 \subsection{The 20 $\times$ 20 case}
 Next we looked at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ kT/J and $T = 2.4$ kT/J, as shown in Fig.~\ref{fig:L20_ex_values}a-d. 
 
-For $T = 1.0$ kT/J, we see that the expectation values does not change considerably with MC cycles. Thus, the system quickly reaches an equilibrium state. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$. Here, as for the $L = 2$ case, the minimum number of MC cycles is around 22.
+For $T = 1.0$ kT/J, we see that the expectation values does not change considerably with the number of MC cycles, meaning the system reached the equilibrium state quickly. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$, meaning the system will be in its ground state of minimal energy right away. Here, as for the $L = 2$ case, the minimum number of MC cycles is around 22.
 
 For $T = 2.4$ kT/J, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point. From studying the graphs in Fig.~\ref{fig:L20_ex_values}a-d this occurs after about 5000 MC cycles.  
 
-We also want to study the effect of having an ordered (all spins pointing in one direction) versus a random spin matrix as the starting configuration. Fig.~\ref{fig:random}a-b shows that for the low temperature of $T = 1.0$ kT/J the randomly oriented spin matrix will take longer to reach the most likely state, while the ordered spin matrix will hit the expectation value right away. This is different for a higher temperature though. In the case of $T = 2.4$ kT/J both configurations deviate from the long-term expectation value in the beginning, then slowly oscillates towards a value close to the expectation value. 
+Do these conclusions depend on whether we have an ordered (all spins pointing in one direction) or a random spin matrix as the starting configuration? Fig.~\ref{fig:random}a-b shows that for the low temperature of $T = 1.0$ kT/J the randomly oriented spin matrix will take longer to reach the most likely state, while the ordered spin matrix will hit the expectation value right away. This is different for a higher temperature. In the case of $T = 2.4$ kT/J both configurations deviate from the long-term expectation value in the beginning, then slowly oscillates towards a value close to the expectation value. 
 
 \begin{figure*}[t]
 \begin{center}
@@ -435,11 +438,19 @@ These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curv
 
 \section{Conclusions}
 
-The quality of our simulation can be discussed by comparing our numerical results to the exact value of the critical temperature $T_C$. It is obvious that the lattice size $L$ is extremely important in some cases. Reviewing the results for the expectation values in Fig.~\ref{fig:ex_values_temp}, the value of $\langle {\cal E}\rangle$ does not vary much with lattice size, but the lattice size is highly important in the case of $\langle {\cal M}\rangle$, which in turn tells us whether a phase transition has occurred or not. 
+We have studied the phase transition of a spin system using the Ising model in two dimensions without an external magnetic field. 
+
+MORE.
+
+From Fig.~\ref{fig:time_usage} it is evident that the time usage of the code increases significantly with larger lattice size $L$, making it desirable to get away with as low a value for $L$ as possible. How low $L$ can we get away with?
+
+Something about lattice size vs. time vs. results.
+
+The quality of our simulation can be discussed by comparing our numerical results to the exact value of the critical temperature $T_C$. It is obvious that the lattice size $L$ is extremely important in some cases. Reviewing the results for the expectation values in Fig.~\ref{fig:ex_values_temp}, the value of $\langle {\cal E}\rangle$ does not vary much with lattice size, but the lattice size is highly important in the case of $\langle {\cal M}\rangle$, which can tell us whether a phase transition has occurred or not. 
 
 ... MORE!
 
-Something about lattice size vs. time vs. results.
+
 
 
 
