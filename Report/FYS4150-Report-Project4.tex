@@ -238,7 +238,7 @@ After the most likely state has been reached, we want to
 We have parallelized our code using the Open MPI library. ADD DETAILS.
 
 \subsection{Calculating $T_{\mathrm{C}}$}
-The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). But we do not know what the constant $a$ should be. 
+The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through our algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). But we do not know what the constant $a$ should be. To estimate $T_C$, we look at how $T_C(L)$ varies with $L$, and how $a$ changes from case to case.
 
 ...
 
@@ -299,8 +299,8 @@ We also study the number of accepted configurations as a function of the total n
 \caption{Number of accepted configurations.}\label{fig:L20_accepted_configs}
 \end{center}
 \end{figure*}
-How the total number of accepted configurations vary as a function of temperature is shown in Fig.~\ref{fig:L20_accepted_configs}b. The number of accepted configurations increases with higher temperature. We see that this increase is greater with higher lattice size. EXPLAIN WHY?
-
+How the total number of accepted configurations vary as a function of temperature is shown in Fig.~\ref{fig:L20_accepted_configs}b. The number of accepted configurations increases with higher temperature. We see that this increase is greater with higher lattice size. 
+When the temperature is higher, the value of $e^{-\mathrm{d}E/T}$ is larger, thus the probability of a spin flip is larger. For larger lattices, there are a larger number of spins that can change direction, thus a higher number of accepted configurations.
 
 
 \subsection{The probability P(E)}
@@ -308,9 +308,7 @@ How the total number of accepted configurations vary as a function of temperatur
 By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the computed variance in energy $\sigma_E^2$. 
 
 For $T = 1.0$ we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ for an ordered initial spin matrix. 
-Where there are small deviation in energy values, we see a high probability of finding a specific value. When the deviation is large as for $T=2.4$, the probability of finding a specific energy value is small.
-
-DISCUSS. 
+Where there are small deviation in energy values, we see a high probability of energy to be equal to the expectation value. When the deviation is large, as for $T=2.4$, the probability of finding this specific energy value is small.
 
 
 

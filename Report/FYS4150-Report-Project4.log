@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.11)  11 NOV 2015 12:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.11)  11 NOV 2015 15:20
 entering extended mode
 **FYS4150-Report-Project4.tex
 (FYS4150-Report-Project4.tex
@@ -603,7 +603,7 @@ File: images/visualization_L80_T2_0_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_0_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_0_square.png used on input
- line 322.
+ line 320.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/visualization_L80_T2_2_square.png, id=38, 797.98125pt x 707.64375pt>
@@ -611,7 +611,7 @@ File: images/visualization_L80_T2_2_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_2_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_2_square.png used on input
- line 323.
+ line 321.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/visualization_L80_T2_4_square.png, id=39, 797.98125pt x 707.64375pt>
@@ -619,47 +619,47 @@ File: images/visualization_L80_T2_4_square.png Graphic file (type png)
 
 <use images/visualization_L80_T2_4_square.png>
 Package pdftex.def Info: images/visualization_L80_T2_4_square.png used on input
- line 324.
+ line 322.
 (pdftex.def)             Requested size: 159.33542pt x 141.28868pt.
 
 <images/E_avg_temp.png, id=40, 578.16pt x 433.62pt>
 File: images/E_avg_temp.png Graphic file (type png)
 
 <use images/E_avg_temp.png>
-Package pdftex.def Info: images/E_avg_temp.png used on input line 350.
+Package pdftex.def Info: images/E_avg_temp.png used on input line 348.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
 
 <images/M_avg_temp.png, id=41, 578.16pt x 433.62pt>
 File: images/M_avg_temp.png Graphic file (type png)
 
 <use images/M_avg_temp.png>
-Package pdftex.def Info: images/M_avg_temp.png used on input line 351.
+Package pdftex.def Info: images/M_avg_temp.png used on input line 349.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  <images/chi_temp.png, id=42, 578.16pt x 433.62pt>
 File: images/chi_temp.png Graphic file (type png)
 
 <use images/chi_temp.png>
-Package pdftex.def Info: images/chi_temp.png used on input line 354.
+Package pdftex.def Info: images/chi_temp.png used on input line 352.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  <images/Cv_temp.png, id=43, 578.16pt x 433.62pt>
 File: images/Cv_temp.png Graphic file (type png)
 
 <use images/Cv_temp.png>
-Package pdftex.def Info: images/Cv_temp.png used on input line 355.
+Package pdftex.def Info: images/Cv_temp.png used on input line 353.
 (pdftex.def)             Requested size: 241.84842pt x 181.38472pt.
  [5 <./images/accepted_configs_MC_L20.png> <./images/accepted_configs_temp.png>
 ] <images/time_usage.png, id=49, 578.16pt x 433.62pt>
 File: images/time_usage.png Graphic file (type png)
 
 <use images/time_usage.png>
-Package pdftex.def Info: images/time_usage.png used on input line 415.
+Package pdftex.def Info: images/time_usage.png used on input line 413.
 (pdftex.def)             Requested size: 256.0748pt x 192.05052pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 433--434
+Underfull \hbox (badness 10000) in paragraph at lines 431--432
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+txtt on input line 435
+LaTeX Font Info:    Try loading font information for OT1+txtt on input line 433
 .
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\txfonts\ot1txtt.fd"
 File: ot1txtt.fd 2000/12/15 v3.1
@@ -688,7 +688,7 @@ fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
 pe1/urw/helvetic/uhvro8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw
 /times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr
 8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on FYS4150-Report-Project4.pdf (7 pages, 490199 bytes).
+Output written on FYS4150-Report-Project4.pdf (7 pages, 490033 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
