@@ -31,15 +31,15 @@ int main(int argc, char *argv[]) // Leave second argument blank
 {
     // INITIAL CONDITIONS
     double T = 1.0;                                     // Temperature [kT/J]
-    int n_spins = 100;                                   // Number of spins
+    int n_spins = 120;                                   // Number of spins
     int N = n_spins*n_spins;                            // Lattice dimensions (square)
     int MC_cycles = 1000000;                                // Number of Monte Carlo cycles
 
-    bool random = true; // true = random spin matrix, false = all spins pointing upwards
+    bool random = false; // true = random spin matrix, false = all spins pointing upwards
 
     double temp_step = 0.01;                             // Steps in temperature
-    double initial_temp = 2.0;                          // Initial temperature
-    double final_temp = 2.4;                            // Final temperature
+    double initial_temp = 2.26;                          // Initial temperature
+    double final_temp = 2.31;                            // Final temperature
 
 
     // MPI INITIALIZATIONS
@@ -120,8 +120,9 @@ int main(int argc, char *argv[]) // Leave second argument blank
     sprintf(filename_T, "ExpectationValues_temp_%d_%d.txt", n_spins, random);
     ofstream file_T(filename_T);
 
-    for(T=initial_temp;T<=final_temp;T+=temp_step)
-        ExpectationValues_T(T,file_T,n_spins,MC_cycles,spin_matrix,random,myloop_begin,myloop_end,my_rank);
+    for(T=initial_temp;T<=final_temp;T+=temp_step){
+        cout << "T = " << T << endl;
+        ExpectationValues_T(T,file_T,n_spins,MC_cycles,spin_matrix,random,myloop_begin,myloop_end,my_rank);}
     file_T.close();
 
     // END MPI
