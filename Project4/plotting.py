@@ -323,15 +323,41 @@ def main(argv): # Change these values according to run!
     # What is the temperature?
     temp = 2.4
     temp_list = [1.0,2.4]
-    
-    # Run calculations: Uncomment the one you want :-)
-    #exp_values_MC(L,temp_list,random)      # Expectation values vs. # of Monte Carlo cycles
-    #exp_rand_MC(L,temp,random_list)        # Expectation values vs. # of Monte Carlo cycles: Random vs. non-random
-    #exp_values_T(L_list,random)            # Expectation values vs. temperature
-    probability(L,temp,random,cutoff=3000)      # Calculate probabilty for <E>
-    #T_C_estimate(L_list,random)             # Calculate estimate of T_crit based on analytical value of the constant a
-    #timeusage()                            # Plot time usage to run code (based on dataset)
-    
+    yes = 1
+	
+    while yes==1:
+        print " "
+        print "What do you want to do?"
+        print "1 = Plot expectation values against MC cycles;"
+        print "2 = Plot expectation values against MC cycles, random vs. fixed ground state;"
+        print "3 = Plot expectation values against temperature;"
+        print "4 = Calculate probability for <E>;"
+        print "5 = Calculate estimate of critical temperature;"
+        print "6 = Plot time usage;"
+        number = raw_input("Choose a number: ")
+        option = int(number)
 
+        if option == 1:
+	        exp_values_MC(L,temp_list,random)      # Expectation values vs. number of Monte Carlo cycles
+        elif option == 2:
+            exp_rand_MC(L,temp,random_list)        # Expectation values vs. number of Monte Carlo cycles: Random vs. non-random
+        elif option == 3:
+            exp_values_T(L_list,random)            # Expectation values vs. temperature
+        elif option == 4:
+            probability(L,temp,random,cutoff=3000)  # Calculate probabilty for <E>
+        elif option == 5:
+            T_C_estimate(L_list,random)            # Calculate estimate of T_crit based on analytical value of the constant a
+        elif option == 6:
+            timeusage()                            # Plot time usage to run code (based on dataset)
+        else:
+            print "Invalid choice. Aborting."
+        new = raw_input("Want to try again? Yes(1) or No(0): ")
+        yes = int(new)
+        if yes==0:
+            print "Bye."
+        else:
+            yes=1
+		
+		
 if __name__ == "__main__":
     main(sys.argv[1:]) 
