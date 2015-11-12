@@ -35,9 +35,9 @@ def read_file(filename):
     E_avg = data[2]                 # Mean energy
     M_absavg = data[3]              # Mean magnetization (absolute value) 
     C_v = data[4]                   # Specific heat
-    X = data[5] 		    # Susceptibility
+    X = data[5] 		   	 		# Susceptibility
     E_var = data[6]                 # Variance of energy
-    AC = data[7]		    # Accepted configurations
+    AC = data[7]		    		# Accepted configurations
     
     return T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC
 
@@ -281,7 +281,6 @@ def T_C_estimate(L_list,random):
     
     for i in range(len(L_list)):
         filenameT = '../Datasets/ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
-        #filenameT = 'C:\Users\mariefoss\Documents\GitHub\Project4\Datasets\ExpectationValues_temp_%d_%d.txt' % (L_list[i],random)
         T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameT) # Read data
         
         # Find critical temperature from data set:
