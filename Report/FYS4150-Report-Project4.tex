@@ -334,11 +334,30 @@ The figure also shows that this increase is greater with higher lattice size. Th
 
 \subsection{The probability P(E)}
 
-By simply counting the number of times a given energy appears in our computation, namely the expectation value for the energy, we can compute the probability $P(E)$ for getting that energy. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. This result is compared with the computed variance in energy $\sigma_E^2$. 
+\begin{figure*}[b!]
+\begin{center}
+\begin{tabular}{c c}
+  	\includegraphics[width=85mm]{images/prob_dist_T10.png}
+	& \includegraphics[width=85mm]{images/prop_dist_T24.png} \\
+	(a) $T = 1.0$					& (b) $T = 2.4$  \\ [6pt]
+\end{tabular}
+\caption{The probability distribution $P(E)$ for the energies $E$ for different temperatures.}\label{fig:prob_dist}
+\end{center}
+\end{figure*}
 
-For $T = 1.0$ we find that $P(E) = 0.87$ and $\sigma_E^2 = 0.02$, while for $T = 2.4$ we find that $P(E) = 0.03$ and $\sigma_E^2 = 8.28$ in the case of an ordered initial spin matrix (as follows from Fig.~\ref{fig:random} this result is not much different for a randomly oriented initial spin matrix because we are excluding the first number of MC cycles where having a different initial configuration would make a difference). This means that where there is a small deviation in energy values, described by the variance, there will be a high probability of getting the specific value $E$. When the deviation is large as for $T=2.4$, the probability of getting the value $E$ is small.
+By simply counting the number of times a given energy appears in our computation, we can compute the probability distribution $P(E)$. We start the counting after the steady state situation has been reached, still looking at the $L = 20$ case. Fig.~\ref{fig:prob_dist}a-b shows the probability distribution for temperatures $T = 1.0$ and $T = 2.4$. 
 
-These findings correspond with what we see in Fig.~\ref{fig:L20_ex_values}a-d where the curves are linear for a low temperature, giving the expected energy in almost every MC cycle, while the curves oscillate in the case of a high temperature, making the probability smaller.
+We see that for the low temperature the probability of getting an energy corresponding to the value of the expectation value for the energy, $\langle E\rangle$, is very high, and the spreading of energies is small, which corresponds with the small value of the variance $\sigma_E^2 = 0.02$.
+
+The opposite is true in the case of the higher temperature, shown in Fig.~\ref{fig:prob_dist}b. The probability is still highest for $\langle E\rangle$, but the spreading of the energies around this value is much larger, corresponding with the variance of $\sigma_E^2 = 8.28$. 
+
+In conclusion, this means that where there is a small deviation in energy values, described by the variance, there will be a high probability of getting the expectation value $\langle E\rangle$. When the deviation is large as for $T=2.4$, the probability of getting the value $\langle E\rangle$ is small.
+
+The numbers presented here apply in the case of an ordered initial spin matrix, but as follows from Fig.~\ref{fig:random} this result is not much different for a randomly oriented initial spin matrix because we are excluding the first number of MC cycles where having a different initial configuration would make a difference)
+
+The findings presented here correspond with what we see in Fig.~\ref{fig:L20_ex_values}a-d where the curves are completely straight for a low temperature, giving the expected energy in almost every MC cycle, while the curves oscillate in the case of a high temperature, making the probability smaller.
+
+
 
 
 
@@ -430,7 +449,9 @@ where we used the values from the two first columns to find that $a = 0.25$ by t
 
 
 \subsection{Parallelization}
-As described previously, we parallelized our code using MPI. Here we have gathered some recordings of the time usage, using $n = 4$ processes on a 2,5 GHz Intel Core i5 processor (a four-year old MacBook Pro) for a temperature step length of 0.05:
+As described previously, we parallelized our code using MPI. When using parallelization, we had to make sure to only allow \verb@rank = 0@ to print out the results of our calculations, to get readable files.
+
+Here we have gathered some recordings of the time usage, using $n = 4$ processes on a 2,5 GHz Intel Core i5 processor (a four-year old MacBook Pro) for a temperature step length of 0.05:
 
 \begin{center}
 \begin{tabular}{ l r }
@@ -448,14 +469,21 @@ As described previously, we parallelized our code using MPI. Here we have gather
 \end{center}
 These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curve which makes a good fit for lower values of $L$, and a $e^{L/9.5}$ curve which is a good approximation for higher values of $L$.
 
+\begin{figure*}
 \begin{center}
-	\includegraphics[width=90mm]{images/time_usage.png}	
-	\captionof{figure}{Time needed to run the program as a function of lattice size.}
-	\label{fig:time_usage}
+  	\includegraphics[width=90mm]{images/time_usage.png}
+\caption{Time needed to run the program as a function of lattice size.}\label{fig:time_usage}
 \end{center}
+\end{figure*}
+
+%\begin{center}
+%	\includegraphics[width=90mm]{images/time_usage.png}	
+%	\captionof{figure}{Time needed to run the program as a function of lattice size.}
+%	\label{fig:time_usage}
+%\end{center}
 We also wanted to run our code on the super-computers in the Astrophysics department and compare the time usage with the time spent on the MacBook, but we had trouble making MPI work on these machines.
 
-When using parallelization, we had to make sure to only allow \verb@rank = 0@ to print out the results of our calculations, to get usable files.
+
 
 
 \section{Conclusions}
