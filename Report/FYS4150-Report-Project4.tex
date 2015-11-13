@@ -36,7 +36,7 @@
 \maketitle
 
 \begin{abstract}
-	\noindent We study the Ising model for a spin system in two dimensions for different lattice sizes $L$ and estimate the critical temperature $T_{\mathrm{C}}$ of the system as it experiences a magnetic phase transition using Monte Carlo simulations. A lattice size of $L = 80$ allows us to estimate a critical temperature with a relative error of $1.36 \times 10^{-2}$ compared to the exact value of 2.269 (in units of $kT/J$). We find that using a value of $L = 80$ is sufficient to get good results without the code taking too long to compile, using a temperature step length of 0.05. Whether we initialize the system with a random or ordered spin matrix is of no importance after about 25 000 Monte Carlo cycles at the highest (this depends on the temperature of the system), when all the expectation values of interest has reached the most likely state. Here we study the behavior of the expectation values for the energy, magnetization, susceptibility and heat capacity. We find that these expectation values oscillate more for higher temperatures as a function of the number of Monte Carlo cycles (analogous with the passing of time), resulting in a large value for the variance $\sigma_E^2$ and a small value for the probability $P(E)$ for getting an energy equal to the expectation value for the energy, as opposed to temperatures well below the critical value where the value of $\sigma_E^2$ will be low and $P(E)$ will be high.
+	\noindent We study the Ising model for a spin system in two dimensions for different lattice sizes $L$ and estimate the critical temperature $T_{\mathrm{C}}$ of the system as it experiences a magnetic phase transition using Monte Carlo simulations. A lattice size of $L = 80$ allows us to estimate a critical temperature with a relative error of $1.36 \times 10^{-2}$ compared to the exact value of 2.269 (in units of $kT/J$). We find that using a value of $L = 80$ is sufficient to get good results without the code taking too long to compile, using a temperature step length of 0.05. Whether we initialize the system with a random or ordered spin matrix is of no importance after about 1000 Monte Carlo cycles at the highest, when all the expectation values of interest has reached the most likely state. Here we study the behavior of the expectation values for the energy, magnetization, susceptibility and heat capacity. We find that these expectation values oscillate more for higher temperatures as a function of the number of Monte Carlo cycles (analogous with the passing of time), resulting in a large value for the variance $\sigma_E^2$ and a small value for the probability $P(E)$ for getting an energy equal to the expectation value for the energy, as opposed to temperatures well below the critical value where the value of $\sigma_E^2$ will be low and $P(E)$ will be high.
 	% \lipsum[1]
 	\vspace*{2ex}
 	
@@ -228,7 +228,9 @@ We made use of the \textbf{Metropolis algorithm}:
 	\item Repeat steps $2-5$ for the chosen number of Monte Carlo (MC) cycles, meaning the number of times we should sweep through the lattice.
 	\item Compute the various expectation values by dividing by the total number of cycles (and possibly the number of spins).
 \end{enumerate}
-During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $E$ with the previous value of $E$. If the difference is smaller than $5 \%$, we can say that the most likely state has been reached. In total we run 1 million MC cycles.
+During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $E$ with the previous value of $E$. If the difference is smaller than $1 \%$, we can say that the most likely state has been reached. (We had to choose $1 \%$ rather than the suggested $5 \%$ because the first two energies in the $T = 2.4$ case vary less than $5 \%$.)
+
+We run 1 million MC cycles in total.
 
 
 \subsection{Parallelization}
@@ -255,16 +257,17 @@ For temperature $T=1.0$ (in units of $kT/J$), this gives the following results f
 \begin{center}
 \begin{tabular}{ l l l }\hline
 	Quantity 								& Closed form	 				& Numerical		\\ \hline
-	Mean energy $E$ 						& $-8.00$ 						& $-7.98$		 \\
-	Mean magnetization $|{\cal M}|$ 			& 3.99						& 3.99		 \\
-	Specific heat $C_V$						& $2.88 \times 10^{-5}$			& 0.12 		\\
-	Susceptibility $\chi$						& $3.21 \times 10^{-2}$			& $1.5 \times 10^{-2}$		\\
+	Mean energy $E$ 						& $-8.00$ 						& $-8.00$		 \\
+	Mean magnetization $|{\cal M}|$ 			& 3.99						& 4.00		 \\
+	Specific heat $C_V$						& $2.88 \times 10^{-5}$			& 0.00 		\\
+	Susceptibility $\chi$						& $3.21 \times 10^{-2}$			& 0.00		\\
 	\hline
 \end{tabular}
 \end{center}
 These results follow closely that of Table \ref{table:quantities}. 
 
-The minimum number of MC cycles needed to achieve good agreement for the expectation value for energy is calculated to be 22-24 cycles, which will vary slightly for each run, according to our energy difference test described in Sec.~\ref{subsec:metropolis}.
+The total number of MC cycles needed to achieve good agreement for the expectation value of the energy is only one cycle, which gives perfect results according to Table~\ref{table:quantities}. We see that the results from the closed-form expressions are slightly off, which is probably due to the approximation we used in Eq. (\ref{eq:E_avg_analytic}). 
+
 
 \begin{figure*}[t]
 \begin{center}
@@ -285,13 +288,14 @@ The minimum number of MC cycles needed to achieve good agreement for the expecta
 \subsection{The 20 $\times$ 20 case}
 Now that we have confirmed that our code produces results comparable to the analytic solution, we can look at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a closer study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ and $T = 2.4$, as shown in Fig.~\ref{fig:L20_ex_values}a-d. 
 
-For $T = 1.0$, we see that the expectation values does not change considerably with the number of MC cycles, meaning the system reached the equilibrium state quickly. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$, meaning the system will be in its ground state of minimal energy right away. Here, as for the $L = 2$ case, the minimum number of MC cycles is around 22.
+For $T = 1.0$, we see that the expectation values does not change considerably with the number of MC cycles, meaning the system reached the equilibrium state quickly. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$, meaning the system will be in its ground state of minimal energy right away. Here the minimum number of MC cycles is around 2, according to the method described in Sec.~\ref{subsec:metropolis}. This number will vary slightly for each run due to the use of random numbers in the method.
 
-For $T = 2.4$, on the other hand, the calculated values shows large variation for small numbers of MC cycles. The system reaches an equilibrium at a much later point. From studying the graphs in Fig.~\ref{fig:L20_ex_values}a-d this occurs after about 5000 MC cycles.
+For $T = 2.4$, on the other hand, the expectation values shows a larger variation for small numbers of MC cycles in Fig.~\ref{fig:L20_ex_values}a, meaning the system reaches an equilibrium at a later point. In this case the minimum number of MC cycles is around 11 when using the method in Sec.~\ref{subsec:metropolis} where we compare the new energy value with the previous one. When studying the graphs in Fig.~\ref{fig:L20_ex_values}a we see that the minimum number of MC cycles would be much larger if comparing energy values from a larger intervall than one MC cycle. Then the minimum number of MC cycles would be around 2000 MC cycles according to the figure.
 
-Do these conclusions depend on whether we have an ordered (all spins pointing in one direction) or a random spin matrix as the starting configuration? Fig.~\ref{fig:random}a-b shows that for the low temperature of $T = 1.0$ the randomly oriented spin matrix will take longer to reach the most likely state, while the ordered spin matrix will hit the expectation value right away. In the random case, we again need about 5000 MC cycles before the most likely state is reached.
+Do these conclusions depend on whether we have an ordered (all spins pointing in one direction) or a random spin matrix as the starting configuration? Fig.~\ref{fig:random}a-b shows that for the low temperature of $T = 1.0$ the randomly oriented spin matrix will take longer to reach the most likely state, while the ordered spin matrix will hit the expectation value right away. In the random case, we need about 1000 MC cycles before the most likely state is reached, according to the figure.
 
-The situation is different for a higher temperature. In the case of $T = 2.4$ both configurations deviate from the long-term expectation value in the beginning, then slowly oscillates towards a value close to the expectation value. But this does not happen for both the energy and magnetization until after about 25 000 MC cycles. 
+In the case of $T = 2.4$ both configurations deviate from the long-term expectation value in the beginning, then slowly oscillates towards a value close to the expectation value. This, again, happens after about 1000 MC cycles. 
+
 
 \begin{figure*}[t]
 \begin{center}

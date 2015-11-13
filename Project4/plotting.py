@@ -246,6 +246,7 @@ def probability(L,temp,random,cutoff):
     # Read data
     T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameMC)
     E = np.loadtxt(filenameE,unpack=True)
+    E = E[cutoff:-1]
     
     # Plot probability distribution
     results, edges = np.histogram(E, normed=True)
@@ -361,7 +362,7 @@ def main(argv):
             temp = float(temperature)
             rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
             random = int(rand)
-            probability(L,temp,random,cutoff=3000)  
+            probability(L,temp,random,cutoff=100)  
         elif option == 5: # Calculate estimate of T_crit based on analytical value of the constant a
             list = raw_input("Which L do you want to estimate T_C for? Choose one or more from 10,20,40,60,80,100. Separate by commas: ")
             L_list = string2array(list)
