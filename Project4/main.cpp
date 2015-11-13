@@ -278,10 +278,11 @@ void ExpectationValues_MC(double T,ofstream &file,ofstream &fileE,int n_spins,in
 
     bool count = false;
     bool first = true;
+    int minimum_mcs;
 
     for(int cycles=1; cycles <= mc;cycles++){
         Metropolis(n_spins,spin_matrix,E,M,w,accepted_configs);
-        if(count && my_rank ==0){
+        if(count && my_rank == 0){
             fileE << E/n_spins/n_spins << endl;
         }
 
@@ -292,9 +293,10 @@ void ExpectationValues_MC(double T,ofstream &file,ofstream &fileE,int n_spins,in
 
         test = fabs((Eprev-average[0])/Eprev);
         if (test < 0.05) countstart = 1;
+        if (test > 0.1) {countstart = 0; first = true;}
 
         if (countstart == 1 && first){
-            cout << "Min. # cycles " << "\t" << cycles << endl;
+            minimum_mcs = cycles;
             first = false;
             count = true;
         }
@@ -302,6 +304,7 @@ void ExpectationValues_MC(double T,ofstream &file,ofstream &fileE,int n_spins,in
             write_to_file(file,cycles,T,average,accepted_configs,n_spins);
         }
     }
+    cout << "Min. # cycles " << "\t" << cycles << endl;
 }
 
 
