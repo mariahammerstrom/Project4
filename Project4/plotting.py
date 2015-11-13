@@ -6,8 +6,9 @@ A program that plots:
     2) Number of accepted configurations, and
     3) Number of Monte Carlo cycles
 as a function of temperature and number of Monte Carlo cycles.
+The program also plots the time usage of the program based on a given data set.
 
-The program also calculates:
+The program calculates:
     1) The probability of the average energy and compares it to the standard 
     deviation for the average energy, and
     2) An estimate for the critical temperature of the system.
@@ -35,9 +36,9 @@ def read_file(filename):
     E_avg = data[2]                 # Mean energy
     M_absavg = data[3]              # Mean magnetization (absolute value) 
     C_v = data[4]                   # Specific heat
-    X = data[5] 		   	 		# Susceptibility
+    X = data[5] 		    # Susceptibility
     E_var = data[6]                 # Variance of energy
-    AC = data[7]		    		# Accepted configurations
+    AC = data[7]		    # Accepted configurations
     
     return T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC
 
@@ -60,29 +61,29 @@ def exp_values_MC(L,temps,random):
     plt.title('Magnetism expectation value, L = %d' % L,size=12)
     plt.xlabel('# of MC cycles',size=12)
     plt.ylabel(r'$\langle M \rangle$',size=12)
-    plt.xlim(0,10000) # L = 20
-    plt.ylim(0.2,1.2) # L = 20
+    #plt.xlim(0,10000) # L = 20
+    #plt.ylim(0.2,1.2) # L = 20
     
     plt.figure(3)
     plt.title('Heat capacity, L = %d' % L,size=12)
     plt.xlabel('# of MC cycles',size=12)
     plt.ylabel(r'$C_V$',size=12)
-    plt.xlim(0,10000) # L = 20
-    plt.ylim(-0.5,2) # L = 20
+    #plt.xlim(0,10000) # L = 20
+    #plt.ylim(-0.5,2) # L = 20
     
     plt.figure(4)
     plt.title('Susceptibility, L = %d' % L,size=12)
     plt.xlabel('# of MC cycles',size=12)
     plt.ylabel(r'$\chi$',size=12)
-    plt.xlim(0,30000) # L = 20
-    plt.ylim(-1,12) # L = 20
+    #plt.xlim(0,30000) # L = 20
+    #plt.ylim(-1,12) # L = 20
     
     plt.figure(5)
     plt.title('Accepted configurations vs. MC cycles, L = %d' % L,size=12)
     plt.xlabel('# of MC cycles',size=12)
     plt.ylabel('Accepted configurations',size=12)
-    plt.xlim(0,3000)   # L = 20  
-    plt.ylim(-10,150) # L = 20
+    #plt.xlim(0,3000)   # L = 20  
+    #plt.ylim(-10,150) # L = 20
     
     for i in range(len(temps)):
         # Read data
@@ -246,22 +247,20 @@ def probability(L,temp,random,cutoff):
     T,MC_cycles,E_avg,M_absavg,C_v,X,E_var,AC = read_file(filenameMC)
     E = np.loadtxt(filenameE,unpack=True)
     
-    # Round-off to make counting possible
-    precision = 2 # Number of decimal points
-    E_avg = np.around(E_avg,decimals=precision)
-    E = np.around(E,decimals=precision)
-    E = E[cutoff:-1] # Only include energies after most likely state is reached
-
-    # Calculate probability
-    no_elements = len(E)
-    counter = list(E).count(E_avg[-1])
-    prob = float(counter)/no_elements
+    # Plot probability distribution
+    results, edges = np.histogram(E, normed=True)
+    binWidth = edges[1] - edges[0]
+    plt.bar(edges[:-1], results*binWidth, binWidth)
+    plt.xlabel(r'$E$')
+    plt.ylabel(r'$P(E)$')
+    plt.title(r'Probability distribution, $L$ = %d, $T$ = %.2f, $<E>$ = %.2f' % (L,temp,E_avg[-1]),size=12)
+    plt.show()
     
-    print "Probability: (T = %.2f)" % temp
+    print "T = %.2f" % temp
     print "E_avg = %.2f" % E_avg[-1]
-    print "E = %.2f" % E[-1]
-    print "P(E) = %.2f" % prob
     print "Var(E) = %.2f" % E_var[-1]
+    
+    print "\nSum(P(E)) = ", sum(results*binWidth) # Check that the probabilities sum to 1.0
     
     return
 
@@ -308,6 +307,7 @@ def timeusage():
     plt.show()
     return
 	
+
 def string2array(list):
     list = list.split(',')
     size = len(list)
@@ -317,21 +317,13 @@ def string2array(list):
     return array
     
 
-def main(argv): # Change these values according to run!
-    
-    # Is the spin matrix initially random? True = 1, false = 0.
-    random = 0                           
-    random_list = [0,1]
-    
-    # How large is the lattice?
-    L = 20
-    L_list = [80,100,120]
-    
-    # What is the temperature?
-    temp = 2.4
-    temp_list = [1.0,2.4]
+def main(argv):
+
+    # Command line options
     yes = 1
-	
+    random_list = [0,1]
+    temp_list = [1.0,2.4]
+    
     while yes==1:
         print " "
         print "What do you want to do?"
@@ -357,7 +349,7 @@ def main(argv): # Change these values according to run!
             temp = float(temperature)
             exp_rand_MC(L,temp,random_list)        
         elif option == 3: # Expectation values vs. temperature
-            list = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100. Separate by commas: ")
+            list = raw_input("Which L do you want to plot for? Choose one or more from 10,20,40,60,80,100. Separate by commas: ")
             L_list = string2array(list)
             rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
             random = int(rand)
@@ -365,11 +357,13 @@ def main(argv): # Change these values according to run!
         elif option == 4: # Calculate probabilty for <E>
             l = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100: ")
             L = int(l)
+            temperature = raw_input("T=1.0 or T=2.4? ")
+            temp = float(temperature)
             rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
             random = int(rand)
             probability(L,temp,random,cutoff=3000)  
         elif option == 5: # Calculate estimate of T_crit based on analytical value of the constant a
-            list = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100. Separate by commas: ")
+            list = raw_input("Which L do you want to estimate T_C for? Choose one or more from 10,20,40,60,80,100. Separate by commas: ")
             L_list = string2array(list)
             rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
             random = int(rand)
@@ -381,7 +375,7 @@ def main(argv): # Change these values according to run!
         new = raw_input("Want to try again? Yes(1) or No(0): ")
         yes = int(new)
         if yes==0:
-            print "Bye."
+            print "Bye!"
         else:
             yes=1
 		
