@@ -307,6 +307,14 @@ def timeusage():
     plt.legend()
     plt.show()
     return
+	
+def string2array(list):
+    list = list.split(',')
+    size = len(list)
+    array = np.zeros(size)
+    for i in range(size):
+	    array[i] = float(list[i])
+    return array
     
 
 def main(argv): # Change these values according to run!
@@ -336,18 +344,38 @@ def main(argv): # Change these values according to run!
         number = raw_input("Choose a number: ")
         option = int(number)
 
-        if option == 1:
-	        exp_values_MC(L,temp_list,random)      # Expectation values vs. number of Monte Carlo cycles
-        elif option == 2:
-            exp_rand_MC(L,temp,random_list)        # Expectation values vs. number of Monte Carlo cycles: Random vs. non-random
-        elif option == 3:
-            exp_values_T(L_list,random)            # Expectation values vs. temperature
-        elif option == 4:
-            probability(L,temp,random,cutoff=3000)  # Calculate probabilty for <E>
-        elif option == 5:
-            T_C_estimate(L_list,random)            # Calculate estimate of T_crit based on analytical value of the constant a
-        elif option == 6:
-            timeusage()                            # Plot time usage to run code (based on dataset)
+        if option == 1: # Expectation values vs. number of Monte Carlo cycles
+            l = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100: ")
+            L = int(l)
+            rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
+            random = int(rand)
+            exp_values_MC(L,temp_list,random)      
+        elif option == 2: # Expectation values vs. number of Monte Carlo cycles: Random vs. non-random
+            l = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100: ")
+            L = int(l)
+            temperature = raw_input("T=1.0 or T=2.4? ")
+            temp = float(temperature)
+            exp_rand_MC(L,temp,random_list)        
+        elif option == 3: # Expectation values vs. temperature
+            list = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100. Separate by commas: ")
+            L_list = string2array(list)
+            rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
+            random = int(rand)
+            exp_values_T(L_list,random)            
+        elif option == 4: # Calculate probabilty for <E>
+            l = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100: ")
+            L = int(l)
+            rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
+            random = int(rand)
+            probability(L,temp,random,cutoff=3000)  
+        elif option == 5: # Calculate estimate of T_crit based on analytical value of the constant a
+            list = raw_input("Which L do you want to plot for? Choose 10,20,40,60,80 or 100. Separate by commas: ")
+            L_list = string2array(list)
+            rand = raw_input("Do you want to start with a random ground state? Yes(1), No(0): ")
+            random = int(rand)
+            T_C_estimate(L_list,random)            
+        elif option == 6: # Plot time usage to run code (based on dataset)
+            timeusage()                            
         else:
             print "Invalid choice. Aborting."
         new = raw_input("Want to try again? Yes(1) or No(0): ")
