@@ -36,7 +36,7 @@
 \maketitle
 
 \begin{abstract}
-	\noindent We study the Ising model for a spin system in two dimensions for different lattice sizes $L$ and estimate the critical temperature $T_{\mathrm{C}}$ of the system as it experiences a magnetic phase transition using Monte Carlo simulations. A lattice size of $L = 80$ allows us to estimate a critical temperature with a relative error of $1.36 \times 10^{-2}$ compared to the exact value of 2.269 (in units of $kT/J$). We find that using a value of $L = 80$ is sufficient to get good results without the code taking too long to compile, using a temperature step length of 0.05. Whether we initialize the system with a random or ordered spin matrix is of no importance after about 1000 Monte Carlo cycles at the highest, when all the expectation values of interest has reached the most likely state. Here we study the behaviour of the expectation values for the energy, magnetization, susceptibility and heat capacity. We find that these expectation values oscillate more for higher temperatures as a function of the number of Monte Carlo cycles (analogous with the passing of time), resulting in a large value for the variance $\sigma_E^2$ and a small value for the probability $P(E)$ for getting an energy equal to the expectation value for the energy, as opposed to temperatures well below the critical value where the value of $\sigma_E^2$ will be low and $P(E)$ will be high.
+	\noindent We study the Ising model for a spin system in two dimensions without an external magnetic field for different lattice sizes $L$ and estimate the critical temperature $T_{\mathrm{C}}$ of the system as it experiences a magnetic phase transition using Monte Carlo simulations. A lattice size of $L = 80$ allows us to estimate a critical temperature with a relative error of $1.36 \times 10^{-2}$ compared to the exact value of 2.269 (in units of $kT/J$). We find that using a value of $L = 80$ is sufficient to get decent results without the code taking too long to compile, using a temperature step length of 0.05. Whether we initialize the system with a random or ordered spin matrix is of no importance after about 15,000 Monte Carlo cycles, when the expectation values for the energy, magnetization, susceptibility and heat capacity all have reached the most likely state. We find that these expectation values oscillate more for higher temperatures as a function of the number of Monte Carlo cycles (analogous with the passing of time), resulting in a large value for the variance $\sigma_E^2$ and a small value for the probability $P(E)$ for getting an energy equal to the expectation value for the energy, as opposed to temperatures well below the critical value where the value of $\sigma_E^2$ will be low and $P(E)$ will be high.
 	% \lipsum[1]
 	\vspace*{2ex}
 	
@@ -228,9 +228,7 @@ We made use of the \textbf{Metropolis algorithm}:
 	\item Repeat steps $2-5$ for the chosen number of Monte Carlo (MC) cycles, meaning the number of times we should sweep through the lattice.
 	\item Compute the various expectation values by dividing by the total number of cycles (and possibly the number of spins).
 \end{enumerate}
-During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of $E$ with the previous value of $E$. If the difference is smaller than $1 \%$, we can say that the most likely state has been reached. (We had to choose $1 \%$ rather than the suggested $5 \%$ because the first two energies in the $T = 2.4$ case vary less than $5 \%$.)
-
-We run 1 million MC cycles in total.
+During the computation we want to check how many MC cycles we need before the system has reached its most likely state. This is done by comparing the new value of the energy $E$ with the previous value of $E$. If the difference is smaller than $1 \%$, we can say that the most likely state has been reached. (We had to choose $1 \%$ rather than the suggested $5 \%$ because the first two energies in the $T = 2.4$ case vary less than $5 \%$.) We run 1 million MC cycles in total.
 
 
 \subsection{Parallelization}
@@ -238,7 +236,7 @@ We have parallelized our code using the Open MPI library.
 
 
 \subsection{Calculating $T_{\mathrm{C}}$}\label{subsec:T_C}
-The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through the Metropolis algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is described by the exact value of 2.269 (in units of $kT/J$). Eq. (\ref{eq:T_C}) has two unknowns, $T_{\mathrm{C}}(L = \infty)$ and the constant $a$. By using our calculations for two different lattice sizes to calculate $T_{\mathrm{C}}(L)$, we can solve Eq. (\ref{eq:T_C}) in the two cases and get an estimate for $a$ and thus the critical temperature $T_{\mathrm{C}}$, using
+The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), where $T_{\mathrm{C}}(L)$ is calculated for different lattice sizes $L$ through the Metropolis algorithm described above.  $T_{\mathrm{C}}(L = \infty)$ is defined by the exact value of 2.269 (in units of $kT/J$). Eq. (\ref{eq:T_C}) has two unknowns, $T_{\mathrm{C}}(L = \infty)$ and the constant $a$. By using our calculations for two different lattice sizes to calculate $T_{\mathrm{C}}(L)$, we can solve Eq. (\ref{eq:T_C}) in the two cases and get an estimate for $a$ and thus the critical temperature $T_{\mathrm{C}}$, using
 
 \begin{equation}\label{eg:T_C_estimate}
 	T_{\mathrm{C}} = T_{\mathrm{C}}(L) - \frac{a}{L}.
@@ -250,7 +248,7 @@ The critical temperature $T_{\mathrm{C}}$ is described by Eq. (\ref{eq:T_C}), wh
 
 \subsection{Checking the 2 $\times$ 2 case}
 
-Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ numerically with periodic boundary conditions, using the expressions from Sec.~\ref{subsec:theory}, gives results which can be compared with the results of the analytical closed-form expressions given in Sec.~\ref{subsec:analytical} to check that our code is working properly. 
+Computing the mean energy $E$, mean magnetization $|{\cal M}|$, the specific heat $C_V$ and the susceptibility $\chi$ numerically with periodic boundary conditions, using the expressions from Sec.~\ref{subsec:theory}, gives us results we can be compared with the results from the analytical closed-form expressions given in Sec.~\ref{subsec:analytical} to check that our code is working properly. 
 
 For temperature $T=1.0$ (in units of $kT/J$), this gives the following results for a $2 \times 2$ spin system where the initial state has all spins pointing upwards:
 
@@ -264,9 +262,7 @@ For temperature $T=1.0$ (in units of $kT/J$), this gives the following results f
 	\hline
 \end{tabular}
 \end{center}
-These results follow closely that of Table \ref{table:quantities}. 
-
-The total number of MC cycles needed to achieve good agreement for the expectation value of the energy is only one cycle, which gives perfect results according to Table~\ref{table:quantities}. We see that the results from the closed-form expressions are slightly off, which is probably due to the approximation we used in Eq. (\ref{eq:E_avg_analytic}). 
+The total number of MC cycles needed to achieve this agreement for the expectation value of the energy is only one MC cycle, which gives perfect results according to Table~\ref{table:quantities}. We see that the results from the closed-form expressions are slightly off, which is probably due to the approximation we used in Eq. (\ref{eq:E_avg_analytic}). 
 
 
 \begin{figure*}[t]
@@ -286,15 +282,17 @@ The total number of MC cycles needed to achieve good agreement for the expectati
 
 
 \subsection{The 20 $\times$ 20 case}
-Now that we have confirmed that our code produces results comparable to the analytic solution, we can look at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a closer study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. A rough study is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ and $T = 2.4$, as shown in Fig.~\ref{fig:L20_ex_values}a-d. 
+Now that we have confirmed that our code produces results corresponding well with the analytic solution, we can look at the case of $L = 20$ spins in the $x$ and $y$ directions. In this case we wanted to perform a closer study of the time (or number of MC cycles) we need before reaching an equilibrium situation and can start computing the various expectation values. This is done by plotting the various expectation values as a function of number of MC cycles, for both $T = 1.0$ and $T = 2.4$, as shown in Fig.~\ref{fig:L20_ex_values}a-d. 
 
-For $T = 1.0$, we see that the expectation values does not change considerably with the number of MC cycles, meaning the system reached the equilibrium state quickly. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$, meaning the system will be in its ground state of minimal energy right away. Here the minimum number of MC cycles is around 2, according to the method described in Sec.~\ref{subsec:metropolis}. This number will vary slightly for each run due to the use of random numbers in the method.
+For $T = 1.0$ we see that the expectation values do not change considerably with the number of MC cycles, meaning the system reached the equilibrium state quickly. This is because we set all spin configurations to spin up for temperatures lower than $T=1.5$, meaning the system will be in its ground state of minimal energy right away. Here the minimum number of MC cycles is around 2, according to the method described in Sec.~\ref{subsec:metropolis}. This number will vary slightly for each run due to the use of random numbers in the method.
 
-For $T = 2.4$, on the other hand, the expectation values shows a larger variation for small numbers of MC cycles in Fig.~\ref{fig:L20_ex_values}a, meaning the system reaches an equilibrium at a later point. In this case the minimum number of MC cycles is around 11 when using the method in Sec.~\ref{subsec:metropolis}, where we compare the new energy value with the previous one. When studying the graphs in Fig.~\ref{fig:L20_ex_values}a, we see that the minimum number of MC cycles would be much larger if comparing energy values from a larger interval than one MC cycle. Then the minimum number of MC cycles would be around 2000 MC cycles according to the figure.
+For $T = 2.4$, on the other hand, the expectation values shows a larger variation for small numbers of MC cycles in Fig.~\ref{fig:L20_ex_values}a, meaning the system reaches an equilibrium at a later point. In this case the minimum number of MC cycles is around 11 when using the method in Sec.~\ref{subsec:metropolis}, where we compare the new energy value with the previous one. When studying the graphs in Fig.~\ref{fig:L20_ex_values}a, we see that the minimum number of MC cycles would be much larger if comparing energy values from a larger interval than one MC cycle, as there can be small variations for the individual cycles, but a larger variation over many. Then the minimum number of MC cycles would be around 2,000 MC cycles according to the figure.
 
-Do these conclusions depend on whether we have an ordered (all spins pointing in one direction) or a random spin matrix as the starting configuration? Fig.~\ref{fig:random}a-b shows that for the low temperature of $T = 1.0$ the randomly oriented spin matrix will take longer to reach the most likely state, while the ordered spin matrix will hit the expectation value right away. In the random case, we need about 1000 MC cycles before the most likely state is reached, according to the figure.
+Do these conclusions depend on whether we have an ordered (all spins pointing in one direction) or a random spin matrix as the starting configuration? Fig.~\ref{fig:random}a-b shows that for the low temperature of $T = 1.0$ the randomly oriented spin matrix will take longer to reach the most likely state, while the ordered spin matrix will hit the expectation value right away. In the random case, we need about 1,000 MC cycles before the most likely state is reached, according to the figure.
 
-In the case of $T = 2.4$ both configurations deviate from the long-term expectation value in the beginning, then slowly oscillates towards a value close to the expectation value. This, again, happens after about 1000 MC cycles. 
+In the case of $T = 2.4$ both configurations deviate from the long-term expectation value in the beginning, then slowly oscillates towards a value close to the expectation value. This, again, happens after about 1,000 MC cycles, for both the ordered and random spin configuration. 
+
+In this discussion we have only considered the the minimum number of MC cycles needed for the mean energy to reach the most likely state. If we also include the other expectation values presented in Fig.~\ref{fig:L20_ex_values} and Fig.~\ref{fig:random}, this number should be around 15,000 MC cycles, which is $1.5 \%$ of the total number of MC cycles used in our computations.
 
 
 \begin{figure*}[t]
@@ -316,18 +314,18 @@ In the case of $T = 2.4$ both configurations deviate from the long-term expectat
 
 \subsection{The number of accepted configurations}
 
-The number of accepted configurations as a function of the total number of MC cycles is shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows the number of accepted configurations divided by the total number of MC cycles. The number of accepted configurations scales approximately linearly with the total number of MC cycles. For $T=1.0$ there are no accepted configurations since no spin in the lattice is changed from up to down. 
+The number of accepted configurations as a function of the total number of MC cycles is shown in Fig.~\ref{fig:L20_accepted_configs}a. The plot shows the number of accepted configurations divided by the total number of MC cycles. We see that the number of accepted configurations scales approximately linearly with the total number of MC cycles. 
 
-For the case of $T = 2.4$ the number of accepted configurations increases rapidly in the beginning, then stabilizing, as the most likely state has been reached. 
+For $T=1.0$ there are no accepted configurations since no spin in the lattice is changed from up to down. For the case of $T = 2.4$ the number of accepted configurations increases rapidly in the beginning, then stabilizing, as the most likely state has been reached. 
 
 \begin{figure*}[t]
 \begin{center}
 \begin{tabular}{ccc}
-  	\includegraphics[width=85mm]{images/accepted_configs_MC_L20.png}
-	& \includegraphics[width=85mm]{images/accepted_configs_temp.png} \\
+  	\includegraphics[width=90mm]{images/accepted_configs_MC_L20.png}
+	& \includegraphics[width=90mm]{images/accepted_configs_temp.png} \\
 	(a) As a function of \# of MC cycles.					& (b) As a function of temperature.  \\[6pt]
 \end{tabular}
-\caption{Number of accepted configurations.}\label{fig:L20_accepted_configs}
+\caption{Number of accepted configurations divided by the total number of MC cycles.}\label{fig:L20_accepted_configs}
 \end{center}
 \end{figure*}
 The total number of accepted configurations increases with higher temperature as shown in Fig.~\ref{fig:L20_accepted_configs}b. This is because of the test in the Metropolis algorithm saying that a configuration is accepted if $r < e^{-\Delta E/kT}$ where $r$ is a random number between 0 and 1. When the temperature is higher, $e^{-\Delta E/kT}$ will have a higher value, thus the probability of a spin flip is larger (as many more values of $r$ will fulfil the test), leading to more accepted configurations.
@@ -341,8 +339,8 @@ The figure also shows that this increase is greater with higher lattice size. Th
 \begin{figure*}[b!]
 \begin{center}
 \begin{tabular}{c c}
-  	\includegraphics[width=85mm]{images/prob_dist_T10.png}
-	& \includegraphics[width=85mm]{images/prop_dist_T24.png} \\
+  	\includegraphics[width=90mm]{images/prob_dist_T10.png}
+	& \includegraphics[width=90mm]{images/prop_dist_T24.png} \\
 	(a) $T = 1.0$					& (b) $T = 2.4$  \\ [6pt]
 \end{tabular}
 \caption{The probability distribution $P(E)$ for the energies $E$ for different temperatures.}\label{fig:prob_dist}
@@ -389,9 +387,9 @@ The spin matrix in the case of $L = 80$ for different temperatures is visualized
 
 We see the same behaviour in Fig.~\ref{fig:ex_values_temp}b, which shows that $\langle {\cal M}\rangle$ decreases more and more for higher temperatures, with a particularly steep decrease around $T \approx 2.25$ and the value start to stabilize around $T \approx 2.35$ in the $L = 100$ case. Here $\langle {\cal M}\rangle$ approaches zero, meaning the net magnetization is expected to disappear more and more. This transition becomes steeper and steeper for increasing values of $L$.
 
-These observations tells us that we might be witnessing a phase transition, going from an ordered, magnetic state to a random, nearly non-magnetized state. This transition is expected to be even clearer for higher values of $L$.
+These observations tell us that we might be witnessing a phase transition, going from an ordered, magnetic state to a random, nearly non-magnetized state. This transition is expected to be even clearer for higher values of $L$.
 
-Around the same temperature range the susceptibility and heat capacity also exhibits a clear change in behaviour. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_{\mathrm{C}} \approx 2.3$. Similar behaviour can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
+Around the same temperature range, $T \in [2.25,2.35]$, the susceptibility and heat capacity also exhibits a clear change in behaviour. In the case of the susceptibility in Fig.~\ref{fig:ex_values_temp}c we see that the peak sharpens more and more for higher values of $L$, pointing us towards a critical temperature of $T_{\mathrm{C}} \approx 2.3$. Similar behaviour can be seen for the heat capacity in Fig.~\ref{fig:ex_values_temp}d, though the peak is more ambiguous here, making the susceptibility a better measurement of the critical temperature. 
 
 Both the susceptibility and the heat capacity are extensive quantities meaning they are proportional to the size of the system, $L$, which is clear from the graphs in Fig.~\ref{fig:ex_values_temp}c-d, where both quantities increase with the size of $L$.
 
@@ -417,7 +415,7 @@ Both the susceptibility and the heat capacity are extensive quantities meaning t
 
 \subsection{Estimating the critical temperature $T_{\mathrm{C}}$}
 
-Lastly, we want to estimate the critical temperature $T_{\mathrm{C}}$ in the thermodynamic limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behaviour of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$ and $L = 80$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d. 
+Lastly, we want to estimate the critical temperature $T_{\mathrm{C}}$ in the thermodynamic limit $L \rightarrow \infty$ using Eq. (\ref{eq:T_C}). In our study of the behaviour of our model close to the critical temperature we look at the various expectation values as a function of $T$ for $L = 20, L = 40, L = 60$, $L = 80$ and $L = 100$ for $T \in [2.0,2.4]$, shown in Fig.~\ref{fig:ex_values_temp}a-d. 
 
 The calculated critical temperature $T_{\mathrm{C}}(L)$ obtained from the datasets by considering at which temperature the susceptibility in Fig.~\ref{fig:ex_values_temp}c peaks is listed in the following table for a step length of 0.05 in temperature:
 
@@ -449,13 +447,11 @@ We thus decreased the temperature step length to $0.01$ and ran our calculations
 	\hline
 \end{tabular}
 \end{center}
-where we used the values from the two first columns to find that $a = 0.25$ by the method described in Sec.~\ref{subsec:T_C}, which lets us make an approximation for $T_{\mathrm{C}}(L \rightarrow \infty)$ by using Eq. (\ref{eg:T_C_estimate}), given in the third column. The relative error with respect to the exact value of $T_{\mathrm{C}} = 2.269$ is given in the fourth column. We see that the result for $L = 100$ is quite good, and that the result for $L = 80$ does not improve much from the case with the larger step length. 
+where we used the values from the two first columns to find that $a = 0.25$ by the method described in Sec.~\ref{subsec:T_C}, which lets us make an approximation for $T_{\mathrm{C}}(L \rightarrow \infty)$, given in the third column, by using Eq. (\ref{eg:T_C_estimate}). The relative error with respect to the exact value of $T_{\mathrm{C}} = 2.269$ is given in the fourth column. We see that the result for $L = 100$ is quite good, and that the result for $L = 80$ has not improve much compared to the case with the larger step length. 
 
 
 \subsection{Parallelization}
-As described previously, we parallelized our code using MPI. When using parallelization, we had to make sure to only allow \verb@rank = 0@ to print out the results of our calculations, to get readable files.
-
-Here we have gathered some recordings of the time usage, using $n = 4$ processes on a 2,5 GHz Intel Core i5 processor (a four-year old MacBook Pro) for a temperature step length of 0.05:
+As described previously, we parallelized our code using MPI. Here we have gathered some recordings of the time usage, using $n = 4$ processes on a 2,5 GHz Intel Core i5 processor (a four-year old MacBook Pro) for a temperature step length of 0.05:
 
 \begin{center}
 \begin{tabular}{ l r }
@@ -471,7 +467,7 @@ Here we have gathered some recordings of the time usage, using $n = 4$ processes
 	\hline
 \end{tabular}
 \end{center}
-These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curve which makes a good fit for lower values of $L$, and a $e^{L/9.5}$ curve which is a good approximation for higher values of $L$.
+These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curve which makes a good fit for lower values of $L$, and a $e^{L/9.5}$ curve which is a good approximation for higher values of $L$. 
 
 \begin{figure*}
 \begin{center}
@@ -479,12 +475,6 @@ These data is plotted in Fig.~\ref{fig:time_usage}, approximated by a $L^2$ curv
 \caption{Time needed to run the program as a function of lattice size.}\label{fig:time_usage}
 \end{center}
 \end{figure*}
-
-%\begin{center}
-%	\includegraphics[width=90mm]{images/time_usage.png}	
-%	\captionof{figure}{Time needed to run the program as a function of lattice size.}
-%	\label{fig:time_usage}
-%\end{center}
 We also wanted to run our code on the super-computers in the Astrophysics department and compare the time usage with the time spent on the MacBook, but we had trouble making MPI work on these machines.
 
 
@@ -500,7 +490,7 @@ We see that the lattice size $L$ is extremely important in some cases. Reviewing
 
 The quality of our simulation can be discussed by comparing our numerical results to the exact value of the critical temperature $T_{\mathrm{C}}$. We found an estimate with a relative error of $1.36 \times 10^{-2}$ in the case of $L = 80$ with a temperature step length of 0.05, which is quite satisfactory, with an even better result in the case of $L = 100$ using a temperature step length of 0.01. However, the improvement is not very significant.
 
-Summarizing these comments, we see that $L = 80$ would be a sufficient lattice size when trying to strike a balance between the numerical results and the time consumption of the computation. On a better computer the time consumption would not be that big of an issue, and a larger lattice size would be a better choice. We also see that a temperature step length of 0.05 gives decent results.
+Summarizing these comments, we see that $L = 80$ would be a sufficient lattice size when trying to strike a balance between the numerical results and the time consumption of the program. On a better computer the time consumption would not be that big of an issue, and a larger lattice size would be a better choice. 
 
 
 
